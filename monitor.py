@@ -27,6 +27,8 @@ import requests
 import yaml
 from bs4 import BeautifulSoup
 
+from generate_index import build_index
+
 ROOT = Path(__file__).resolve().parent
 STATE_DIR = ROOT / "state"
 SOURCES_FILE = ROOT / "sources.yml"
@@ -74,11 +76,23 @@ BOILERPLATE_TEXTS = {
     "abrir menu", "fechar menu", "pesquisar", "buscar", "assine a newsletter",
 }
 
+# Texto de link genérico (tipo "clique aqui") que não serve como título: nesse
+# caso usamos o texto do parágrafo ao redor do link como título.
+GENERIC_LINK_TEXTS = {
+    "aqui", "clique aqui", "clicando aqui", "acesse aqui", "saiba mais",
+    "leia mais", "confira aqui", "veja aqui", "veja mais", "confira",
+}
+
 DATE_RE = re.compile(r"\b\d{1,2}/\d{1,2}/\d{2,4}\b")
 
 
 def log(msg: str) -> None:
     print(msg, file=sys.stderr, flush=True)
+
+
+def clean_text(text: str) -> str:
+    text = re.sub(r"\s+", " ", text or "").strip(" ​-–—:•,.")
+    return re.sub(r"\s+([,.])", r"\1", text)
 
 
 def fetch(url: str) -> str:
@@ -97,6 +111,17 @@ def pick_container(soup: BeautifulSoup):
     return soup
 
 
+def extract_description(el, title: str):
+    for sel in (".description", ".tileBody", ".documentDescription", ".subtitle", "p"):
+        desc_el = el.select_one(sel)
+        if desc_el is None:
+            continue
+        text = clean_text(desc_el.get_text(" ", strip=True))
+        if text and text.lower() != title.lower():
+            return text[:280]
+    return None
+
+
 def extract_via_item_selectors(container, base_url: str):
     for sel in ITEM_SELECTORS:
         elements = container.select(sel)
@@ -108,8 +133,8 @@ def extract_via_item_selectors(container, base_url: str):
             if link is None or not link.get("href"):
                 continue
             heading = el.select_one("h1, h2, h3, h4")
-            title = (heading.get_text(strip=True) if heading else
-                     link.get_text(strip=True))
+            title = clean_text(heading.get_text(" ", strip=True) if heading else
+                                link.get_text(" ", strip=True))
             if not title:
                 continue
             url = urljoin(base_url, link["href"])
@@ -118,6 +143,7 @@ def extract_via_item_selectors(container, base_url: str):
                 "url": url,
                 "title": title,
                 "date": date_match.group(0) if date_match else None,
+                "description": extract_description(el, title),
             })
         if items:
             return items
@@ -133,23 +159,41 @@ def extract_via_generic_links(container, base_url: str):
             continue
         if href.startswith(("javascript:", "mailto:", "tel:")):
             continue
-        title = link.get_text(strip=True)
+        title = clean_text(link.get_text(" ", strip=True))
+        parent_text = clean_text(link.parent.get_text(" ", strip=True)) if link.parent else ""
+
+        if title.strip(".…").lower() in GENERIC_LINK_TEXTS:
+            # texto do link é genérico ("clique aqui"); usa a frase ao redor,
+            # removendo a própria expressão genérica do resultado
+            title = parent_text
+            for phrase in sorted(GENERIC_LINK_TEXTS, key=len, reverse=True):
+                title = re.sub(rf"\b{re.escape(phrase)}\b\s*\.?", "", title, flags=re.IGNORECASE)
+            title = clean_text(title)
+
         if len(title) < 8:
             continue
         if title.strip(".…").lower() in BOILERPLATE_TEXTS:
             continue
         if title.isdigit():
             continue
+
         url = urljoin(base_url, href)
         if url in seen:
             continue
         seen.add(url)
-        parent_text = link.parent.get_text(" ", strip=True) if link.parent else ""
+
         date_match = DATE_RE.search(parent_text)
+        description = None
+        if parent_text and parent_text.lower() != title.lower():
+            remainder = clean_text(parent_text.replace(title, "", 1))
+            if len(remainder) > 20:
+                description = remainder[:280]
+
         items.append({
             "url": url,
             "title": title,
             "date": date_match.group(0) if date_match else None,
+            "description": description,
         })
     return items
 
@@ -220,7 +264,12 @@ def main() -> int:
         if state is None:
             state = {
                 "items": {
-                    item["url"]: {"title": item["title"], "first_seen": now_iso}
+                    item["url"]: {
+                        "title": item["title"],
+                        "date": item.get("date"),
+                        "description": item.get("description"),
+                        "first_seen": now_iso,
+                    }
                     for item in items
                 },
                 "last_checked": now_iso,
@@ -234,7 +283,12 @@ def main() -> int:
         new_items = [item for item in items if item["url"] not in known_urls]
 
         for item in new_items:
-            state["items"][item["url"]] = {"title": item["title"], "first_seen": now_iso}
+            state["items"][item["url"]] = {
+                "title": item["title"],
+                "date": item.get("date"),
+                "description": item.get("description"),
+                "first_seen": now_iso,
+            }
         state["last_checked"] = now_iso
         if not args.dry_run:
             save_state(slug, state)
@@ -276,6 +330,10 @@ def main() -> int:
         for source, count in baselined:
             log(f"[{source['slug']}] estado inicial criado com {count} item(ns) "
                 f"(nenhuma notificação enviada nesta primeira execução)")
+
+    if not args.dry_run:
+        build_index()
+        log("INDEX.md atualizado.")
 
     github_output = os.environ.get("GITHUB_OUTPUT")
     if github_output:

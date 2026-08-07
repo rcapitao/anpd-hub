@@ -49,9 +49,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add state/
+          git add state/ INDEX.md
           if ! git diff --cached --quiet; then
-            git commit -m "chore: atualizar estado do monitoramento ANPD"
+            git commit -m "chore: atualizar estado e índice do monitoramento ANPD"
             git push
           else
             echo "Nenhuma mudança de estado a commitar."

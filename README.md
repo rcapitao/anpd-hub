@@ -3,24 +3,33 @@
 Monitoramento automático da [Central de Conteúdos da ANPD](https://www.gov.br/anpd/pt-br/centrais-de-conteudo).
 Todo dia, um workflow do GitHub Actions verifica as páginas configuradas,
 compara com o conteúdo já visto anteriormente e **abre uma Issue neste
-repositório** listando o que é novo — título e link de cada item.
+repositório** listando o que é novo — título e link de cada item. Todo o
+conteúdo já visto fica organizado em **[INDEX.md](INDEX.md)**, por categoria,
+com nome, link, data de publicação e uma breve descrição.
 
 ## Como funciona
 
 1. `monitor.py` baixa cada página listada em [`sources.yml`](sources.yml) e
-   extrai os itens de conteúdo (título + link).
+   extrai os itens de conteúdo (título, link, data e descrição, quando
+   disponíveis na página).
 2. O resultado é comparado com o estado salvo em `state/<slug>.json`
    (um arquivo por fonte, versionado no repositório).
 3. Itens que não estavam no estado anterior são "novos". Nesse caso:
    - o arquivo de estado é atualizado e commitado de volta no repositório;
    - uma Issue é aberta com o título e o link de cada item novo, agrupados
-     por fonte.
+     por fonte;
+   - [`INDEX.md`](INDEX.md) é regenerado a partir do estado atualizado, para
+     refletir o novo conteúdo.
 4. Na primeira execução de uma fonte não existe estado ainda, então o
    conteúdo atual vira a "linha de base" (nenhuma Issue é aberta — do
-   contrário todo o histórico existente apareceria como "novo").
+   contrário todo o histórico existente apareceria como "novo"), mas ele já
+   entra no índice normalmente.
 5. Se uma página parar de retornar itens (ex.: o layout do site mudou e o
    scraper não reconhece mais a listagem), isso também vira um alerta em
    forma de Issue, em vez de falhar silenciosamente.
+
+O `INDEX.md` é regenerado a cada execução do workflow (não só quando há
+conteúdo novo), então ele nunca fica desatualizado em relação ao estado.
 
 O workflow roda em `.github/workflows/monitor.yml`, agendado para
 **09:00 (horário de Brasília)** todos os dias, e também pode ser disparado
@@ -55,8 +64,9 @@ descrita acima.
 
 ```bash
 pip install -r requirements.txt
-python monitor.py            # roda e atualiza state/*.json
-python monitor.py --dry-run  # roda sem gravar o estado
+python monitor.py            # roda, atualiza state/*.json e regenera INDEX.md
+python monitor.py --dry-run  # roda sem gravar estado nem regenerar o índice
+python generate_index.py     # regenera só o INDEX.md a partir do state/ atual
 ```
 
 Se houver conteúdo novo (ou algum erro), o script gera `report.md` na raiz
