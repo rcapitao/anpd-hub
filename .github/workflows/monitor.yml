@@ -1,0 +1,58 @@
+name: Monitorar Central de Conteúdos da ANPD
+
+on:
+  schedule:
+    # 12:00 UTC = 09:00 (horário de Brasília, UTC-3)
+    - cron: "0 12 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: monitor-anpd
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Executar monitoramento
+        id: monitor
+        run: python monitor.py
+
+      - name: Abrir Issue com o resultado
+        if: steps.monitor.outputs.has_report == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create "monitoramento-anpd" --color "0E8A16" \
+            --description "Alertas do monitoramento automático da ANPD" 2>/dev/null || true
+          gh issue create \
+            --title "${{ steps.monitor.outputs.title }}" \
+            --body-file report.md \
+            --label "monitoramento-anpd"
+
+      - name: Salvar estado atualizado
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add state/
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: atualizar estado do monitoramento ANPD"
+            git push
+          else
+            echo "Nenhuma mudança de estado a commitar."
+          fi
