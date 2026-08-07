@@ -85,6 +85,18 @@ GENERIC_LINK_TEXTS = {
 
 DATE_RE = re.compile(r"\b\d{1,2}/\d{1,2}/\d{2,4}\b")
 
+MESES_PT = {
+    "janeiro": 1, "fevereiro": 2, "março": 3, "marco": 3, "abril": 4,
+    "maio": 5, "junho": 6, "julho": 7, "agosto": 8, "setembro": 9,
+    "outubro": 10, "novembro": 11, "dezembro": 12,
+}
+# Datas por extenso, como usadas nos títulos dos atos normativos da ANPD
+# (ex.: "Resolução CD/ANPD nº 11, de 27 de dezembro de 2023").
+LONG_DATE_RE = re.compile(
+    r"\b(\d{1,2})\s+de\s+(" + "|".join(MESES_PT) + r")\s+de\s+(\d{4})\b",
+    re.IGNORECASE,
+)
+
 
 def log(msg: str) -> None:
     print(msg, file=sys.stderr, flush=True)
@@ -93,6 +105,21 @@ def log(msg: str) -> None:
 def clean_text(text: str) -> str:
     text = re.sub(r"\s+", " ", text or "").strip(" ​-–—:•,.")
     return re.sub(r"\s+([,.])", r"\1", text)
+
+
+def find_date(*texts: str):
+    for text in texts:
+        if not text:
+            continue
+        match = DATE_RE.search(text)
+        if match:
+            return match.group(0)
+        match = LONG_DATE_RE.search(text)
+        if match:
+            day, month_name, year = match.groups()
+            month = MESES_PT[month_name.lower()]
+            return f"{int(day):02d}/{month:02d}/{year}"
+    return None
 
 
 def fetch(url: str) -> str:
@@ -138,16 +165,81 @@ def extract_via_item_selectors(container, base_url: str):
             if not title:
                 continue
             url = urljoin(base_url, link["href"])
-            date_match = DATE_RE.search(el.get_text(" ", strip=True))
+            date = find_date(el.get_text(" ", strip=True))
             items.append({
                 "url": url,
                 "title": title,
-                "date": date_match.group(0) if date_match else None,
+                "date": date,
                 "description": extract_description(el, title),
             })
         if items:
             return items
     return []
+
+
+# Palavras-chave (em minúsculas) usadas para reconhecer colunas de tabelas de
+# listagem, como as usadas em "Regulamentações da ANPD" e "Atos de Gestão
+# Interna": colunas "Ato" (título/link), "Ementa" (descrição), "Data" e
+# "Status Atual".
+TABLE_DESCRIPTION_HEADERS = ("ementa", "descri", "resumo")
+TABLE_STATUS_HEADERS = ("status",)
+TABLE_DATE_HEADERS = ("data",)
+
+
+def find_column_index(headers, keywords):
+    for i, header in enumerate(headers):
+        if any(keyword in header for keyword in keywords):
+            return i
+    return None
+
+
+def extract_via_tables(container, base_url: str):
+    items = []
+    for table in container.select("table"):
+        rows = table.find_all("tr")
+        if len(rows) < 2:
+            continue
+
+        header_cells = rows[0].find_all(["th", "td"])
+        headers = [clean_text(c.get_text(" ", strip=True)).lower() for c in header_cells]
+        desc_idx = find_column_index(headers, TABLE_DESCRIPTION_HEADERS)
+        status_idx = find_column_index(headers, TABLE_STATUS_HEADERS)
+        date_idx = find_column_index(headers, TABLE_DATE_HEADERS)
+
+        for row in rows[1:]:
+            cells = row.find_all(["td", "th"])
+            link = row.select_one("a[href]")
+            if not cells or link is None or not link.get("href"):
+                continue
+
+            title = clean_text(link.get_text(" ", strip=True))
+            if not title:
+                continue
+            url = urljoin(base_url, link["href"])
+
+            description = None
+            if desc_idx is not None and desc_idx < len(cells):
+                description = clean_text(cells[desc_idx].get_text(" ", strip=True)) or None
+
+            status = None
+            if status_idx is not None and status_idx < len(cells):
+                status = clean_text(cells[status_idx].get_text(" ", strip=True)) or None
+            if status:
+                description = f"{description} (Status: {status})" if description else f"Status: {status}"
+
+            date_cell_text = (
+                cells[date_idx].get_text(" ", strip=True)
+                if date_idx is not None and date_idx < len(cells) else None
+            )
+            date = find_date(date_cell_text, title, row.get_text(" ", strip=True))
+
+            items.append({
+                "url": url,
+                "title": title,
+                "date": date,
+                "description": description[:280] if description else None,
+            })
+    return items
 
 
 def extract_via_generic_links(container, base_url: str):
@@ -182,7 +274,6 @@ def extract_via_generic_links(container, base_url: str):
             continue
         seen.add(url)
 
-        date_match = DATE_RE.search(parent_text)
         description = None
         if parent_text and parent_text.lower() != title.lower():
             remainder = clean_text(parent_text.replace(title, "", 1))
@@ -192,7 +283,7 @@ def extract_via_generic_links(container, base_url: str):
         items.append({
             "url": url,
             "title": title,
-            "date": date_match.group(0) if date_match else None,
+            "date": find_date(parent_text, title),
             "description": description,
         })
     return items
@@ -202,6 +293,8 @@ def extract_items(html: str, base_url: str):
     soup = BeautifulSoup(html, "lxml")
     container = pick_container(soup)
     items = extract_via_item_selectors(container, base_url)
+    if not items:
+        items = extract_via_tables(container, base_url)
     if not items:
         items = extract_via_generic_links(container, base_url)
     # dedupe preservando ordem
