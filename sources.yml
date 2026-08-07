@@ -1,14 +1,36 @@
-# Fontes monitoradas na Central de Conteúdos da ANPD.
+# Fontes monitoradas na Central de Conteúdos da ANPD
+# (https://www.gov.br/anpd/pt-br/centrais-de-conteudo).
 #
 # Para adicionar uma nova fonte, inclua um novo item com:
 #   - name: nome amigável (aparece nas Issues)
 #   - slug: identificador único, usado no nome do arquivo de estado (state/<slug>.json)
 #   - url:  URL da página de listagem a ser monitorada
-#
-# Outras páginas da central de conteúdos (https://www.gov.br/anpd/pt-br/centrais-de-conteudo)
-# podem ser adicionadas aqui no futuro (ex.: notícias, editais, eventos, agenda de autoridades).
 
 sources:
-  - name: "Regulamentações da ANPD (Atos Normativos)"
+  - name: "Atos Normativos da ANPD (visão geral)"
     slug: "atos-normativos"
     url: "https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos"
+
+  - name: "Regulamentações da ANPD"
+    slug: "regulamentacoes-anpd"
+    url: "https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd"
+
+  - name: "Atos de Gestão Interna"
+    slug: "atos-gestao-interna"
+    url: "https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/atos_gestao_interna"
+
+  - name: "Decisões em Processos Sancionadores"
+    slug: "decisoes-processos-sancionadores"
+    url: "https://www.gov.br/anpd/pt-br/centrais-de-conteudo/decisoes-em-processos-sancionadores/"
+
+  - name: "Documentos Técnicos e Orientativos"
+    slug: "documentos-tecnicos-orientativos"
+    url: "https://www.gov.br/anpd/pt-br/centrais-de-conteudo/documentos-tecnicos-orientativos"
+
+  - name: "Materiais Educativos e Publicações"
+    slug: "materiais-educativos-publicacoes"
+    url: "https://www.gov.br/anpd/pt-br/centrais-de-conteudo/materiais-educativos-e-publicacoes"
+
+  - name: "Outros Documentos e Publicações Institucionais"
+    slug: "outros-documentos-publicacoes"
+    url: "https://www.gov.br/anpd/pt-br/centrais-de-conteudo/outros-documentos-e-publicacoes-institucionais"

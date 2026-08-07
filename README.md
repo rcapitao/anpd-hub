@@ -26,10 +26,19 @@ O workflow roda em `.github/workflows/monitor.yml`, agendado para
 **09:00 (horário de Brasília)** todos os dias, e também pode ser disparado
 manualmente pela aba *Actions* do GitHub (`workflow_dispatch`).
 
+## Fontes monitoradas
+
+- [Atos Normativos da ANPD (visão geral)](https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos)
+- [Regulamentações da ANPD](https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd)
+- [Atos de Gestão Interna](https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/atos_gestao_interna)
+- [Decisões em Processos Sancionadores](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/decisoes-em-processos-sancionadores/)
+- [Documentos Técnicos e Orientativos](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/documentos-tecnicos-orientativos)
+- [Materiais Educativos e Publicações](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/materiais-educativos-e-publicacoes)
+- [Outros Documentos e Publicações Institucionais](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/outros-documentos-e-publicacoes-institucionais)
+
 ## Adicionar novas páginas para monitorar
 
-A ANPD tem outras seções na central de conteúdos além dos Atos Normativos
-(ex.: notícias, editais, agenda). Para monitorar uma nova página, edite
+Para monitorar uma nova página da central de conteúdos, edite
 [`sources.yml`](sources.yml) e adicione um item:
 
 ```yaml
