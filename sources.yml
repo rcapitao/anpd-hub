@@ -1,0 +1,14 @@
+# Fontes monitoradas na Central de Conteúdos da ANPD.
+#
+# Para adicionar uma nova fonte, inclua um novo item com:
+#   - name: nome amigável (aparece nas Issues)
+#   - slug: identificador único, usado no nome do arquivo de estado (state/<slug>.json)
+#   - url:  URL da página de listagem a ser monitorada
+#
+# Outras páginas da central de conteúdos (https://www.gov.br/anpd/pt-br/centrais-de-conteudo)
+# podem ser adicionadas aqui no futuro (ex.: notícias, editais, eventos, agenda de autoridades).
+
+sources:
+  - name: "Regulamentações da ANPD (Atos Normativos)"
+    slug: "atos-normativos"
+    url: "https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos"
