@@ -87,3 +87,12 @@ Se uma fonte passar a gerar o alerta "nenhum item encontrado", é sinal de
 que o layout mudou e os seletores em `monitor.py` (`ITEM_SELECTORS`,
 `CONTENT_CONTAINER_SELECTORS`) precisam de ajuste — nesse caso, inspecione
 o HTML atual da página e atualize os seletores de acordo.
+
+Se, em vez disso, a Issue de alerta mostrar **todas** as fontes falhando com
+o mesmo erro de conexão (`Network is unreachable`), não é um problema do
+scraper nem do site: é o runner do GitHub Actions sem rota IPv6 tentando se
+conectar em um endereço IPv6 anunciado por `www.gov.br`. `monitor.py` já
+força as conexões a usar IPv4 (`urllib3_connection.allowed_gai_family`) e
+tenta novamente automaticamente algumas vezes antes de desistir — se esse
+alerta voltar a aparecer, é sinal de uma instabilidade de rede maior (do
+lado do gov.br ou do próprio GitHub Actions), não do código.

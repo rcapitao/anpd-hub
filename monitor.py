@@ -18,16 +18,26 @@ import argparse
 import json
 import os
 import re
+import socket
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
 
 import requests
+import urllib3.util.connection as urllib3_connection
 import yaml
 from bs4 import BeautifulSoup
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 from generate_index import build_index
+
+# Alguns runners do GitHub Actions não têm rota IPv6, mas o gov.br anuncia
+# endereço AAAA para www.gov.br. Sem isso, a tentativa de conexão IPv6 falha
+# com "[Errno 101] Network is unreachable" antes mesmo de tentar IPv4, e
+# TODAS as fontes falham de uma vez (não é um bloqueio do site).
+urllib3_connection.allowed_gai_family = lambda: socket.AF_INET
 
 ROOT = Path(__file__).resolve().parent
 STATE_DIR = ROOT / "state"
@@ -42,6 +52,11 @@ HEADERS = {
     "Accept-Language": "pt-BR,pt;q=0.9,en;q=0.5",
 }
 REQUEST_TIMEOUT = 30
+
+SESSION = requests.Session()
+_retry = Retry(total=3, backoff_factor=2, status_forcelist=(429, 500, 502, 503, 504))
+SESSION.mount("https://", HTTPAdapter(max_retries=_retry))
+SESSION.mount("http://", HTTPAdapter(max_retries=_retry))
 
 # Seletores CSS candidatos para o container principal de conteúdo (evita
 # pegar menu, cabeçalho e rodapé, que se repetem em todas as páginas gov.br).
@@ -123,7 +138,7 @@ def find_date(*texts: str):
 
 
 def fetch(url: str) -> str:
-    resp = requests.get(url, headers=HEADERS, timeout=REQUEST_TIMEOUT)
+    resp = SESSION.get(url, headers=HEADERS, timeout=REQUEST_TIMEOUT)
     resp.raise_for_status()
     return resp.text
 
