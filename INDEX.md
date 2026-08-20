@@ -1,6 +1,6 @@
 # Índice de Publicações — Monitoramento ANPD
 
-_Última atualização: 2026-08-19T12:58:11.123551+00:00 · 159 publicação(ões) em 7 categoria(s)._
+_Última atualização: 2026-08-20T13:00:23.042681+00:00 · 159 publicação(ões) em 7 categoria(s)._
 
 > Gerado automaticamente pelo workflow de monitoramento a partir do conteúdo já detectado nas páginas monitoradas. Não edite manualmente — veja [`sources.yml`](sources.yml) e [`monitor.py`](monitor.py). Datas e descrições são um melhor esforço extraído da própria página e podem estar ausentes.
 
