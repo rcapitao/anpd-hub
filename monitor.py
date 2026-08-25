@@ -177,13 +177,27 @@ def derive_api_search_url(url: str):
 API_EXCLUDED_TYPES = {"Image", "File"}
 
 
-def extract_via_api(base_url: str):
+def extract_via_api(base_url: str, portal_type: str | None = None):
+    """Busca a listagem via API REST do Volto (++api++/@search).
+
+    Sem filtro de tipo, o @search devolve todo o conteúdo recursivo da
+    pasta — inclusive imagens/arquivos anexados a cada item — então o
+    total pode ficar muito maior que o número real de itens "de listagem"
+    (ex.: uma pasta de notícias com 38 notícias pode ter @search com
+    centenas de resultados, por causa das imagens de cada notícia). Quando
+    a fonte especifica um portal_type (via `api_portal_type` em
+    sources.yml), filtramos direto na consulta para pegar exatamente esse
+    conteúdo, com paginação generosa o suficiente para não cortar nada.
+    """
     api_url = derive_api_search_url(base_url)
     if not api_url:
         return []
+    params = {"b_size": 200, "sort_on": "effective", "sort_order": "descending"}
+    if portal_type:
+        params["portal_type"] = portal_type
     try:
         resp = SESSION.get(api_url, headers={**HEADERS, "Accept": "application/json"},
-                            timeout=REQUEST_TIMEOUT)
+                            params=params, timeout=REQUEST_TIMEOUT)
         resp.raise_for_status()
         data = resp.json()
     except (requests.RequestException, ValueError):
@@ -221,7 +235,8 @@ def extract_via_api(base_url: str):
     return items
 
 
-def fetch_and_extract(url: str, attempts: int = 3, delay: float = 5.0):
+def fetch_and_extract(url: str, attempts: int = 3, delay: float = 5.0,
+                       api_portal_type: str | None = None):
     """Busca a página e extrai os itens, tentando de novo se a conexão
     falhar ou se a extração vier vazia — sites gov.br às vezes servem uma
     página de bloqueio/instabilidade momentânea em vez do conteúdo real, e
@@ -250,7 +265,7 @@ def fetch_and_extract(url: str, attempts: int = 3, delay: float = 5.0):
                 f"em {delay:.0f}s")
             time.sleep(delay)
 
-    api_items = extract_via_api(url)
+    api_items = extract_via_api(url, portal_type=api_portal_type)
     if api_items:
         log("  itens obtidos via API REST do Volto (++api++/@search)")
         return api_items, last_html
@@ -488,7 +503,8 @@ def main() -> int:
         name, slug, url = source["name"], source["slug"], source["url"]
         log(f"[{slug}] buscando {url}")
         try:
-            items, last_html = fetch_and_extract(url)
+            items, last_html = fetch_and_extract(
+                url, api_portal_type=source.get("api_portal_type"))
         except requests.RequestException as exc:
             log(f"[{slug}] ERRO ao buscar página: {exc}")
             errors.append((source, f"Falha ao acessar a página: `{exc}`"))
