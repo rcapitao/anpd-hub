@@ -1,6 +1,6 @@
 # Índice de Publicações — Monitoramento ANPD
 
-_Última atualização: 2026-08-24T13:01:48.737342+00:00 · 159 publicação(ões) em 7 categoria(s)._
+_Última atualização: 2026-08-25T02:57:26.700729+00:00 · 157 publicação(ões) em 7 categoria(s)._
 
 > Gerado automaticamente pelo workflow de monitoramento a partir do conteúdo já detectado nas páginas monitoradas. Não edite manualmente — veja [`sources.yml`](sources.yml) e [`monitor.py`](monitor.py). Datas e descrições são um melhor esforço extraído da própria página e podem estar ausentes.
 
@@ -12,7 +12,7 @@ Fonte: <https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-nor
 |---|---|---|
 | [Regimento Interno](https://www.in.gov.br/en/web/dou/-/portaria-n-1-de-8-de-marco-de-2021-307463618) | — | — |
 
-## Regulamentações da ANPD (19)
+## Regulamentações da ANPD (17)
 
 Fonte: <https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd>
 
@@ -31,12 +31,10 @@ Fonte: <https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-nor
 | [Resolução CD/ANPD nº 5, de 13 de março de 2023](https://www.in.gov.br/en/web/dou/-/resolucao-cd/anpd-n-5-de-13-de-marco-de-2023-469722336) | 13/03/2023 | Aprova a Agenda de Avaliação de Resultado Regulatório para o período 2023-2026 (Status: Vigente) |
 | [Resolução CD/ANPD nº 4, de 24 de fevereiro de 2023](https://www.in.gov.br/en/web/dou/-/resolucao-cd/anpd-n-4-de-24-de-fevereiro-de-2023-466146077) | 24/02/2023 | Aprova o Regulamento de Dosimetria e Aplicação de Sanções Administrativas. Acesse aqui o processo completo parte 1, parte 2 (Status: Vigente) |
 | [Portaria ANPD nº 35, de 4 de novembro de 2022](https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd/portaria-anpd-no-35-de-4-de-novembro-de-2022) | 04/11/2022 | Torna pública a Agenda Regulatória para o biênio 2023-2024. Acesse aqui o processo completo (Status: Vigente, com alterações da Resolução CD/ANPD nº 11/2023) |
-| [Portaria ANPD nº 35, de 4 de novembro de 2022](https://www.in.gov.br/en/web/dou/-/portaria-anpd-n-35-de-4-de-novembro-de-2022-442057885) | 04/11/2022 | Torna pública a Agenda Regulatória para o biênio 2023-2024. Acesse aqui o processo completo (Status: Vigente) |
 | [Resolução CD/ANPD nº 2, de 27 de janeiro de 2022](https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd/resolucao-cd-anpd-no-2-de-27-de-janeiro-de-2022) | 27/01/2022 | Aprova o Regulamento de aplicação da Lei nº 13.709, de 14 de agosto de 2018, Lei Geral de Proteção de Dados Pessoais (LGPD), para agentes de tratamento de pequeno porte. Acesse aqui o processo completo parte 1, parte 2, parte 3, parte 4, parte 5, parte 6 e parte 7 (Status: Vigent |
 | [Resolução CD/ANPD nº 1, de 28 de outubro de 2021](https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd/resolucao-cd-anpd-no1-2021) | 28/10/2021 | Aprova o Regulamento do Processo de Fiscalização e do Processo Administrativo Sancionador no âmbito da Autoridade Nacional de Proteção de Dados. Acesse aqui o processo completo (Status: Vigente com retificações pela Resolução CD/ANPD nº 4, de 24 de fevereiro de 2023) |
 | [Portaria nº 16, de 8 de julho de 2021](https://www.in.gov.br/en/web/dou/-/portaria-n-16-de-8-de-julho-de-2021-330970241) | 08/07/2021 | Aprova o processo de regulamentação no âmbito da Autoridade Nacional de Proteção de Dados (Status: Vigente) |
 | [Portaria nº 11, de 27 de janeiro de 2021](https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd/portaria-no-11-de-27-de-janeiro-de-2021) | 27/01/2021 | Torna pública a agenda regulatória para o biênio 2021-2022. Acesse aqui o processo completo (Status: Vigente, considerando-se a RETIFICAÇÃO de 01/07/2022) |
-| [Portaria nº 11, de 27 de janeiro de 2021](https://www.in.gov.br/en/web/dou/-/portaria-n-11-de-27-de-janeiro-de-2021-301143313) | 27/01/2021 | Torna pública a agenda regulatória para o biênio 2021-2022. Acesse aqui o processo completo (Status: Vigente, considerando-se a RETIFICAÇÃO de 01/07/2022) |
 
 ## Atos de Gestão Interna (30)
 
