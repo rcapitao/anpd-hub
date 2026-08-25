@@ -20,6 +20,7 @@ import os
 import re
 import socket
 import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
@@ -141,6 +142,72 @@ def fetch(url: str) -> str:
     resp = SESSION.get(url, headers=HEADERS, timeout=REQUEST_TIMEOUT)
     resp.raise_for_status()
     return resp.text
+
+
+# Sinais de que a resposta é uma página de bloqueio/desafio anti-bot (ou uma
+# página de manutenção) em vez do conteúdo real — usados só para deixar a
+# mensagem de erro mais precisa, não para decidir se há item novo.
+CHALLENGE_MARKERS = (
+    "captcha", "cloudflare", "just a moment", "attention required",
+    "acesso negado", "temporariamente indisponível", "em manutenção",
+)
+
+
+def looks_like_challenge_page(html: str) -> bool:
+    lowered = html.lower()
+    return len(html) < 2000 or any(marker in lowered for marker in CHALLENGE_MARKERS)
+
+
+def fetch_and_extract(url: str, attempts: int = 3, delay: float = 5.0):
+    """Busca a página e extrai os itens, tentando de novo se a conexão
+    falhar ou se a extração vier vazia — sites gov.br às vezes servem uma
+    página de bloqueio/instabilidade momentânea em vez do conteúdo real, e
+    uma nova tentativa alguns segundos depois costuma resolver."""
+    last_html = ""
+    for attempt in range(1, attempts + 1):
+        try:
+            last_html = fetch(url)
+        except requests.RequestException:
+            if attempt == attempts:
+                raise
+            log(f"  tentativa {attempt}/{attempts}: erro de conexão, "
+                f"nova tentativa em {delay:.0f}s")
+            time.sleep(delay)
+            continue
+
+        items = extract_items(last_html, url)
+        if items or attempt == attempts:
+            return items, last_html
+
+        log(f"  tentativa {attempt}/{attempts}: nenhum item extraído "
+            f"(possível bloqueio/instabilidade temporária), nova tentativa "
+            f"em {delay:.0f}s")
+        time.sleep(delay)
+    return [], last_html
+
+
+def normalize_title(title: str) -> str:
+    return clean_text(title).lower()
+
+
+def reconcile_url_change(state: dict, item: dict, now_iso: str) -> bool:
+    """Se o item já existe no estado sob outra URL com o mesmo título (o
+    site trocou o link, ex.: de in.gov.br para uma página própria do
+    gov.br), atualiza a URL guardada em vez de tratar como conteúdo novo.
+    Retorna True se reconciliou (nada a notificar), False caso contrário."""
+    norm = normalize_title(item["title"])
+    for old_url, data in list(state["items"].items()):
+        if old_url != item["url"] and normalize_title(data.get("title", "")) == norm:
+            old_data = state["items"].pop(old_url)
+            state["items"][item["url"]] = {
+                "title": item["title"],
+                "date": item.get("date") or old_data.get("date"),
+                "description": item.get("description") or old_data.get("description"),
+                "first_seen": old_data.get("first_seen", now_iso),
+            }
+            log(f"  URL atualizada para o mesmo conteúdo: {old_url} -> {item['url']}")
+            return True
+    return False
 
 
 def pick_container(soup: BeautifulSoup):
@@ -350,22 +417,31 @@ def main() -> int:
         name, slug, url = source["name"], source["slug"], source["url"]
         log(f"[{slug}] buscando {url}")
         try:
-            html = fetch(url)
+            items, last_html = fetch_and_extract(url)
         except requests.RequestException as exc:
             log(f"[{slug}] ERRO ao buscar página: {exc}")
             errors.append((source, f"Falha ao acessar a página: `{exc}`"))
             continue
 
-        items = extract_items(html, url)
         log(f"[{slug}] {len(items)} item(ns) extraído(s)")
 
         if not items:
-            errors.append((
-                source,
-                "Nenhum item foi encontrado na página. O layout do site pode "
-                "ter mudado e os seletores em `monitor.py` provavelmente "
-                "precisam ser ajustados.",
-            ))
+            if looks_like_challenge_page(last_html):
+                msg = (
+                    "Nenhum item foi encontrado após várias tentativas, e a "
+                    "resposta recebida parece uma página de bloqueio "
+                    "anti-bot ou de instabilidade temporária do site, não o "
+                    "conteúdo real. Se isso persistir por vários dias "
+                    "seguidos, pode ser necessário ajustar como as "
+                    "requisições são feitas (ex.: user-agent, cabeçalhos)."
+                )
+            else:
+                msg = (
+                    "Nenhum item foi encontrado na página. O layout do site "
+                    "pode ter mudado e os seletores em `monitor.py` "
+                    "provavelmente precisam ser ajustados."
+                )
+            errors.append((source, msg))
             continue
 
         state = load_state(slug)
@@ -388,7 +464,11 @@ def main() -> int:
             continue
 
         known_urls = set(state["items"].keys())
-        new_items = [item for item in items if item["url"] not in known_urls]
+        candidates = [item for item in items if item["url"] not in known_urls]
+        new_items = [
+            item for item in candidates
+            if not reconcile_url_change(state, item, now_iso)
+        ]
 
         for item in new_items:
             state["items"][item["url"]] = {
