@@ -158,11 +158,72 @@ def looks_like_challenge_page(html: str) -> bool:
     return len(html) < 2000 or any(marker in lowered for marker in CHALLENGE_MARKERS)
 
 
+def derive_api_search_url(url: str):
+    """Converte a URL de uma página do Volto na URL do endpoint REST
+    @search equivalente (ex.: .../anpd/pt-br/x -> .../anpd/++api++/pt-br/x/@search).
+    O site é Plone/Volto: o front-end é só a "casca" React, e o conteúdo
+    real (inclusive listagens montadas no cliente via JS) vem dessa API."""
+    parsed = urlparse(url)
+    parts = parsed.path.strip("/").split("/")
+    if len(parts) < 2:
+        return None
+    site, rest = parts[0], "/".join(parts[1:])
+    return f"{parsed.scheme}://{parsed.netloc}/{site}/++api++/{rest}/@search"
+
+
+# Tipos de conteúdo do Plone que não são "itens de listagem" de verdade —
+# costumam ser imagens/arquivos anexados à mesma pasta e aparecem junto no
+# @search, mas não interessam para o monitoramento.
+API_EXCLUDED_TYPES = {"Image", "File"}
+
+
+def extract_via_api(base_url: str):
+    api_url = derive_api_search_url(base_url)
+    if not api_url:
+        return []
+    try:
+        resp = SESSION.get(api_url, headers={**HEADERS, "Accept": "application/json"},
+                            timeout=REQUEST_TIMEOUT)
+        resp.raise_for_status()
+        data = resp.json()
+    except (requests.RequestException, ValueError):
+        return []
+
+    items = []
+    for entry in data.get("items", []):
+        if entry.get("@type") in API_EXCLUDED_TYPES:
+            continue
+        if entry.get("review_state") not in (None, "published"):
+            continue
+        title = clean_text(entry.get("title") or "")
+        href = entry.get("@id")
+        if not title or not href:
+            continue
+        date = None
+        effective = entry.get("effective")
+        if effective:
+            try:
+                date = datetime.fromisoformat(effective).strftime("%d/%m/%Y")
+            except ValueError:
+                pass
+        description = clean_text(entry.get("description") or "") or None
+        items.append({
+            "url": href,
+            "title": title,
+            "date": date,
+            "description": description[:280] if description else None,
+        })
+    return items
+
+
 def fetch_and_extract(url: str, attempts: int = 3, delay: float = 5.0):
     """Busca a página e extrai os itens, tentando de novo se a conexão
     falhar ou se a extração vier vazia — sites gov.br às vezes servem uma
     página de bloqueio/instabilidade momentânea em vez do conteúdo real, e
-    uma nova tentativa alguns segundos depois costuma resolver."""
+    uma nova tentativa alguns segundos depois costuma resolver. Se mesmo
+    assim não vier nada (ex.: página renderizada só no cliente, sem
+    conteúdo no HTML estático), tenta a API REST do Volto (++api++/@search)
+    como último recurso antes de desistir."""
     last_html = ""
     for attempt in range(1, attempts + 1):
         try:
@@ -176,13 +237,18 @@ def fetch_and_extract(url: str, attempts: int = 3, delay: float = 5.0):
             continue
 
         items = extract_items(last_html, url)
-        if items or attempt == attempts:
+        if items:
             return items, last_html
+        if attempt < attempts:
+            log(f"  tentativa {attempt}/{attempts}: nenhum item extraído "
+                f"(possível bloqueio/instabilidade temporária), nova tentativa "
+                f"em {delay:.0f}s")
+            time.sleep(delay)
 
-        log(f"  tentativa {attempt}/{attempts}: nenhum item extraído "
-            f"(possível bloqueio/instabilidade temporária), nova tentativa "
-            f"em {delay:.0f}s")
-        time.sleep(delay)
+    api_items = extract_via_api(url)
+    if api_items:
+        log("  itens obtidos via API REST do Volto (++api++/@search)")
+        return api_items, last_html
     return [], last_html
 
 
