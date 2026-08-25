@@ -1,6 +1,6 @@
 # Índice de Publicações — Monitoramento ANPD
 
-_Última atualização: 2026-08-25T16:02:13.886554+00:00 · 165 publicação(ões) em 8 categoria(s)._
+_Última atualização: 2026-08-25T16:03:59.589409+00:00 · 164 publicação(ões) em 8 categoria(s)._
 
 > Gerado automaticamente pelo workflow de monitoramento a partir do conteúdo já detectado nas páginas monitoradas. Não edite manualmente — veja [`sources.yml`](sources.yml) e [`monitor.py`](monitor.py). Datas e descrições são um melhor esforço extraído da própria página e podem estar ausentes.
 
@@ -210,7 +210,7 @@ Fonte: <https://www.gov.br/anpd/pt-br/centrais-de-conteudo/outros-documentos-e-p
 | [Side Event - G20 - 2024](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/outros-documentos-e-publicacoes-institucionais/g20-side-event-report-anpd.pdf) | — | — |
 | [Termo de Uso das Redes Sociais da ANPD Conheça as diretrizes que orientam as interações nas redes sociais da ANPD](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/outros-documentos-e-publicacoes-institucionais/termo-de-uso-de-redes-sociais.pdf) | — | — |
 
-## Notícias da ANPD (8)
+## Notícias da ANPD (7)
 
 Fonte: <https://www.gov.br/anpd/pt-br/assuntos/noticias>
 
@@ -223,5 +223,4 @@ Fonte: <https://www.gov.br/anpd/pt-br/assuntos/noticias>
 | [ANPD publica resultado preliminar das inscrições do 4º Prêmio Danilo Doneda de Artigos Científicos](https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-publica-lista-de-inscricoes-homologadas-do-4o-premio-danilo-doneda-de-artigos-cientificos) | 10/07/2026 | Foram recebidos 71 artigos científicos e o certame avança para mais uma etapa seguindo o cronograma previsto no edital. O período para recursos vai de segunda (13) a quarta-feira (15) |
 | [ANPD e PNUD selecionam consultores para realização de estudos sobre IA, proteção de dados e publicidade digital voltada a crianças e adolescentes](https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-e-pnud-selecionam-consultores-para-realizacao-de-estudos-sobre-ia-protecao-de-dados-e-publicidade-digital-voltada-a-criancas-e-adolescentes) | 07/07/2026 | Os interessados devem apresentar candidaturas individuais, conforme os requisitos previstos nos cinco editais, a partir desta terça-feira (07) até 26 de julho. O trabalho terá duração prevista de até 120 dias |
 | [Publicados primeiros resultados do Sandbox Regulatório em Inteligência Artificial](https://www.gov.br/anpd/pt-br/assuntos/noticias/publicados-primeiros-resultados-do-sandbox-regulatorio-em-inteligencia-artificial) | 02/07/2026 | Projeto-piloto da ANPD acompanha três empresas de tecnologia para testar projetos inovadores em ambiente regulado |
-| [Notícias](https://www.gov.br/anpd/pt-br/assuntos/noticias) | 02/12/2020 | — |
 

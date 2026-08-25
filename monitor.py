@@ -189,6 +189,7 @@ def extract_via_api(base_url: str):
     except (requests.RequestException, ValueError):
         return []
 
+    base_normalized = base_url.rstrip("/")
     items = []
     for entry in data.get("items", []):
         if entry.get("@type") in API_EXCLUDED_TYPES:
@@ -198,6 +199,10 @@ def extract_via_api(base_url: str):
         title = clean_text(entry.get("title") or "")
         href = entry.get("@id")
         if not title or not href:
+            continue
+        if href.rstrip("/") == base_normalized:
+            # é a própria pasta/página de índice (ex.: a página "Notícias"),
+            # não um item de conteúdo dentro dela
             continue
         date = None
         effective = entry.get("effective")
