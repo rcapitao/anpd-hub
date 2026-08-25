@@ -11,13 +11,24 @@ jobs:
         run: |
           UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
           URL="https://www.gov.br/anpd/pt-br/assuntos/noticias"
-          echo "=== HEADERS ==="
-          curl -sS -A "$UA" -H "Accept-Language: pt-BR,pt;q=0.9,en;q=0.5" -D headers.txt -o body.html -w "HTTP_CODE:%{http_code}\nSIZE:%{size_download}\n" "$URL"
-          cat headers.txt
-          echo "=== BODY LENGTH ==="
+          curl -sS -A "$UA" -H "Accept-Language: pt-BR,pt;q=0.9,en;q=0.5" -o body.html "$URL"
+          echo "=== TAMANHO ==="
           wc -c body.html
-          echo "=== BODY (primeiros 4000 chars) ==="
-          head -c 4000 body.html
-          echo ""
-          echo "=== BODY (últimos 1500 chars) ==="
-          tail -c 1500 body.html
+          echo "=== OCORRENCIAS DE PADROES CONHECIDOS ==="
+          for pat in "tileItem" "listing-item" "<table" "<article" "/assuntos/noticias/" "searchResults" "content-core" "__data" "window.__" "REDUX" "initialState" "Loadable"; do
+            n=$(grep -o -i "$pat" body.html | wc -l)
+            echo "$pat: $n"
+          done
+          echo "=== PRIMEIRA OCORRENCIA DE /assuntos/noticias/ (link de noticia individual) COM CONTEXTO ==="
+          grep -o '.\{80\}/anpd/pt-br/assuntos/noticias/[^"'"'"' ]*.\{80\}' body.html | head -5
+          echo "=== TRECHO POR VOLTA DE content-core (se existir) ==="
+          python3 -c "
+import re
+html = open('body.html', encoding='utf-8', errors='replace').read()
+idx = html.find('content-core')
+print('idx content-core:', idx)
+if idx >= 0:
+    print(html[max(0,idx-200):idx+3000])
+else:
+    print('NAO ENCONTRADO')
+"
