@@ -29,15 +29,19 @@ jobs:
       - name: Instalar dependências
         run: pip install -r requirements.txt
 
-      - name: "DEBUG temporario: baixar pagina de noticias"
+      - name: "DEBUG temporario: testar API REST do Volto (++api++)"
         run: |
           UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
-          URL="https://www.gov.br/anpd/pt-br/assuntos/noticias"
-          curl -sS -A "$UA" -H "Accept-Language: pt-BR,pt;q=0.9,en;q=0.5" -o /tmp/noticias.html "$URL"
-          wc -c /tmp/noticias.html
-
-      - name: "DEBUG temporario: analisar pagina de noticias"
-        run: python3 debug_noticias.py
+          for URL in \
+            "https://www.gov.br/anpd/++api++/pt-br/assuntos/noticias" \
+            "https://www.gov.br/anpd/++api++/pt-br/assuntos/noticias/@search" \
+            "https://www.gov.br/++api++/anpd/pt-br/assuntos/noticias" ; do
+            echo "=== $URL ==="
+            curl -sS -A "$UA" -H "Accept: application/json" -H "Accept-Language: pt-BR,pt;q=0.9,en;q=0.5" -o /tmp/resp.json -w "HTTP_CODE:%{http_code} SIZE:%{size_download}\n" "$URL"
+            head -c 1500 /tmp/resp.json
+            echo ""
+            echo ""
+          done
 
       - name: Executar monitoramento
         id: monitor
