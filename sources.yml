@@ -5,6 +5,10 @@
 #   - name: nome amigável (aparece nas Issues)
 #   - slug: identificador único, usado no nome do arquivo de estado (state/<slug>.json)
 #   - url:  URL da página de listagem a ser monitorada
+#   - api_portal_type (opcional): usado só se monitor.py precisar recorrer
+#     ao fallback via API REST do Volto (páginas renderizadas só no
+#     cliente) — filtra o @search para esse portal_type específico (ex.:
+#     "News Item"), em vez de trazer todo o conteúdo recursivo da pasta.
 
 sources:
   - name: "Atos Normativos da ANPD (visão geral)"
@@ -38,3 +42,8 @@ sources:
   - name: "Notícias da ANPD"
     slug: "noticias"
     url: "https://www.gov.br/anpd/pt-br/assuntos/noticias"
+    # Página renderizada só no cliente (React); monitor.py cai no fallback
+    # via API REST do Volto (++api++/@search). Sem esse filtro, o @search
+    # devolve todo o conteúdo recursivo da pasta (imagens/anexos inclusos),
+    # não só as notícias.
+    api_portal_type: "News Item"
