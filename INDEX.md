@@ -1,6 +1,6 @@
 # Índice de Publicações — Monitoramento ANPD
 
-_Última atualização: 2026-08-25T15:58:51.227485+00:00 · 157 publicação(ões) em 7 categoria(s)._
+_Última atualização: 2026-08-25T16:02:13.886554+00:00 · 165 publicação(ões) em 8 categoria(s)._
 
 > Gerado automaticamente pelo workflow de monitoramento a partir do conteúdo já detectado nas páginas monitoradas. Não edite manualmente — veja [`sources.yml`](sources.yml) e [`monitor.py`](monitor.py). Datas e descrições são um melhor esforço extraído da própria página e podem estar ausentes.
 
@@ -209,4 +209,19 @@ Fonte: <https://www.gov.br/anpd/pt-br/centrais-de-conteudo/outros-documentos-e-p
 | [Resolução relativa à Decisão de Adequação com a União Européia - em língua inglesa](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/outros-documentos-e-publicacoes-institucionais/resolucao-no-32-decisao-de-adequacao-uniao-europeia-em-lingua-inglesa.pdf) | — | — |
 | [Side Event - G20 - 2024](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/outros-documentos-e-publicacoes-institucionais/g20-side-event-report-anpd.pdf) | — | — |
 | [Termo de Uso das Redes Sociais da ANPD Conheça as diretrizes que orientam as interações nas redes sociais da ANPD](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/outros-documentos-e-publicacoes-institucionais/termo-de-uso-de-redes-sociais.pdf) | — | — |
+
+## Notícias da ANPD (8)
+
+Fonte: <https://www.gov.br/anpd/pt-br/assuntos/noticias>
+
+| Publicação | Data | Descrição |
+|---|---|---|
+| [ANPD avalia como plataformas digitais atuam para prevenir conteúdos criminosos e proteger crianças e mulheres na internet](https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-avalia-como-plataformas-digitais-atuam-para-prevenir-conteudos-criminosos-e-proteger-criancas-e-mulheres-na-internet) | 21/08/2026 | Monitoramento faz parte do planejamento anunciado pela Agência em junho, para avaliar ações para efetivação da atualização do Marco Civil da Internet e do ECA Digital |
+| [ANPD e PNUD divulgam resultado da seleção de consultores que vão elaborar estudos sobre IA e proteção de dados](https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-publica-resultado-da-selecao-para-consultores-que-vao-elaborar-relatorios-em-protecao-de-dados) | 21/08/2026 | Aprovados serão comunicados por e-mail, mas também podem acessar a página do projeto e conferir o resultado |
+| [ANPD realiza consulta multissetorial sobre Sandbox Regulatório de Inteligência Artificial](https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-realiza-consulta-multissetorial-sobre-sandbox-regulatorio-de-inteligencia-artificial) | 14/08/2026 | O encontro reuniu especialistas de diferentes áreas para avaliar e contribuir com o desenvolvimento do projeto |
+| [ANPD publica Radar Tecnológico sobre deepfakes](https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-publica-radar-tecnologico-sobre-deepfakes) | 29/07/2026 | Estudo analisa o funcionamento, as aplicações e os desafios desta tecnologia para a proteção de dados e a construção de ambientes digitais seguros |
+| [ANPD publica resultado preliminar das inscrições do 4º Prêmio Danilo Doneda de Artigos Científicos](https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-publica-lista-de-inscricoes-homologadas-do-4o-premio-danilo-doneda-de-artigos-cientificos) | 10/07/2026 | Foram recebidos 71 artigos científicos e o certame avança para mais uma etapa seguindo o cronograma previsto no edital. O período para recursos vai de segunda (13) a quarta-feira (15) |
+| [ANPD e PNUD selecionam consultores para realização de estudos sobre IA, proteção de dados e publicidade digital voltada a crianças e adolescentes](https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-e-pnud-selecionam-consultores-para-realizacao-de-estudos-sobre-ia-protecao-de-dados-e-publicidade-digital-voltada-a-criancas-e-adolescentes) | 07/07/2026 | Os interessados devem apresentar candidaturas individuais, conforme os requisitos previstos nos cinco editais, a partir desta terça-feira (07) até 26 de julho. O trabalho terá duração prevista de até 120 dias |
+| [Publicados primeiros resultados do Sandbox Regulatório em Inteligência Artificial](https://www.gov.br/anpd/pt-br/assuntos/noticias/publicados-primeiros-resultados-do-sandbox-regulatorio-em-inteligencia-artificial) | 02/07/2026 | Projeto-piloto da ANPD acompanha três empresas de tecnologia para testar projetos inovadores em ambiente regulado |
+| [Notícias](https://www.gov.br/anpd/pt-br/assuntos/noticias) | 02/12/2020 | — |
 
