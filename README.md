@@ -75,19 +75,29 @@ do projeto com o conteúdo que seria publicado na Issue.
 
 ## Sobre o scraper
 
-As páginas da ANPD são construídas em Plone/gov.br, cujo HTML de listagem
+As páginas da ANPD são construídas em Plone/Volto, cujo HTML de listagem
 pode variar entre seções. `monitor.py` tenta, em ordem:
 
 1. Seletores conhecidos de listagem do Plone (`tileItem`, `listing-item`
    etc.);
-2. Um fallback genérico que varre os links dentro da área principal de
+2. Tabelas de listagem com colunas "Ato"/"Ementa"/"Status Atual" (usadas em
+   Regulamentações e Atos de Gestão Interna);
+3. Um fallback genérico que varre os links dentro da área principal de
    conteúdo (ignorando menu, cabeçalho e rodapé) e filtra links de
-   navegação/boilerplate comuns em sites gov.br.
+   navegação/boilerplate comuns em sites gov.br;
+4. Se nenhuma das opções acima encontrar nada — típico de páginas
+   renderizadas só no lado do cliente (React), como "Notícias da ANPD" — a
+   API REST do Volto (`++api++/.../@search`), que devolve a listagem em
+   JSON independentemente de como a página é renderizada no navegador.
 
-Se uma fonte passar a gerar o alerta "nenhum item encontrado", é sinal de
-que o layout mudou e os seletores em `monitor.py` (`ITEM_SELECTORS`,
-`CONTENT_CONTAINER_SELECTORS`) precisam de ajuste — nesse caso, inspecione
-o HTML atual da página e atualize os seletores de acordo.
+Cada tentativa de busca também tem retry automático (até 3x, com espera
+entre elas) para tolerar bloqueios/instabilidades intermitentes do site.
+
+Se uma fonte passar a gerar o alerta "nenhum item encontrado" mesmo após os
+quatro passos acima, é sinal de que o layout mudou de forma mais profunda e
+os seletores em `monitor.py` (`ITEM_SELECTORS`, `CONTENT_CONTAINER_SELECTORS`,
+`TABLE_*_HEADERS`) precisam de ajuste — nesse caso, inspecione o HTML (ou a
+API `++api++`) atual da página e atualize de acordo.
 
 Se, em vez disso, a Issue de alerta mostrar **todas** as fontes falhando com
 o mesmo erro de conexão (`Network is unreachable`), não é um problema do

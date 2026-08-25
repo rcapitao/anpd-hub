@@ -29,13 +29,6 @@ jobs:
       - name: Instalar dependências
         run: pip install -r requirements.txt
 
-      - name: "DEBUG temporario: inspecionar schema do @search"
-        run: |
-          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
-          URL="https://www.gov.br/anpd/++api++/pt-br/assuntos/noticias/@search"
-          curl -sS -A "$UA" -H "Accept: application/json" -H "Accept-Language: pt-BR,pt;q=0.9,en;q=0.5" -o /tmp/resp.json "$URL"
-          python3 debug_search_schema.py
-
       - name: Executar monitoramento
         id: monitor
         run: python monitor.py
