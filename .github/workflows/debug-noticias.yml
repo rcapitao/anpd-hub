@@ -1,4 +1,4 @@
-name: Debug fetch (temporário)
+name: Debug noticias (temporário)
 
 on:
   workflow_dispatch: {}
