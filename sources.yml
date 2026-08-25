@@ -34,3 +34,7 @@ sources:
   - name: "Outros Documentos e Publicações Institucionais"
     slug: "outros-documentos-publicacoes"
     url: "https://www.gov.br/anpd/pt-br/centrais-de-conteudo/outros-documentos-e-publicacoes-institucionais"
+
+  - name: "Notícias da ANPD"
+    slug: "noticias"
+    url: "https://www.gov.br/anpd/pt-br/assuntos/noticias"

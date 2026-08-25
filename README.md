@@ -44,6 +44,7 @@ manualmente pela aba *Actions* do GitHub (`workflow_dispatch`).
 - [Documentos Técnicos e Orientativos](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/documentos-tecnicos-orientativos)
 - [Materiais Educativos e Publicações](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/materiais-educativos-e-publicacoes)
 - [Outros Documentos e Publicações Institucionais](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/outros-documentos-e-publicacoes-institucionais)
+- [Notícias da ANPD](https://www.gov.br/anpd/pt-br/assuntos/noticias)
 
 ## Adicionar novas páginas para monitorar
 
