@@ -1,0 +1,23 @@
+name: Debug fetch (temporário)
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch e inspecionar resposta
+        run: |
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+          URL="https://www.gov.br/anpd/pt-br/assuntos/noticias"
+          echo "=== HEADERS ==="
+          curl -sS -A "$UA" -H "Accept-Language: pt-BR,pt;q=0.9,en;q=0.5" -D headers.txt -o body.html -w "HTTP_CODE:%{http_code}\nSIZE:%{size_download}\n" "$URL"
+          cat headers.txt
+          echo "=== BODY LENGTH ==="
+          wc -c body.html
+          echo "=== BODY (primeiros 4000 chars) ==="
+          head -c 4000 body.html
+          echo ""
+          echo "=== BODY (últimos 1500 chars) ==="
+          tail -c 1500 body.html
