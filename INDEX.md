@@ -1,6 +1,6 @@
 # Índice de Publicações — Monitoramento ANPD
 
-_Última atualização: 2026-08-25T16:25:43.411733+00:00 · 195 publicação(ões) em 8 categoria(s)._
+_Última atualização: 2026-08-26T12:38:23.934187+00:00 · 197 publicação(ões) em 8 categoria(s)._
 
 > Gerado automaticamente pelo workflow de monitoramento a partir do conteúdo já detectado nas páginas monitoradas. Não edite manualmente — veja [`sources.yml`](sources.yml) e [`monitor.py`](monitor.py). Datas e descrições são um melhor esforço extraído da própria página e podem estar ausentes.
 
@@ -73,14 +73,16 @@ Fonte: <https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-nor
 | [Portaria nº 14, de 17 de maio de 2021](https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/atos_gestao_interna/portaria-14-de-17-de-maio-de-2021-aprova-a-cadeia-de-valor-da-anpd.pdf/@@display-file/file) | 17/05/2021 | Tornar pública a Cadeia de Valor e Macroprocessos da Autoridade Nacional de Proteção de Dados (Status: Vigente) |
 | [Portaria nº 1, de 8 de março de 2021](https://www.in.gov.br/en/web/dou/-/portaria-n-1-de-8-de-marco-de-2021-307463618) | 08/03/2021 | Estabelece o Regimento Interno da ANPD. Conheça também sua versão em língua espanhola, clicando aqui (Status: Vigente) |
 
-## Decisões em Processos Sancionadores (11)
+## Decisões em Processos Sancionadores (13)
 
 Fonte: <https://www.gov.br/anpd/pt-br/centrais-de-conteudo/decisoes-em-processos-sancionadores/>
 
 | Publicação | Data | Descrição |
 |---|---|---|
 | [Circuito Deliberativo nº 21/2025](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/decisoes-em-processos-sancionadores/antigo/pt-br/assuntos/deliberacoes-do-conselho-diretor-1/circuito-deliberativo) | — | Status: Recurso decidido pelo Conselho Diretor no. Processo encerrado |
+| [Despacho Decisório nº 27/2026/CGS/SFI](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/decisoes-em-processos-sancionadores/despacho-decisorio-no-27-2026-cgs-sfi.pdf/@@display-file/file) | — | — |
 | [Pesquisa Pública do SEI](https://sei.anpd.gov.br/sei/modulos/pesquisa/md_pesq_processo_pesquisar.php?acao_externa=protocolo_pesquisar&acao_origem_externa=protocolo_pesquisar&id_orgao_acesso_externo=0) | — | Os documentos públicos dos Processos Administrativos Sancionadores conduzidos pela ANPD podem ser consultados na |
+| [Relatório de Instrução (Pub) Nº 2/2026/CGS/SFI](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/decisoes-em-processos-sancionadores/relatorio-de-instrucao-pub-no-2-2026-cgs-sfi-1.pdf/@@display-file/file) | — | Bytedance Brasil Tecnologia Ltda |
 | [Relatório de Instrução nº 1/2023/CGF/ANPD](https://www.gov.br/anpd/pt-br/assuntos/noticias/sei_00261-000489_2022_62_decisao_telekall_inforservice.pdf/@@display-file/file) | — | Telekall Inforservice |
 | [Relatório de Instrução nº 1/2024/CGF/ANPD](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/relatorio-de-instrucao-1_2024.pdf/@@display-file/file) | — | Instituto Nacional do Seguro Social - INSS |
 | [Relatório de Instrução nº 2/2023/CGF/ANPD](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/sei_4286376_relatorio_2_2023.pdf/@@display-file/file) | — | Instituto de Assistência ao Servidor Público Estadual de São Paulo - IAMSPE |
