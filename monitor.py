@@ -276,23 +276,40 @@ def normalize_title(title: str) -> str:
     return clean_text(title).lower()
 
 
-def reconcile_url_change(state: dict, item: dict, now_iso: str) -> bool:
+def reconcile_url_change(state: dict, item: dict, now_iso: str, current_urls: set) -> bool:
     """Se o item já existe no estado sob outra URL com o mesmo título (o
     site trocou o link, ex.: de in.gov.br para uma página própria do
     gov.br), atualiza a URL guardada em vez de tratar como conteúdo novo.
-    Retorna True se reconciliou (nada a notificar), False caso contrário."""
+
+    Só reconcilia se a URL antiga *não* aparece mais na extração atual da
+    página — ou seja, ela realmente sumiu (migração). Páginas como
+    "Regulamentações da ANPD" repetem o mesmo texto genérico ("Conheça
+    também, sua versão em língua inglesa...") em vários documentos
+    DIFERENTES (PDFs em idiomas diferentes, por exemplo); se reconciliasse
+    só por título igual, um documento real e ainda presente na página
+    seria descartado silenciosamente a cada execução.
+
+    Retorna True se reconciliou (nada a notificar), False caso contrário.
+    """
     norm = normalize_title(item["title"])
     for old_url, data in list(state["items"].items()):
-        if old_url != item["url"] and normalize_title(data.get("title", "")) == norm:
-            old_data = state["items"].pop(old_url)
-            state["items"][item["url"]] = {
-                "title": item["title"],
-                "date": item.get("date") or old_data.get("date"),
-                "description": item.get("description") or old_data.get("description"),
-                "first_seen": old_data.get("first_seen", now_iso),
-            }
-            log(f"  URL atualizada para o mesmo conteúdo: {old_url} -> {item['url']}")
-            return True
+        if old_url == item["url"]:
+            continue
+        if normalize_title(data.get("title", "")) != norm:
+            continue
+        if old_url in current_urls:
+            # a URL antiga continua presente nesta mesma extração: não é
+            # uma migração, são dois documentos diferentes com título igual
+            continue
+        old_data = state["items"].pop(old_url)
+        state["items"][item["url"]] = {
+            "title": item["title"],
+            "date": item.get("date") or old_data.get("date"),
+            "description": item.get("description") or old_data.get("description"),
+            "first_seen": old_data.get("first_seen", now_iso),
+        }
+        log(f"  URL atualizada para o mesmo conteúdo: {old_url} -> {item['url']}")
+        return True
     return False
 
 
@@ -551,10 +568,11 @@ def main() -> int:
             continue
 
         known_urls = set(state["items"].keys())
+        current_urls = {i["url"] for i in items}
         candidates = [item for item in items if item["url"] not in known_urls]
         new_items = [
             item for item in candidates
-            if not reconcile_url_change(state, item, now_iso)
+            if not reconcile_url_change(state, item, now_iso, current_urls)
         ]
 
         for item in new_items:

@@ -20,6 +20,14 @@ com nome, link, data de publicação e uma breve descrição.
      por fonte;
    - [`INDEX.md`](INDEX.md) é regenerado a partir do estado atualizado, para
      refletir o novo conteúdo.
+   - Antes de considerar um item "novo", o monitor verifica se ele não é na
+     verdade um documento já conhecido que só mudou de URL (ex.: de
+     `in.gov.br` para uma página própria do `gov.br`) — nesse caso, só
+     atualiza a URL guardada, sem notificar. Essa verificação só reconcilia
+     quando a URL antiga realmente sumiu da página; documentos diferentes
+     que por acaso têm o mesmo texto de link (comum em versões "em inglês"/
+     "em espanhol" de uma mesma resolução) continuam sendo tratados como
+     itens distintos, mesmo com título idêntico.
 4. Na primeira execução de uma fonte não existe estado ainda, então o
    conteúdo atual vira a "linha de base" (nenhuma Issue é aberta — do
    contrário todo o histórico existente apareceria como "novo"), mas ele já
