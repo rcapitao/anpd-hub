@@ -29,9 +29,6 @@ jobs:
       - name: Instalar dependências
         run: pip install -r requirements.txt
 
-      - name: "DEBUG temporario: checar estrutura de fontes suspeitas"
-        run: python3 debug_check_structure.py
-
       - name: Executar monitoramento
         id: monitor
         run: python monitor.py
