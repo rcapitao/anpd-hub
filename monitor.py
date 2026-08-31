@@ -55,7 +55,14 @@ HEADERS = {
 REQUEST_TIMEOUT = 30
 
 SESSION = requests.Session()
-_retry = Retry(total=3, backoff_factor=2, status_forcelist=(429, 500, 502, 503, 504))
+# connect=0: erros de conexão (ex.: timeout) já são reexecutados pelo loop de
+# retry da própria aplicação em fetch_and_extract() (com backoff e logging).
+# Deixar o urllib3 também retentar aqui (o padrão herdaria `total`) multiplica
+# as duas camadas: cada "tentativa" do app fazia até 4 conexões reais de 30s
+# por baixo, fazendo uma falha de rede em todas as 8 fontes levar ~54min em
+# vez de alguns minutos (visto nas Issues #4, #5, #8, #10, #35).
+_retry = Retry(total=3, connect=0, backoff_factor=2,
+                status_forcelist=(429, 500, 502, 503, 504))
 SESSION.mount("https://", HTTPAdapter(max_retries=_retry))
 SESSION.mount("http://", HTTPAdapter(max_retries=_retry))
 
