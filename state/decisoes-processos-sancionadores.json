@@ -12,18 +12,6 @@
       "first_seen": "2026-08-27T18:03:05.062623+00:00",
       "title": "Relatório de Instrução nº 1/2023/CGF/ANPD"
     },
-    "https://www.gov.br/anpd/pt-br/centrais-de-conteudo/decisoes-em-processos-sancionadores/antigo/pt-br/assuntos/deliberacoes-do-conselho-diretor-1/circuito-deliberativo": {
-      "date": null,
-      "description": "Status: Recurso decidido pelo Conselho Diretor no. Processo encerrado",
-      "first_seen": "2026-08-27T18:03:05.062623+00:00",
-      "title": "Circuito Deliberativo nº 21/2025"
-    },
-    "https://www.gov.br/anpd/pt-br/centrais-de-conteudo/decisoes-em-processos-sancionadores/antigo/pt-br/centrais-de-conteudo/decisoes-em-processos-sancionadores-1/relatorio_de_instrucao_5_publico_ocultado.pdf": {
-      "date": null,
-      "description": null,
-      "first_seen": "2026-08-27T18:03:05.062623+00:00",
-      "title": "Relatório de Instrução nº 5/2024/FIS/CGF/ANPD"
-    },
     "https://www.gov.br/anpd/pt-br/centrais-de-conteudo/decisoes-em-processos-sancionadores/despacho-decisorio-no-27-2026-cgs-sfi.pdf/@@display-file/file": {
       "date": null,
       "description": null,
@@ -77,7 +65,19 @@
       "description": "Instituto de Pesquisas Jardim Botânico do Rio de Janeiro - JBRJ",
       "first_seen": "2026-08-27T18:03:05.062623+00:00",
       "title": "Relatório de Instrução nº 3/2023/CGF/ANPD"
+    },
+    "https://www.gov.br/anpdantigo/pt-br/assuntos/deliberacoes-do-conselho-diretor-1/circuito-deliberativo": {
+      "date": null,
+      "description": "Status: Recurso decidido pelo Conselho Diretor no. Processo encerrado",
+      "first_seen": "2026-08-27T18:03:05.062623+00:00",
+      "title": "Circuito Deliberativo nº 21/2025"
+    },
+    "https://www.gov.br/anpdantigo/pt-br/centrais-de-conteudo/decisoes-em-processos-sancionadores-1/relatorio_de_instrucao_5_publico_ocultado.pdf": {
+      "date": null,
+      "description": null,
+      "first_seen": "2026-08-27T18:03:05.062623+00:00",
+      "title": "Relatório de Instrução nº 5/2024/FIS/CGF/ANPD"
     }
   },
-  "last_checked": "2026-08-30T15:50:31.118946+00:00"
+  "last_checked": "2026-08-31T18:34:41.035614+00:00"
 }

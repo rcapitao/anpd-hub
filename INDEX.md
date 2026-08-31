@@ -1,6 +1,6 @@
 # Índice de Publicações — Monitoramento ANPD
 
-_Última atualização: 2026-08-30T15:50:46.697008+00:00 · 197 publicação(ões) em 8 categoria(s)._
+_Última atualização: 2026-08-31T18:34:55.449663+00:00 · 197 publicação(ões) em 8 categoria(s)._
 
 > Gerado automaticamente pelo workflow de monitoramento a partir do conteúdo já detectado nas páginas monitoradas. Não edite manualmente — veja [`sources.yml`](sources.yml) e [`monitor.py`](monitor.py). Datas e descrições são um melhor esforço extraído da própria página e podem estar ausentes.
 
@@ -79,7 +79,7 @@ Fonte: <https://www.gov.br/anpd/pt-br/centrais-de-conteudo/decisoes-em-processos
 
 | Publicação | Data | Descrição |
 |---|---|---|
-| [Circuito Deliberativo nº 21/2025](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/decisoes-em-processos-sancionadores/antigo/pt-br/assuntos/deliberacoes-do-conselho-diretor-1/circuito-deliberativo) | — | Status: Recurso decidido pelo Conselho Diretor no. Processo encerrado |
+| [Circuito Deliberativo nº 21/2025](https://www.gov.br/anpdantigo/pt-br/assuntos/deliberacoes-do-conselho-diretor-1/circuito-deliberativo) | — | Status: Recurso decidido pelo Conselho Diretor no. Processo encerrado |
 | [Despacho Decisório nº 27/2026/CGS/SFI](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/decisoes-em-processos-sancionadores/despacho-decisorio-no-27-2026-cgs-sfi.pdf/@@display-file/file) | — | — |
 | [Pesquisa Pública do SEI](https://sei.anpd.gov.br/sei/modulos/pesquisa/md_pesq_processo_pesquisar.php?acao_externa=protocolo_pesquisar&acao_origem_externa=protocolo_pesquisar&id_orgao_acesso_externo=0) | — | Os documentos públicos dos Processos Administrativos Sancionadores conduzidos pela ANPD podem ser consultados na |
 | [Relatório de Instrução (Pub) Nº 2/2026/CGS/SFI](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/decisoes-em-processos-sancionadores/relatorio-de-instrucao-pub-no-2-2026-cgs-sfi-1.pdf/@@display-file/file) | — | Bytedance Brasil Tecnologia Ltda |
@@ -91,7 +91,7 @@ Fonte: <https://www.gov.br/anpd/pt-br/centrais-de-conteudo/decisoes-em-processos
 | [Relatório de Instrução nº 3/2024/FIS/CGF/ANPD](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/ri-pas-pe-versao-publica.pdf/@@display-file/file) | — | Secretaria de Assistência Social, Combate à Fome e Políticas sobre Drogas - SAS, sucessora da Secretaria de Desenvolvimento Social, Criança, Juventude e Prevenção à Violência e às Drogas do Estado de Pernambuco - SDSCJPVD, que sucedeu a Secretaria de Desenvolvimento Social, Crian |
 | [Relatório de Instrução nº 4/2023/FIS/CGF/ANPD](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/ri-sesc-sc-00261001886202251-autos-publicos.pdf/@@display-file/file) | — | Secretaria de Estado da Saúde de Santa Catarina |
 | [Relatório de Instrução nº 4/2024/FIS/CGF/ANPD](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/relatorio_de_instrucao_no_4_2024_fis_cgf_anpd_v-publica.pdf/@@display-file/file) | — | — |
-| [Relatório de Instrução nº 5/2024/FIS/CGF/ANPD](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/decisoes-em-processos-sancionadores/antigo/pt-br/centrais-de-conteudo/decisoes-em-processos-sancionadores-1/relatorio_de_instrucao_5_publico_ocultado.pdf) | — | — |
+| [Relatório de Instrução nº 5/2024/FIS/CGF/ANPD](https://www.gov.br/anpdantigo/pt-br/centrais-de-conteudo/decisoes-em-processos-sancionadores-1/relatorio_de_instrucao_5_publico_ocultado.pdf) | — | — |
 
 ## Documentos Técnicos e Orientativos (55)
 
