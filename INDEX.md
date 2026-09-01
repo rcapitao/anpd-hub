@@ -1,6 +1,6 @@
 # Índice de Publicações — Monitoramento ANPD
 
-_Última atualização: 2026-08-31T18:34:55.449663+00:00 · 197 publicação(ões) em 8 categoria(s)._
+_Última atualização: 2026-09-01T15:53:48.252707+00:00 · 198 publicação(ões) em 8 categoria(s)._
 
 > Gerado automaticamente pelo workflow de monitoramento a partir do conteúdo já detectado nas páginas monitoradas. Não edite manualmente — veja [`sources.yml`](sources.yml) e [`monitor.py`](monitor.py). Datas e descrições são um melhor esforço extraído da própria página e podem estar ausentes.
 
@@ -79,7 +79,7 @@ Fonte: <https://www.gov.br/anpd/pt-br/centrais-de-conteudo/decisoes-em-processos
 
 | Publicação | Data | Descrição |
 |---|---|---|
-| [Circuito Deliberativo nº 21/2025](https://www.gov.br/anpdantigo/pt-br/assuntos/deliberacoes-do-conselho-diretor-1/circuito-deliberativo) | — | Status: Recurso decidido pelo Conselho Diretor no. Processo encerrado |
+| [Circuito Deliberativo nº 21/2025](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/decisoes-em-processos-sancionadores/antigo/pt-br/assuntos/deliberacoes-do-conselho-diretor-1/circuito-deliberativo) | — | Status: Recurso decidido pelo Conselho Diretor no. Processo encerrado |
 | [Despacho Decisório nº 27/2026/CGS/SFI](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/decisoes-em-processos-sancionadores/despacho-decisorio-no-27-2026-cgs-sfi.pdf/@@display-file/file) | — | — |
 | [Pesquisa Pública do SEI](https://sei.anpd.gov.br/sei/modulos/pesquisa/md_pesq_processo_pesquisar.php?acao_externa=protocolo_pesquisar&acao_origem_externa=protocolo_pesquisar&id_orgao_acesso_externo=0) | — | Os documentos públicos dos Processos Administrativos Sancionadores conduzidos pela ANPD podem ser consultados na |
 | [Relatório de Instrução (Pub) Nº 2/2026/CGS/SFI](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/decisoes-em-processos-sancionadores/relatorio-de-instrucao-pub-no-2-2026-cgs-sfi-1.pdf/@@display-file/file) | — | Bytedance Brasil Tecnologia Ltda |
@@ -91,7 +91,7 @@ Fonte: <https://www.gov.br/anpd/pt-br/centrais-de-conteudo/decisoes-em-processos
 | [Relatório de Instrução nº 3/2024/FIS/CGF/ANPD](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/ri-pas-pe-versao-publica.pdf/@@display-file/file) | — | Secretaria de Assistência Social, Combate à Fome e Políticas sobre Drogas - SAS, sucessora da Secretaria de Desenvolvimento Social, Criança, Juventude e Prevenção à Violência e às Drogas do Estado de Pernambuco - SDSCJPVD, que sucedeu a Secretaria de Desenvolvimento Social, Crian |
 | [Relatório de Instrução nº 4/2023/FIS/CGF/ANPD](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/ri-sesc-sc-00261001886202251-autos-publicos.pdf/@@display-file/file) | — | Secretaria de Estado da Saúde de Santa Catarina |
 | [Relatório de Instrução nº 4/2024/FIS/CGF/ANPD](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/relatorio_de_instrucao_no_4_2024_fis_cgf_anpd_v-publica.pdf/@@display-file/file) | — | — |
-| [Relatório de Instrução nº 5/2024/FIS/CGF/ANPD](https://www.gov.br/anpdantigo/pt-br/centrais-de-conteudo/decisoes-em-processos-sancionadores-1/relatorio_de_instrucao_5_publico_ocultado.pdf) | — | — |
+| [Relatório de Instrução nº 5/2024/FIS/CGF/ANPD](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/decisoes-em-processos-sancionadores/antigo/pt-br/centrais-de-conteudo/decisoes-em-processos-sancionadores-1/relatorio_de_instrucao_5_publico_ocultado.pdf) | — | — |
 
 ## Documentos Técnicos e Orientativos (55)
 
@@ -212,12 +212,13 @@ Fonte: <https://www.gov.br/anpd/pt-br/centrais-de-conteudo/outros-documentos-e-p
 | [Side Event - G20 - 2024](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/outros-documentos-e-publicacoes-institucionais/g20-side-event-report-anpd.pdf) | — | — |
 | [Termo de Uso das Redes Sociais da ANPD Conheça as diretrizes que orientam as interações nas redes sociais da ANPD](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/outros-documentos-e-publicacoes-institucionais/termo-de-uso-de-redes-sociais.pdf) | — | — |
 
-## Notícias da ANPD (38)
+## Notícias da ANPD (39)
 
 Fonte: <https://www.gov.br/anpd/pt-br/assuntos/noticias>
 
 | Publicação | Data | Descrição |
 |---|---|---|
+| [ANPD abre tomadas de subsídios sobre próxima agenda regulatória e avaliação do resultado regulatório](https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-abre-ts-agenda-regulatoria-e-avaliacao-de-resultado-regulatorio) | 01/09/2026 | As contribuições podem ser enviadas até 16/10 e ajudarão a orientar a atuação da Agência em temas como proteção de crianças e adolescentes, IA, biometria e direitos dos titulares de dados |
 | [ANPD multa TikTok em R$ 153,7 milhões por falhas na proteção de dados de crianças e adolescentes](https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-multa-tiktok-em-r-153-7-milhoes-por-falhas-na-protecao-de-dados-de-criancas-e-adolescentes) | 25/08/2026 | Rede social é multada por violações à LGPD. ByteDance também se comprometeu com plano de conformidade para correção das irregularidades e melhoria no tratamento de dados |
 | [ANPD avalia como plataformas digitais atuam para prevenir conteúdos criminosos e proteger crianças e mulheres na internet](https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-avalia-como-plataformas-digitais-atuam-para-prevenir-conteudos-criminosos-e-proteger-criancas-e-mulheres-na-internet) | 21/08/2026 | Monitoramento faz parte do planejamento anunciado pela Agência em junho, para avaliar ações para efetivação da atualização do Marco Civil da Internet e do ECA Digital |
 | [ANPD e PNUD divulgam resultado da seleção de consultores que vão elaborar estudos sobre IA e proteção de dados](https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-publica-resultado-da-selecao-para-consultores-que-vao-elaborar-relatorios-em-protecao-de-dados) | 21/08/2026 | Aprovados serão comunicados por e-mail, mas também podem acessar a página do projeto e conferir o resultado |

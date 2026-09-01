@@ -1,5 +1,11 @@
 {
   "items": {
+    "https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-abre-ts-agenda-regulatoria-e-avaliacao-de-resultado-regulatorio": {
+      "date": "01/09/2026",
+      "description": "As contribuições podem ser enviadas até 16/10 e ajudarão a orientar a atuação da Agência em temas como proteção de crianças e adolescentes, IA, biometria e direitos dos titulares de dados",
+      "first_seen": "2026-09-01T15:53:32.419233+00:00",
+      "title": "ANPD abre tomadas de subsídios sobre próxima agenda regulatória e avaliação do resultado regulatório"
+    },
     "https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-avalia-como-plataformas-digitais-atuam-para-prevenir-conteudos-criminosos-e-proteger-criancas-e-mulheres-na-internet": {
       "date": "21/08/2026",
       "description": "Monitoramento faz parte do planejamento anunciado pela Agência em junho, para avaliar ações para efetivação da atualização do Marco Civil da Internet e do ECA Digital",
@@ -229,5 +235,5 @@
       "title": "Site e redes sociais da ANPD ficarão restritos no período do defeso eleitoral"
     }
   },
-  "last_checked": "2026-08-31T18:34:41.035614+00:00"
+  "last_checked": "2026-09-01T15:53:32.419233+00:00"
 }
