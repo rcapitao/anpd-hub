@@ -1,5 +1,11 @@
 {
   "items": {
+    "https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-abre-audiencia-consulta-atualizacao-regulamento-fiscalizacao": {
+      "date": "09/09/2026",
+      "description": "As contribuições podem ser enviadas até 26/10, enquanto as inscrições para a audiência virtual do dia 24/09 podem ser feitas até 18/09",
+      "first_seen": "2026-09-09T15:43:38.275195+00:00",
+      "title": "ANPD abre inscrições para audiência e inicia consulta pública para atualização de Regulamento de Fiscalização"
+    },
     "https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-abre-ts-agenda-regulatoria-e-avaliacao-de-resultado-regulatorio": {
       "date": "01/09/2026",
       "description": "As contribuições podem ser enviadas até 16/10 e ajudarão a orientar a atuação da Agência em temas como proteção de crianças e adolescentes, IA, biometria e direitos dos titulares de dados",
@@ -235,5 +241,5 @@
       "title": "Site e redes sociais da ANPD ficarão restritos no período do defeso eleitoral"
     }
   },
-  "last_checked": "2026-09-08T15:47:42.751300+00:00"
+  "last_checked": "2026-09-09T15:43:38.275195+00:00"
 }

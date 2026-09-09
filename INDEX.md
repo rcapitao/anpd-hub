@@ -1,6 +1,6 @@
 # Índice de Publicações — Monitoramento ANPD
 
-_Última atualização: 2026-09-08T15:47:58.234818+00:00 · 198 publicação(ões) em 8 categoria(s)._
+_Última atualização: 2026-09-09T15:43:53.380789+00:00 · 199 publicação(ões) em 8 categoria(s)._
 
 > Gerado automaticamente pelo workflow de monitoramento a partir do conteúdo já detectado nas páginas monitoradas. Não edite manualmente — veja [`sources.yml`](sources.yml) e [`monitor.py`](monitor.py). Datas e descrições são um melhor esforço extraído da própria página e podem estar ausentes.
 
@@ -212,12 +212,13 @@ Fonte: <https://www.gov.br/anpd/pt-br/centrais-de-conteudo/outros-documentos-e-p
 | [Side Event - G20 - 2024](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/outros-documentos-e-publicacoes-institucionais/g20-side-event-report-anpd.pdf) | — | — |
 | [Termo de Uso das Redes Sociais da ANPD Conheça as diretrizes que orientam as interações nas redes sociais da ANPD](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/outros-documentos-e-publicacoes-institucionais/termo-de-uso-de-redes-sociais.pdf) | — | — |
 
-## Notícias da ANPD (39)
+## Notícias da ANPD (40)
 
 Fonte: <https://www.gov.br/anpd/pt-br/assuntos/noticias>
 
 | Publicação | Data | Descrição |
 |---|---|---|
+| [ANPD abre inscrições para audiência e inicia consulta pública para atualização de Regulamento de Fiscalização](https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-abre-audiencia-consulta-atualizacao-regulamento-fiscalizacao) | 09/09/2026 | As contribuições podem ser enviadas até 26/10, enquanto as inscrições para a audiência virtual do dia 24/09 podem ser feitas até 18/09 |
 | [ANPD abre tomadas de subsídios sobre próxima agenda regulatória e avaliação do resultado regulatório](https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-abre-ts-agenda-regulatoria-e-avaliacao-de-resultado-regulatorio) | 01/09/2026 | As contribuições podem ser enviadas até 16/10 e ajudarão a orientar a atuação da Agência em temas como proteção de crianças e adolescentes, IA, biometria e direitos dos titulares de dados |
 | [ANPD multa TikTok em R$ 153,7 milhões por falhas na proteção de dados de crianças e adolescentes](https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-multa-tiktok-em-r-153-7-milhoes-por-falhas-na-protecao-de-dados-de-criancas-e-adolescentes) | 25/08/2026 | Rede social é multada por violações à LGPD. ByteDance também se comprometeu com plano de conformidade para correção das irregularidades e melhoria no tratamento de dados |
 | [ANPD avalia como plataformas digitais atuam para prevenir conteúdos criminosos e proteger crianças e mulheres na internet](https://www.gov.br/anpd/pt-br/assuntos/noticias/anpd-avalia-como-plataformas-digitais-atuam-para-prevenir-conteudos-criminosos-e-proteger-criancas-e-mulheres-na-internet) | 21/08/2026 | Monitoramento faz parte do planejamento anunciado pela Agência em junho, para avaliar ações para efetivação da atualização do Marco Civil da Internet e do ECA Digital |
