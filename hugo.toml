@@ -1,5 +1,4 @@
 baseURL = "https://rcapitao.github.io/anpd-hub/"
-locale = "pt-BR"
 title = "ANPD Hub"
 theme = "hextra"
 
@@ -8,6 +7,27 @@ enableGitInfo = true
 
 outputs.home = ["html", "rss"]
 outputs.section = ["html", "rss"]
+
+# i18n: português do Brasil é o idioma padrão (todo o conteúdo hoje é só em
+# pt-br, então fica servido na raiz, sem prefixo /pt-br/). Inglês e espanhol
+# ficam configurados e com o seletor de idioma disponível na navbar, prontos
+# para receber conteúdo traduzido (em /en/ e /es/) quando existir.
+defaultContentLanguage = "pt-br"
+defaultContentLanguageInSubdir = false
+
+[languages]
+  [languages.pt-br]
+    label = "Português (Brasil)"
+    locale = "pt-BR"
+    weight = 1
+  [languages.en]
+    label = "English"
+    locale = "en"
+    weight = 2
+  [languages.es]
+    label = "Español"
+    locale = "es"
+    weight = 3
 
 [markup]
   [markup.highlight]
@@ -22,14 +42,26 @@ outputs.section = ["html", "rss"]
   weight = 1
 
 [[menu.main]]
-  name = "Search"
+  identifier = "blog"
+  name = "Blog"
+  pageRef = "/blog"
   weight = 2
+
+[[menu.main]]
+  name = "Search"
+  weight = 3
   [menu.main.params]
     type = "search"
 
 [[menu.main]]
+  name = "Language"
+  weight = 4
+  [menu.main.params]
+    type = "language-switch"
+
+[[menu.main]]
   name = "GitHub"
-  weight = 3
+  weight = 5
   url = "https://github.com/rcapitao/anpd-hub"
   [menu.main.params]
     icon = "github"
@@ -56,3 +88,12 @@ outputs.section = ["html", "rss"]
   [params.search]
     enable = true
     type = "flexsearch"
+
+  [params.blog]
+    [params.blog.list]
+      sortBy = "date"
+      sortOrder = "desc"
+      displayTags = true
+      pagerSize = 10
+    [params.blog.article]
+      displayPagination = false
