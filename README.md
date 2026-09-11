@@ -103,6 +103,21 @@ subpáginas. São cópias estáticas do estado de quando foram geradas — não
 sincronizadas automaticamente com `state/*.json`/`INDEX.md` a cada
 execução do monitor.
 
+`content/blog/` é uma seção separada, para registrar atualizações e
+novidades do próprio site (não é conteúdo da ANPD) — cada post é um
+arquivo em `content/blog/<slug>.md`.
+
+### Idiomas (i18n)
+
+O site é multilíngue: português do Brasil (`pt-br`) é o idioma padrão,
+servido na raiz (sem prefixo `/pt-br/`); inglês (`en`) e espanhol (`es`)
+já estão configurados em `hugo.toml` ([languages]), com o seletor de
+idioma na navbar, mas **sem conteúdo traduzido ainda** — hoje só existem
+`content/*.md` sem sufixo de idioma, então só o pt-br tem conteúdo de
+verdade em `/en/` e `/es/`. Para traduzir uma página, crie a versão com
+sufixo do idioma ao lado da original (ex.: `content/_index.en.md`,
+`content/_index.es.md`).
+
 ## Sobre o scraper
 
 As páginas da ANPD são construídas em Plone/Volto, cujo HTML de listagem
