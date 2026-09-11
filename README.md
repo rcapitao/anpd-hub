@@ -95,10 +95,13 @@ hugo server   # roda o site localmente em http://localhost:1313
 hugo          # gera o build estático em public/
 ```
 
-`content/docs/_index.md` é hoje uma cópia estática de `INDEX.md` (não
-sincronizada automaticamente); para refletir o índice atual, regenere esse
-arquivo a partir de `INDEX.md` ou publique o site manualmente após cada
-atualização.
+O conteúdo de `content/docs/` é dividido em uma página por categoria
+(`content/docs/<slug>/_index.md`, um `<slug>` por fonte de `sources.yml`),
+para ser mais fácil de ajustar cada seção individualmente. `content/docs/_index.md`
+é só a página de entrada (lista de categorias); o conteúdo em si vive nas
+subpáginas. São cópias estáticas do estado de quando foram geradas — não
+sincronizadas automaticamente com `state/*.json`/`INDEX.md` a cada
+execução do monitor.
 
 ## Sobre o scraper
 
