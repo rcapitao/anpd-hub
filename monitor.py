@@ -510,6 +510,82 @@ def save_state(slug: str, state: dict) -> None:
                      encoding="utf-8")
 
 
+def check_source(source: dict, now_iso: str, dry_run: bool, attempts: int = 3):
+    """Busca e processa uma única fonte. Retorna um dict:
+    {"kind": "error", "message": str} |
+    {"kind": "baseline", "count": int} |
+    {"kind": "new_items", "items": [...]} |
+    {"kind": "no_new"}
+    """
+    name, slug, url = source["name"], source["slug"], source["url"]
+    log(f"[{slug}] buscando {url}")
+    try:
+        items, last_html = fetch_and_extract(
+            url, attempts=attempts, api_portal_type=source.get("api_portal_type"))
+    except requests.RequestException as exc:
+        log(f"[{slug}] ERRO ao buscar página: {exc}")
+        return {"kind": "error", "message": f"Falha ao acessar a página: `{exc}`"}
+
+    log(f"[{slug}] {len(items)} item(ns) extraído(s)")
+
+    if not items:
+        if looks_like_challenge_page(last_html):
+            msg = (
+                "Nenhum item foi encontrado após várias tentativas, e a "
+                "resposta recebida parece uma página de bloqueio "
+                "anti-bot ou de instabilidade temporária do site, não o "
+                "conteúdo real. Se isso persistir por vários dias "
+                "seguidos, pode ser necessário ajustar como as "
+                "requisições são feitas (ex.: user-agent, cabeçalhos)."
+            )
+        else:
+            msg = (
+                "Nenhum item foi encontrado na página. O layout do site "
+                "pode ter mudado e os seletores em `monitor.py` "
+                "provavelmente precisam ser ajustados."
+            )
+        return {"kind": "error", "message": msg}
+
+    state = load_state(slug)
+    if state is None:
+        state = {
+            "items": {
+                item["url"]: {
+                    "title": item["title"],
+                    "date": item.get("date"),
+                    "description": item.get("description"),
+                    "first_seen": now_iso,
+                }
+                for item in items
+            },
+            "last_checked": now_iso,
+        }
+        if not dry_run:
+            save_state(slug, state)
+        return {"kind": "baseline", "count": len(items)}
+
+    known_urls = set(state["items"].keys())
+    current_urls = {i["url"] for i in items}
+    candidates = [item for item in items if item["url"] not in known_urls]
+    new_items = [
+        item for item in candidates
+        if not reconcile_url_change(state, item, now_iso, current_urls)
+    ]
+
+    for item in new_items:
+        state["items"][item["url"]] = {
+            "title": item["title"],
+            "date": item.get("date"),
+            "description": item.get("description"),
+            "first_seen": now_iso,
+        }
+    state["last_checked"] = now_iso
+    if not dry_run:
+        save_state(slug, state)
+
+    return {"kind": "new_items", "items": new_items} if new_items else {"kind": "no_new"}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--dry-run", action="store_true",
@@ -522,79 +598,38 @@ def main() -> int:
     new_by_source = []   # [(source, [items])]
     baselined = []       # sources com estado criado agora pela primeira vez
     errors = []          # (source, mensagem)
+    failed_sources = []  # fontes com erro na primeira passada, candidatas a nova tentativa
 
     for source in sources:
-        name, slug, url = source["name"], source["slug"], source["url"]
-        log(f"[{slug}] buscando {url}")
-        try:
-            items, last_html = fetch_and_extract(
-                url, api_portal_type=source.get("api_portal_type"))
-        except requests.RequestException as exc:
-            log(f"[{slug}] ERRO ao buscar página: {exc}")
-            errors.append((source, f"Falha ao acessar a página: `{exc}`"))
-            continue
+        result = check_source(source, now_iso, args.dry_run)
+        if result["kind"] == "error":
+            errors.append((source, result["message"]))
+            failed_sources.append(source)
+        elif result["kind"] == "baseline":
+            baselined.append((source, result["count"]))
+        elif result["kind"] == "new_items":
+            new_by_source.append((source, result["items"]))
 
-        log(f"[{slug}] {len(items)} item(ns) extraído(s)")
-
-        if not items:
-            if looks_like_challenge_page(last_html):
-                msg = (
-                    "Nenhum item foi encontrado após várias tentativas, e a "
-                    "resposta recebida parece uma página de bloqueio "
-                    "anti-bot ou de instabilidade temporária do site, não o "
-                    "conteúdo real. Se isso persistir por vários dias "
-                    "seguidos, pode ser necessário ajustar como as "
-                    "requisições são feitas (ex.: user-agent, cabeçalhos)."
-                )
-            else:
-                msg = (
-                    "Nenhum item foi encontrado na página. O layout do site "
-                    "pode ter mudado e os seletores em `monitor.py` "
-                    "provavelmente precisam ser ajustados."
-                )
-            errors.append((source, msg))
-            continue
-
-        state = load_state(slug)
-        if state is None:
-            state = {
-                "items": {
-                    item["url"]: {
-                        "title": item["title"],
-                        "date": item.get("date"),
-                        "description": item.get("description"),
-                        "first_seen": now_iso,
-                    }
-                    for item in items
-                },
-                "last_checked": now_iso,
-            }
-            if not args.dry_run:
-                save_state(slug, state)
-            baselined.append((source, len(items)))
-            continue
-
-        known_urls = set(state["items"].keys())
-        current_urls = {i["url"] for i in items}
-        candidates = [item for item in items if item["url"] not in known_urls]
-        new_items = [
-            item for item in candidates
-            if not reconcile_url_change(state, item, now_iso, current_urls)
-        ]
-
-        for item in new_items:
-            state["items"][item["url"]] = {
-                "title": item["title"],
-                "date": item.get("date"),
-                "description": item.get("description"),
-                "first_seen": now_iso,
-            }
-        state["last_checked"] = now_iso
-        if not args.dry_run:
-            save_state(slug, state)
-
-        if new_items:
-            new_by_source.append((source, new_items))
+    if failed_sources:
+        # Falhas de conexão em várias fontes ao mesmo tempo costumam ser uma
+        # instabilidade momentânea do gov.br (não um bloqueio permanente):
+        # nas Issues #35 e #38, uma fonte processada mais tarde na mesma
+        # execução já conseguiu buscar dados normalmente, porque o site tinha
+        # se recuperado enquanto as fontes anteriores ainda esgotavam
+        # tentativas. Uma nova tentativa rápida (1 tentativa, sem o retry
+        # completo) ao final do loop principal aproveita esse tempo já
+        # decorrido para capturar essa recuperação, sem inflar o tempo total
+        # de execução em caso de indisponibilidade real e persistente.
+        log(f"Revisando {len(failed_sources)} fonte(s) com falha antes de reportar...")
+        for source in failed_sources:
+            result = check_source(source, now_iso, args.dry_run, attempts=1)
+            if result["kind"] == "error":
+                continue
+            errors = [(s, m) for s, m in errors if s is not source]
+            if result["kind"] == "baseline":
+                baselined.append((source, result["count"]))
+            elif result["kind"] == "new_items":
+                new_by_source.append((source, result["items"]))
 
     # monta o report.md, se houver algo a dizer
     sections = []
