@@ -4,7 +4,7 @@ layout: hextra-home
 ---
 
 {{< hextra/hero-headline >}}
-  Monitoramento da ANPD
+  ANPD Hub
 {{< /hextra/hero-headline >}}
 
 <div class="mt-6 mb-6">
