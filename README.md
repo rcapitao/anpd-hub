@@ -81,6 +81,25 @@ python generate_index.py     # regenera só o INDEX.md a partir do state/ atual
 Se houver conteúdo novo (ou algum erro), o script gera `report.md` na raiz
 do projeto com o conteúdo que seria publicado na Issue.
 
+## Site (Hugo + Hextra)
+
+O repositório também tem um site [Hugo](https://gohugo.io/) com o tema
+[Hextra](https://github.com/imfing/hextra), configurado em `hugo.toml`. O
+tema fica vendorizado em `themes/hextra/` (cópia direta dos arquivos, sem
+submodule/Hugo Modules), para poder ser editado diretamente aqui — veja
+`themes/hextra/VENDORED.md` para detalhes de como foi baixado e como
+atualizar para uma versão mais nova.
+
+```bash
+hugo server   # roda o site localmente em http://localhost:1313
+hugo          # gera o build estático em public/
+```
+
+`content/docs/_index.md` é hoje uma cópia estática de `INDEX.md` (não
+sincronizada automaticamente); para refletir o índice atual, regenere esse
+arquivo a partir de `INDEX.md` ou publique o site manualmente após cada
+atualização.
+
 ## Sobre o scraper
 
 As páginas da ANPD são construídas em Plone/Volto, cujo HTML de listagem

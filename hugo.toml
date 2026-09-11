@@ -1,0 +1,58 @@
+baseURL = "https://rcapitao.github.io/anpd-hub/"
+locale = "pt-BR"
+title = "ANPD Hub"
+theme = "hextra"
+
+enableRobotsTXT = true
+enableGitInfo = true
+
+outputs.home = ["html", "rss"]
+outputs.section = ["html", "rss"]
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+  [markup.goldmark.renderer]
+    unsafe = true
+
+[[menu.main]]
+  identifier = "docs"
+  name = "Índice"
+  pageRef = "/docs"
+  weight = 1
+
+[[menu.main]]
+  name = "Search"
+  weight = 2
+  [menu.main.params]
+    type = "search"
+
+[[menu.main]]
+  name = "GitHub"
+  weight = 3
+  url = "https://github.com/rcapitao/anpd-hub"
+  [menu.main.params]
+    icon = "github"
+
+[params]
+  description = "Monitoramento automático de novas publicações da ANPD (Autoridade Nacional de Proteção de Dados)."
+
+  [params.navbar]
+    displayTitle = true
+    displayLogo = false
+
+  [params.theme]
+    default = "system"
+    displayToggle = true
+
+  [params.footer]
+    enable = true
+    displayCopyright = false
+    displayPoweredBy = true
+
+  displayUpdatedDate = true
+  dateFormat = "02/01/2006"
+
+  [params.search]
+    enable = true
+    type = "flexsearch"
