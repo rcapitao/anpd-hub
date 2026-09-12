@@ -103,6 +103,15 @@ subpáginas. São cópias estáticas do estado de quando foram geradas — não
 sincronizadas automaticamente com `state/*.json`/`INDEX.md` a cada
 execução do monitor.
 
+`content/docs/noticias/_index.md` tem um formato à parte: em vez da
+tabela markdown simples (Publicação/Data/Descrição), usa uma tabela HTML
+com colunas de **palavras-chave** (tags de tema — LGPD, IA, ECA Digital,
+Sanção etc.) e **resumo** (uma frase para o leitor decidir se quer abrir
+a notícia), mais um filtro por tema em JavaScript puro (sem dependência
+externa) acima da tabela. Tags e resumos são autorados manualmente por
+item — ao adicionar uma notícia nova a essa página, inclua `data-tags`
+com os temas relevantes e um resumo curto seguindo o mesmo padrão.
+
 `content/blog/` é uma seção separada, para registrar atualizações e
 novidades do próprio site (não é conteúdo da ANPD) — cada post é um
 arquivo em `content/blog/<slug>.md`.
