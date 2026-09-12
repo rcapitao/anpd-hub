@@ -1,6 +1,7 @@
 ---
 title: "Outros Documentos e Publicações Institucionais"
 weight: 7
+icon: "fa-solid fa-box-archive"
 ---
 
 Fonte: <https://www.gov.br/anpd/pt-br/centrais-de-conteudo/outros-documentos-e-publicacoes-institucionais>

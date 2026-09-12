@@ -1,6 +1,7 @@
 ---
 title: "Decisões em Processos Sancionadores"
 weight: 4
+icon: "fa-solid fa-gavel"
 ---
 
 Fonte: <https://www.gov.br/anpd/pt-br/centrais-de-conteudo/decisoes-em-processos-sancionadores/>

@@ -1,6 +1,7 @@
 ---
 title: "Atos Normativos da ANPD (visão geral)"
 weight: 1
+icon: "fa-solid fa-file-lines"
 ---
 
 Fonte: <https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos>

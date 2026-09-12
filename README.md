@@ -81,36 +81,49 @@ python generate_index.py     # regenera só o INDEX.md a partir do state/ atual
 Se houver conteúdo novo (ou algum erro), o script gera `report.md` na raiz
 do projeto com o conteúdo que seria publicado na Issue.
 
-## Site (Hugo + Hextra)
+## Site (Hugo + OINK)
 
 O repositório também tem um site [Hugo](https://gohugo.io/) com o tema
-[Hextra](https://github.com/imfing/hextra), configurado em `hugo.toml`. O
-tema fica vendorizado em `themes/hextra/` (cópia direta dos arquivos, sem
+[OINK](https://github.com/pgsty/oink), configurado em `hugo.yaml`. O tema
+fica vendorizado em `themes/oink/` (cópia direta dos arquivos, sem
 submodule/Hugo Modules), para poder ser editado diretamente aqui — veja
-`themes/hextra/VENDORED.md` para detalhes de como foi baixado e como
-atualizar para uma versão mais nova.
+`themes/oink/VENDORED.md` para detalhes de como foi baixado e como
+atualizar para uma versão mais nova. `themes/oink/hugo.yaml` é a
+configuração de valores-padrão do próprio tema (o Hugo mescla isso por
+baixo do `hugo.yaml` da raiz automaticamente); `hugo.yaml` na raiz só tem
+identidade/conteúdo específicos do ANPD Hub.
 
 ```bash
 hugo server   # roda o site localmente em http://localhost:1313
 hugo          # gera o build estático em public/
 ```
 
+Customizações de CSS ficam em `assets/scss/_styles_project.scss` (ponto de
+extensão documentado pelo próprio tema, não dentro de `themes/oink/`) —
+hoje só um ajuste de largura de coluna nas tabelas de categoria.
+
+A homepage (`content/_index.md`) usa o sistema de landing page do tema:
+o conteúdo em si mora em `data/home/<idioma>.yaml` (seções `hero`,
+`metrics`, `cards`, `cta`), não no corpo do markdown.
+
 O conteúdo de `content/docs/` é dividido em uma página por categoria
 (`content/docs/<slug>/_index.md`, um `<slug>` por fonte de `sources.yml`),
 para ser mais fácil de ajustar cada seção individualmente. `content/docs/_index.md`
-é só a página de entrada (lista de categorias); o conteúdo em si vive nas
+é só a página de entrada; a lista de categorias com ícones é gerada
+automaticamente pelo tema (`params.ui.section_index: cards`), a partir das
 subpáginas. São cópias estáticas do estado de quando foram geradas — não
 sincronizadas automaticamente com `state/*.json`/`INDEX.md` a cada
 execução do monitor.
 
 `content/docs/noticias/_index.md` tem um formato à parte: em vez da
-tabela markdown simples (Publicação/Data/Descrição), usa uma tabela HTML
-com colunas de **palavras-chave** (tags de tema — LGPD, IA, ECA Digital,
-Sanção etc.) e **resumo** (uma frase para o leitor decidir se quer abrir
-a notícia), mais um filtro por tema em JavaScript puro (sem dependência
-externa) acima da tabela. Tags e resumos são autorados manualmente por
-item — ao adicionar uma notícia nova a essa página, inclua `data-tags`
-com os temas relevantes e um resumo curto seguindo o mesmo padrão.
+tabela markdown simples (Publicação/Data/Descrição), usa uma lista de
+cards em HTML com **palavras-chave** (tags de tema — LGPD, IA, ECA
+Digital, Sanção etc.) e **resumo** (uma frase para o leitor decidir se
+quer abrir a notícia), mais uma barra lateral de tags com filtro em
+JavaScript puro (sem dependência externa). Tags e resumos são autorados
+manualmente por item — ao adicionar uma notícia nova a essa página,
+inclua `data-tags` com os temas relevantes e um resumo curto seguindo o
+mesmo padrão.
 
 `content/blog/` é uma seção separada, para registrar atualizações e
 novidades do próprio site (não é conteúdo da ANPD) — cada post é um
@@ -120,12 +133,15 @@ arquivo em `content/blog/<slug>.md`.
 
 O site é multilíngue: português do Brasil (`pt-br`) é o idioma padrão,
 servido na raiz (sem prefixo `/pt-br/`); inglês (`en`) e espanhol (`es`)
-já estão configurados em `hugo.toml` ([languages]), com o seletor de
-idioma na navbar, mas **sem conteúdo traduzido ainda** — hoje só existem
-`content/*.md` sem sufixo de idioma, então só o pt-br tem conteúdo de
-verdade em `/en/` e `/es/`. Para traduzir uma página, crie a versão com
-sufixo do idioma ao lado da original (ex.: `content/_index.en.md`,
-`content/_index.es.md`).
+já estão configurados em `hugo.yaml` (`languages:`), com o seletor de
+idioma na navbar. A homepage tem conteúdo traduzido nos três idiomas
+(`data/home/en.yaml`, `data/home/es.yaml`, `content/_index.en.md`,
+`content/_index.es.md`), mas **as demais páginas ainda não** — `/docs/`
+e `/blog/` só existem em português, então os cartões de categoria nas
+homepages en/es apontam para URLs absolutas do conteúdo em pt-br (em vez
+de um link relativo, que resultaria em 404 sob `/en/`/`/es/`). Para
+traduzir uma página, crie a versão com sufixo do idioma ao lado da
+original (ex.: `content/docs/_index.en.md`).
 
 ## Sobre o scraper
 

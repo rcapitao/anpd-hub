@@ -1,6 +1,7 @@
 ---
 title: "Materiais Educativos e Publicações"
 weight: 6
+icon: "fa-solid fa-graduation-cap"
 ---
 
 Fonte: <https://www.gov.br/anpd/pt-br/centrais-de-conteudo/materiais-educativos-e-publicacoes>
