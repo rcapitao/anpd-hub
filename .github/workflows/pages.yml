@@ -6,10 +6,9 @@ on:
     paths:
       - "content/**"
       - "themes/**"
-      - "hugo.yaml"
+      - "hugo.toml"
       - "assets/**"
       - "static/**"
-      - "data/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch: {}
 
