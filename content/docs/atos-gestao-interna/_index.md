@@ -1,7 +1,6 @@
 ---
 title: "Atos de Gestão Interna"
 weight: 3
-icon: "fa-solid fa-building-columns"
 ---
 
 Fonte: <https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/atos_gestao_interna>

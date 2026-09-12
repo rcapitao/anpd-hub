@@ -1,7 +1,6 @@
 ---
 title: "Notícias da ANPD"
 weight: 8
-icon: "fa-solid fa-newspaper"
 ---
 
 Fonte: <https://www.gov.br/anpd/pt-br/assuntos/noticias>
@@ -94,7 +93,7 @@ Fonte: <https://www.gov.br/anpd/pt-br/assuntos/noticias>
 .anpd-card-resumo { margin: 0; line-height: 1.5; opacity: 0.9; }
 
 .anpd-noticias-tags { flex: 0 0 14rem; width: 14rem; }
-.anpd-tags-sticky { position: sticky; top: calc(50px + 1.5rem); }
+.anpd-tags-sticky { position: sticky; top: calc(var(--navbar-height, 4rem) + 1.5rem); }
 .anpd-tags-titulo { font-weight: 600; font-size: 0.85rem; margin: 0 0 0.25rem; }
 .anpd-tags-contagem { font-size: 0.78rem; opacity: 0.65; margin: 0 0 0.75rem; }
 .anpd-tags-lista { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.3rem; }
@@ -116,7 +115,7 @@ Fonte: <https://www.gov.br/anpd/pt-br/assuntos/noticias>
 }
 .anpd-tags-lista button:hover { background: rgba(120, 120, 120, 0.12); }
 .anpd-tags-lista button.is-active {
-  background: var(--td-accent);
+  background: hsl(var(--primary-hue) var(--primary-saturation) var(--primary-lightness));
   color: #fff;
 }
 .anpd-tags-count { font-size: 0.72rem; opacity: 0.7; }
@@ -127,7 +126,7 @@ Fonte: <https://www.gov.br/anpd/pt-br/assuntos/noticias>
   background: none;
   border: none;
   padding: 0;
-  color: var(--td-accent);
+  color: hsl(var(--primary-hue) var(--primary-saturation) var(--primary-lightness));
   cursor: pointer;
   text-decoration: underline;
   font-family: inherit;

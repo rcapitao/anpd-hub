@@ -1,7 +1,6 @@
 ---
 title: "Regulamentações da ANPD"
 weight: 2
-icon: "fa-solid fa-scale-balanced"
 ---
 
 Fonte: <https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd>
