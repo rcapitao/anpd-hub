@@ -1,6 +1,7 @@
 ---
 title: "Documentos Técnicos e Orientativos"
 weight: 5
+icon: "fa-solid fa-file-contract"
 ---
 
 Fonte: <https://www.gov.br/anpd/pt-br/centrais-de-conteudo/documentos-tecnicos-orientativos>

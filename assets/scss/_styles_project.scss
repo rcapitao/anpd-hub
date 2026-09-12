@@ -1,0 +1,17 @@
+/*
+Ajustes de estilo do ANPD Hub por cima do tema OINK.
+Ponto de customização documentado pelo próprio tema — veja
+https://oink.pgsty.com/docs/customize/brand/#scss
+*/
+
+// As páginas de categoria (content/docs/<slug>/_index.md) usam sempre a
+// mesma tabela de 3 colunas (Publicação | Data | Descrição). Sem isso, o
+// algoritmo de auto-layout do navegador espreme a coluna de datas curtas
+// (ex.: "26/01/2026") a ponto de quebrar em 3 linhas — o truque clássico
+// width:1% + white-space:nowrap faz essa coluna encolher para caber só o
+// conteúdo, sobrando espaço para Publicação/Descrição.
+.td-content table td:nth-child(2),
+.td-content table th:nth-child(2) {
+  width: 1%;
+  white-space: nowrap;
+}
