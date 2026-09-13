@@ -2,7 +2,7 @@
 <header id="topnav">
     <div class="container d-flex justify-content-between align-items-center">
         <!-- Logo container-->
-        <a class="logo" aria-label="Home" href='{{ relLangURL "" }}'>
+        <a class="logo d-flex align-items-center" aria-label="Home" href='{{ relLangURL "" }}'>
             <div class="small">
                 {{ with resources.Get "images/logos/mark.svg" }}
                         {{ .Content | safeHTML }}
@@ -13,6 +13,7 @@
                         {{ .Content | safeHTML }}
                 {{ end }}
             </div>
+            <span class="ms-2 fw-bold">{{ site.Title }}</span>
         </a>
         <!-- End Logo container-->
 
