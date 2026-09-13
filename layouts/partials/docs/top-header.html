@@ -1,3 +1,11 @@
+{{/*
+Override de site (não do tema) — cópia de
+themes/lotusdocs/layouts/partials/docs/top-header.html com uma única
+mudança: o seletor de idioma virou um ícone (globo) posicionado entre o
+ícone do GitHub e o de modo escuro, em vez de um botão de texto
+("PT-BR") depois do modo escuro. Mantém themes/lotusdocs/ como cópia
+fiel do upstream — veja themes/lotusdocs/VENDORED.md.
+*/}}
 <!-- Top Header -->
 <div id="top-header" class="top-header d-print-none">
     <div class="header-bar d-flex justify-content-between">
@@ -62,6 +70,16 @@
                     {{ end }}
                 {{ end }}
             </ul>
+            {{ if hugo.IsMultilingual }}
+                <div class="dropdown">
+                    <button class="btn btn-icon btn-default ms-2" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Selecionar idioma / Select language / Seleccionar idioma">
+                        <span class="material-icons size-20 align-middle">language</span>
+                    </button>
+                    <ul class="dropdown-menu text-end">
+                        {{ partial (printf "%s/%s" ($.Scratch.Get "pathName") "i18nlist") . }}
+                    </ul>
+                </div>
+            {{ end }}
             {{ if eq .Site.Params.docs.darkMode true -}}
             <button id="mode" class="btn btn-icon btn-default ms-2" type="button" aria-label="Toggle user interface mode">
                 <span class="toggle-dark">
@@ -78,16 +96,6 @@
                 </span>
             </button>
             {{ end -}}
-            {{ if hugo.IsMultilingual }}
-                <div class="dropdown">
-                    <button class="btn btn-link btn-default dropdown-toggle ps-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ site.Language.Lang | upper }}
-                    </button>
-                    <ul class="dropdown-menu text-end">
-                        {{ partial (printf "%s/%s" ($.Scratch.Get "pathName") "i18nlist") . }}
-                    </ul>
-                </div>
-            {{ end }}
         </div>
     </div>
     <!-- FlexSearch Input Start -->

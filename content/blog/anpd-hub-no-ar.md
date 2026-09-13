@@ -20,4 +20,4 @@ O que já está disponível:
   — não é conteúdo da ANPD, é sobre o que muda por aqui.
 
 O monitoramento em si (o que dispara as Issues de "novo conteúdo" e
-mantém o `INDEX.md`) continua funcionando como sempre, sem mudança.
+mantém o `Monitoramento ANPD/INDEX.md`) continua funcionando como sempre, sem mudança.
