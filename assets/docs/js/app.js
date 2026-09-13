@@ -237,8 +237,26 @@ if (document.getElementsByClassName("dd-menu")) {
 // Last Modified Date of current page (relative time format)
 if (document.getElementById("relativetime")) {
     dayjs.extend(window.dayjs_plugin_relativeTime);
+    dayjs.locale({
+        name: "pt-br",
+        relativeTime: {
+            future: "em %s",
+            past: "há %s",
+            s: "poucos segundos",
+            m: "um minuto",
+            mm: "%d minutos",
+            h: "uma hora",
+            hh: "%d horas",
+            d: "um dia",
+            dd: "%d dias",
+            M: "um mês",
+            MM: "%d meses",
+            y: "um ano",
+            yy: "%d anos"
+        }
+    });
     const modId = document.getElementById('relativetime');
-    let modAgo = dayjs(modId.getAttribute('data-authdate')).fromNow();
+    let modAgo = dayjs(modId.getAttribute('data-authdate')).locale('pt-br').fromNow();
     document.getElementById("relativetime").innerHTML = modAgo;
 };
 
