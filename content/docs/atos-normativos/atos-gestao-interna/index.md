@@ -1,7 +1,7 @@
 ---
 title: "Atos de Gestão Interna"
 description: "30 publicações"
-weight: 3
+weight: 2
 icon: "account_balance"
 ---
 

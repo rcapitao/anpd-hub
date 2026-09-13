@@ -1,6 +1,6 @@
 ---
-title: "Atos Normativos da ANPD (visão geral)"
-description: "1 publicação"
+title: "Atos Normativos"
+description: "Atos normativos da ANPD, incluindo as subcategorias Atos de Gestão Interna e Regulamentações da ANPD."
 weight: 1
 icon: "description"
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Documentos Técnicos e Orientativos"
 description: "55 publicações"
-weight: 5
+weight: 3
 icon: "article"
 ---
 

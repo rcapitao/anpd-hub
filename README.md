@@ -129,19 +129,28 @@ blocos nativos do tema.
 
 O conteúdo de `content/docs/` é dividido em uma página por categoria
 (`content/docs/<slug>/index.md`, um `<slug>` por fonte de
-`monitoramento-ANPD/sources.yml`). Cada categoria é um *leaf bundle*
-(`index.md`, sem underscore) e não uma seção (`_index.md`, que teria
-isso) — o layout `docs/list.html` do tema, usado para páginas de seção,
-só lista subpáginas e ignora o corpo markdown, então qualquer categoria
-sem subpáginas ficaria com o conteúdo invisível se fosse `_index.md`.
-Como *leaf bundle*, a página usa `docs/single.html`, que renderiza o
-conteúdo normalmente, e continua aparecendo do mesmo jeito na barra
-lateral e nos cartões automáticos de `content/docs/_index.md` (a
-página de entrada — essa sim uma seção de verdade, já que tem as 8
-categorias como subpáginas —, cujo corpo também não é renderizado pelo
-mesmo motivo: o resumo mostrado ali vem do front matter `description`,
-não do corpo). São cópias estáticas do estado de quando foram geradas —
-não sincronizadas automaticamente com
+`monitoramento-ANPD/sources.yml`). A maioria das categorias é um *leaf
+bundle* (`index.md`, sem underscore) e não uma seção (`_index.md`), já
+que não tem subpáginas. A exceção é **Atos Normativos**
+(`content/docs/atos-normativos/_index.md`), que é uma seção de verdade
+com duas subcategorias aninhadas por baixo —
+`atos-normativos/regulamentacoes-anpd/` e
+`atos-normativos/atos-gestao-interna/` (cada uma continua sendo seu
+próprio *leaf bundle*, só que agora um nível mais fundo). O layout
+`docs/list.html` do tema, usado por todas as páginas de seção, antes só
+listava subpáginas e ignorava o corpo markdown da própria seção — foi
+ajustado (`{{ with .Content }}`) para renderizar também o corpo antes
+dos cartões, já que a página de Atos Normativos precisa mostrar seu
+próprio conteúdo (a antiga "visão geral") **e** os cartões das duas
+subcategorias. Categorias sem subpáginas continuam como *leaf bundle*
+e usam `docs/single.html`, que só renderiza o conteúdo normalmente.
+Tanto os *leaf bundles* quanto as seções aparecem na barra lateral e
+nos cartões automáticos de `content/docs/_index.md` (a página de
+entrada — essa sim uma seção de verdade, já que tem as categorias como
+subpáginas —, cujo corpo também não é renderizado pelo mesmo motivo: o
+resumo mostrado ali vem do front matter `description`, não do corpo).
+São cópias estáticas do estado de quando foram geradas — não
+sincronizadas automaticamente com
 `monitoramento-ANPD/state/*.json`/`monitoramento-ANPD/INDEX.md` a cada
 execução do monitor.
 

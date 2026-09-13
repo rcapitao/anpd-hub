@@ -58,26 +58,12 @@ featureGrid:
   subtitle: Um clique de cada categoria já detectada pelo monitoramento.
 
   items:
-    - title: Atos Normativos (visão geral)
+    - title: Atos Normativos
       icon: description
-      description: 1 publicação
+      description: 48 publicações, em 2 subcategorias
       ctaLink:
         text: ver
         url: docs/atos-normativos/
-
-    - title: Regulamentações da ANPD
-      icon: balance
-      description: 17 publicações
-      ctaLink:
-        text: ver
-        url: docs/regulamentacoes-anpd/
-
-    - title: Atos de Gestão Interna
-      icon: account_balance
-      description: 30 publicações
-      ctaLink:
-        text: ver
-        url: docs/atos-gestao-interna/
 
     - title: Decisões Sancionadoras
       icon: gavel
