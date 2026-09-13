@@ -155,62 +155,71 @@ table {
     overflow-x: auto;
 }
 
-// Publication cards (alternative to a raw table for long-description
-// categories — see render-table.html markup hook, gated by the
-// `cardtable: true` front matter param)
-.pub-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+// Publication timeline (alternative to a raw table for categories with
+// a Data column — see render-table.html markup hook, gated by the
+// `cardtable: "timeline"` front matter param). Rows are grouped under a
+// year heading; rows with no parseable date fall under "Sem data".
+.pub-timeline {
     margin: 1.5rem 0;
 }
 
-.pub-card {
-    border: 1px solid var(--card-border-color);
-    border-radius: 8px;
-    padding: 0.125rem 1.25rem;
-    background: var(--card-bg);
+.pub-timeline-year {
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: var(--text-default);
+    margin: 1.5rem 0 0.75rem;
+    padding-left: 1.75rem;
 
-    &[open] {
-        padding-bottom: 1rem;
-
-        .pub-card-header::before {
-            transform: rotate(90deg);
-        }
+    &:first-child {
+        margin-top: 0;
     }
 }
 
-.pub-card-header {
+.pub-timeline-item {
     display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 0.5rem 1rem;
-    padding: 0.875rem 0;
-    padding-left: 1.5rem;
+    gap: 1rem;
+    padding-left: 0.75rem;
     position: relative;
-    cursor: pointer;
-    list-style: none;
-
-    &::-webkit-details-marker {
-        display: none;
-    }
 
     &::before {
         content: "";
         position: absolute;
-        left: 0;
-        top: 1.125rem;
-        width: 0;
-        height: 0;
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        border-left: 6px solid var(--text-muted, #6c757d);
-        transition: transform 0.15s ease;
+        left: 1rem;
+        top: 0.5rem;
+        bottom: -0.75rem;
+        width: 1px;
+        background: var(--card-border-color);
+    }
+
+    &:last-child::before {
+        display: none;
     }
 }
 
-.pub-card-title {
+.pub-timeline-dot {
+    flex-shrink: 0;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--bs-primary, #3b82f6);
+    margin-top: 0.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.pub-timeline-content {
+    flex-grow: 1;
+    padding-bottom: 1.25rem;
+}
+
+.pub-timeline-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 0.75rem;
+}
+
+.pub-timeline-title {
     font-weight: 600;
     color: var(--text-default);
 
@@ -219,21 +228,18 @@ table {
     }
 }
 
-.pub-card-date {
-    flex-shrink: 0;
+.pub-timeline-date {
     font-size: 0.8125rem;
     color: var(--text-muted, #6c757d);
-    white-space: nowrap;
 }
 
-.pub-card-desc {
-    padding-left: 1.5rem;
+.pub-timeline-desc {
+    margin-top: 0.25rem;
     font-size: 0.875rem;
     color: var(--text-muted, #6c757d);
 }
 
-.pub-card-status {
-    padding-left: 1.5rem;
-    margin-top: 0.5rem;
+.pub-timeline-status {
+    margin-top: 0.25rem;
     font-size: 0.8125rem;
 }

@@ -4,7 +4,7 @@ description: "55 publicações"
 weight: 3
 icon: "article"
 hide_lead_description: true
-cardtable: true
+cardtable: "timeline"
 ---
 
 Fonte: <https://www.gov.br/anpd/pt-br/centrais-de-conteudo/documentos-tecnicos-orientativos>

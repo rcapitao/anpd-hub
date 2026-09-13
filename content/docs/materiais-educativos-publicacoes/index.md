@@ -3,6 +3,7 @@ title: "Materiais Educativos e Publicações"
 description: "12 publicações"
 weight: 4
 icon: "school"
+cardtable: "timeline"
 hide_lead_description: true
 ---
 

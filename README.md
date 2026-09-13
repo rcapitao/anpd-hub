@@ -321,20 +321,31 @@ depois:
   Técnicos e Orientativos **mantém** a coluna, porque parte das suas
   linhas tem data real.
 
-- **Listagem em acordeão como alternativa à tabela crua**: para
+- **Linha do tempo por ano como alternativa à tabela crua**: para
   categorias com descrições longas, uma tabela markdown normal vira uma
-  rolagem enorme no celular (uma página chegou a ~8000px de altura no
+  rolagem enorme no celular (uma página chegou a ~9300px de altura no
   mobile). `layouts/docs/_markup/render-table.html` é um *markdown
   render hook* que intercepta toda tabela markdown do site: se a página
-  tiver `cardtable: true` no front matter, a tabela é renderizada como
-  uma lista de `<details>`/`<summary>` nativos do HTML (sem JS, sem
-  dependência do Bootstrap) — cada publicação aparece recolhida
-  (só título + data), expandindo a descrição/status ao clicar. Sem
-  `cardtable: true`, a página continua recebendo a tabela normal (o
-  hook reproduz exatamente a saída padrão do Goldmark nesse caso). Hoje
-  só `documentos-tecnicos-orientativos` usa esse layout, como piloto;
-  adicione `cardtable: true` a outra categoria para testar o mesmo
-  visual lá.
+  tiver `cardtable: "timeline"` no front matter, a tabela (que precisa
+  ter a coluna "Data" em segundo lugar, formato `dd/mm/aaaa`) é
+  renderizada como uma linha do tempo agrupada por ano, com um marcador
+  por publicação; linhas sem data reconhecível (`—`) caem num grupo
+  "Sem data" à parte, em vez de ficarem coladas no último ano real. Sem
+  `cardtable: "timeline"`, a página continua recebendo a tabela normal
+  (o hook reproduz exatamente a saída padrão do Goldmark nesse caso).
+  Esse layout foi escolhido depois de comparar visualmente 4
+  alternativas com o mantenedor (grade de cards, tabela com busca,
+  acordeão denso e a própria linha do tempo); está aplicado em todas as
+  categorias cuja tabela tem uma coluna "Data" nessa posição
+  (Documentos Técnicos e Orientativos, Materiais Educativos, Outros
+  Documentos, Atos Normativos e as subpáginas de Regulamentações
+  da ANPD/Atos de Gestão Interna). **Decisões em Processos
+  Sancionadores** fica de fora de propósito: sua tabela não tem coluna
+  de data (é `Publicação | Descrição | Processo nº | Status`), então o
+  hook trataria a Descrição como se fosse uma data — e o agrupamento
+  por ano já existe ali por outro meio (cada ano é uma subpágina
+  própria). **Notícias da ANPD** também fica de fora — não usa tabela,
+  tem seu próprio layout de cards (`docs/noticias-list.html`).
 
 - **Removidos** (sem uso em nenhum conteúdo, confirmado por busca no
   repositório inteiro): os shortcodes `tabs`, `tab`, `table`, `katex`,
