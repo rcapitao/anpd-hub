@@ -1,0 +1,41 @@
+{{- if .Page.Params.cardtable -}}
+<div class="pub-cards">
+    {{- range $rowIndex, $row := .TBody }}
+    <details class="pub-card">
+        <summary class="pub-card-header">
+            <span class="pub-card-title">{{ (index $row 0).Text | safeHTML }}</span>
+            {{- with (index $row 1).Text }}
+            <span class="pub-card-date">{{ . | safeHTML }}</span>
+            {{- end }}
+        </summary>
+        {{- with (index $row 2).Text }}
+        <div class="pub-card-desc">{{ . | safeHTML }}</div>
+        {{- end }}
+        {{- with (index $row 3).Text }}
+        <div class="pub-card-status">{{ . | safeHTML }}</div>
+        {{- end }}
+    </details>
+    {{- end }}
+</div>
+{{- else -}}
+<table>
+    <thead>
+    {{- range .THead }}
+        <tr>
+        {{- range . }}
+            <th{{ with .Alignment }} style="text-align: {{ . }}"{{ end }}>{{ .Text | safeHTML }}</th>
+        {{- end }}
+        </tr>
+    {{- end }}
+    </thead>
+    <tbody>
+    {{- range .TBody }}
+        <tr>
+        {{- range . }}
+            <td{{ with .Alignment }} style="text-align: {{ . }}"{{ end }}>{{ .Text | safeHTML }}</td>
+        {{- end }}
+        </tr>
+    {{- end }}
+    </tbody>
+</table>
+{{- end -}}

@@ -249,23 +249,29 @@ O modo escuro do tema é específico das páginas de `/docs/` (o CSS de
 
 ### Idiomas (i18n)
 
-O site é multilíngue: português do Brasil (`pt-br`) é o idioma padrão,
-servido na raiz (sem prefixo `/pt-br/`); inglês (`en`) e espanhol (`es`)
-já estão configurados em `hugo.toml` (`[languages]`), com um seletor de
-idioma (ícone de globo, ao lado do modo escuro) nas páginas de `/docs/`,
-mas **sem conteúdo traduzido ainda** — hoje só existem `content/*.md`
-sem sufixo de idioma, então só o pt-br tem conteúdo de verdade em
-`/en/` e `/es/`. Para traduzir uma página, crie a versão com sufixo do
-idioma ao lado da original (ex.: `content/_index.en.md`,
-`content/_index.es.md`).
+O site é monolíngue: português do Brasil (`pt-br`) é o único idioma
+configurado em `hugo.toml` (`[languages]`), servido na raiz (sem prefixo
+`/pt-br/`). Inglês e espanhol já estiveram configurados (sem conteúdo
+traduzido) e foram removidos numa auditoria do site: como não existia
+nenhum `content/*.en.md`/`*.es.md`, o Hugo só gerava, para `/en/` e
+`/es/`, uma homepage 100% em português cujos links (inclusive o botão
+"Índice" do menu) apontavam para `/en/docs/`/`/es/docs/` — páginas que
+não existiam, um 404 garantido. Removido o seletor de idioma some
+sozinho quando só há um idioma configurado (`{{ if
+hugo.IsMultilingual }}` em `layouts/partials/docs/top-header.html`, sem
+nenhuma mudança de template necessária). Para reativar no futuro,
+adicione `[languages.en]`/`[languages.es]` de volta a `hugo.toml` **só**
+quando já existir conteúdo de verdade nesses idiomas (`content/_index.en.md`
+etc.) — e recrie `i18n/en.toml`/`i18n/es.toml`, removidos junto por
+estarem órfãos.
 
 Além do conteúdo, o tema também traduz sua própria interface (busca,
 "Editar esta página", rodapé, página 404 etc.) via arquivos em
 `i18n/<código-do-idioma>.toml` — o Hugo casa esse arquivo pelo código
 exato do idioma declarado em `[languages]`. O tema (Lotus Docs) veio
-só com `i18n/en.toml`, `pt.toml`, `de.toml` e `fr.toml`; como o site
-declara o idioma como `pt-br` (não `pt`), o Hugo não casava esse
-arquivo, e toda a interface caía no fallback em inglês mesmo com
+com `i18n/en.toml`, `pt.toml`, `de.toml` e `fr.toml`; como o site
+declara o idioma como `pt-br` (não `pt`), o Hugo não casava
+`pt.toml`, e toda a interface caía no fallback em inglês mesmo com
 pt-br como idioma padrão. Criado `i18n/pt-br.toml` com todas as
 chaves traduzidas para português do Brasil (algumas reescritas a
 partir do `pt.toml`, que estava em português de Portugal — ex.:
@@ -274,9 +280,86 @@ Também havia strings de interface sem chave de i18n nenhuma,
 direto em inglês nos templates (página 404, "Table of Contents",
 "Edit this page", "Last updated", o badge "DRAFT", o tooltip
 "Directory" e vários `aria-label`) — foram convertidas para usar
-`i18n`, com chaves novas adicionadas tanto em `pt-br.toml` quanto em
-`en.toml` (mantendo o texto em inglês como estava, para não regredir
-se `/en/` ganhar conteúdo de verdade no futuro).
+`i18n`, com chaves novas adicionadas ao `pt-br.toml`.
+`i18n/de.toml`/`fr.toml`/`pt.toml` foram removidos na mesma auditoria
+por não corresponderem a nenhum idioma configurado.
+
+## Auditoria de performance, SEO e conteúdo
+
+Numa auditoria do site (setembro de 2026) foram identificados e
+corrigidos vários pontos de performance, SEO de busca interna, mobile e
+conteúdo morto. Os pontos mais relevantes para quem for mexer no site
+depois:
+
+- **Busca (FlexSearch) publicada como JSON externo, não mais inline.**
+  Antes, `layouts/partials/docs/footer/flexsearch.html` gerava, dentro
+  do HTML de **cada página**, uma chamada `index.add(...)` para cada
+  publicação do site inteiro — ou seja, o mesmo índice de busca era
+  duplicado em toda página visitada (chegava a 74% do peso de uma
+  página pequena). Agora o índice é gerado **uma única vez**, como
+  `/search-index.json` (`layouts/index.searchindex.json`, via um novo
+  `[outputFormats.searchindex]`/`[outputs] home` em `hugo.toml`), e
+  `flexsearch.html` só faz um `fetch()` desse arquivo — que o navegador
+  baixa e cacheia uma vez, em vez de reprocessar em toda navegação.
+  A busca já cobria o site inteiro antes disso (`where .Site.Pages
+  "Section" "docs"` casa qualquer página sob `/docs/`, não só a seção
+  atual — o parâmetro `params.flexsearch.searchSectionsIndex` do tema
+  serve para restringir isso, mas não estava setado, então o padrão já
+  era buscar tudo); o problema real era só a duplicação por página.
+
+- **`prism = false`** em `params.docs` (`hugo.toml`): o realce de sintaxe
+  Prism.js estava ligado globalmente e sendo enviado em **toda** página
+  do site mesmo sem nenhum bloco de código em nenhum conteúdo. Se algum
+  dia um bloco de código for necessário, o Hugo já cai automaticamente
+  no highlighter nativo dele (Chroma, via `layouts/docs/_markup/render-codeblock.html`),
+  sem precisar reativar o Prism.
+
+- **Tabelas de "Data" sempre vazia**: as categorias Outros Documentos e
+  Materiais Educativos tinham uma coluna "Data" que nunca carregava
+  valor real (o `monitor.py` não extrai data para esses tipos de
+  publicação) — a coluna foi removida dessas duas tabelas. Documentos
+  Técnicos e Orientativos **mantém** a coluna, porque parte das suas
+  linhas tem data real.
+
+- **Listagem em acordeão como alternativa à tabela crua**: para
+  categorias com descrições longas, uma tabela markdown normal vira uma
+  rolagem enorme no celular (uma página chegou a ~8000px de altura no
+  mobile). `layouts/docs/_markup/render-table.html` é um *markdown
+  render hook* que intercepta toda tabela markdown do site: se a página
+  tiver `cardtable: true` no front matter, a tabela é renderizada como
+  uma lista de `<details>`/`<summary>` nativos do HTML (sem JS, sem
+  dependência do Bootstrap) — cada publicação aparece recolhida
+  (só título + data), expandindo a descrição/status ao clicar. Sem
+  `cardtable: true`, a página continua recebendo a tabela normal (o
+  hook reproduz exatamente a saída padrão do Goldmark nesse caso). Hoje
+  só `documentos-tecnicos-orientativos` usa esse layout, como piloto;
+  adicione `cardtable: true` a outra categoria para testar o mesmo
+  visual lá.
+
+- **Removidos** (sem uso em nenhum conteúdo, confirmado por busca no
+  repositório inteiro): os shortcodes `tabs`, `tab`, `table`, `katex`,
+  `markdownify` e `prism`; os assets do KaTeX (JS + fontes, ~1,7 MB), os
+  componentes de linguagem do Prism (~570 KB), o Mermaid (~2,9 MB), o
+  DocSearch/Algolia (não configurado — FlexSearch é quem funciona), o
+  widget "image compare" da landing page (JS + CSS + a lógica que o
+  detectava em `layouts/_default/baseof.html`/`layouts/partials/head.html`,
+  já que nenhum bloco de `data/landing.yaml` o usa) e os screenshots de
+  demonstração do próprio tema Lotus Docs (`assets/images/screenshots/`,
+  `lotus_docs_screenshot.png`) — nenhum deles tinha qualquer referência
+  em `content/`, `layouts/` ou `data/`.
+
+- **Meta tags corrigidas**: `<meta name="author">`/`"keywords">` no
+  `<head>` (`layouts/partials/docs/head.html`) ainda eram literalmente
+  as do autor do tema Lotus Docs ("Colin Wilson", `lotusdocs.dev` etc.)
+  — atualizadas para refletir o ANPD Hub. Adicionado `<link
+  rel="canonical">` em toda página, e uma linha `Sitemap:` no
+  `robots.txt` (agora um template próprio em `layouts/robots.txt`, já
+  que o tema não gerava um por padrão).
+
+A imagem de compartilhamento (Open Graph/Twitter Card) **já** era
+gerada automaticamente por página (título + descrição + logo sobre um
+card-base, via `layouts/partials/docs/head/get-featured-image.html`) —
+nenhuma mudança necessária ali.
 
 ## Sobre o scraper
 

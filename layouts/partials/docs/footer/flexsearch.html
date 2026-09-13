@@ -101,57 +101,22 @@
     });
 
 
-    // Not yet supported: https://github.com/nextapps-de/flexsearch#complex-documents
+    // O índice é publicado uma única vez como JSON estático (ver
+    // layouts/index.searchindex.json) e buscado aqui via fetch(), em vez de
+    // reembutido inline nesta página — assim o navegador baixa e faz o parse
+    // dele uma vez só (cacheado), não a cada página visitada.
+    var indexReady = fetch({{ "search-index.json" | absURL }})
+        .then((response) => response.json())
+        .then((docs) => {
+            docs.forEach((doc) => index.add(doc));
+        })
+        .catch((error) => {
+            console.error("Falha ao carregar o índice de busca:", error);
+        });
 
-
-    // var docs = [
-    //     {{ range $index, $page := (where .Site.Pages "Section" "docs") -}}
-    //     {
-    //         id: {{ $index }},
-    //         href: {{ .Permalink }},
-    //         title: {{ .Title }},
-    //         description: {{ .Params.description }},
-    //         content: {{ .Content }}
-    //     },
-    //     {{ end -}}
-    // ];
-
-
-    // https://discourse.gohugo.io/t/range-length-or-last-element/3803/2
-
-    {{ $list := slice }}
-    {{- if and (isset .Site.Params.flexsearch "searchsectionsindex") (not (eq (len .Site.Params.flexsearch.searchSectionsIndex) 0)) }}
-        {{- if eq .Site.Params.flexsearch.searchSectionsIndex "ALL" }}
-            {{- $list = .Site.Pages }}
-        {{- else }}
-            {{- $list = (where .Site.Pages "Type" "in" .Site.Params.flexsearch.searchSectionsIndex) }}
-        {{- if (in .Site.Params.flexsearch.searchSectionsIndex "HomePage") }}
-            {{ $list = $list | append .Site.Home }}
-        {{- end }}
-        {{- end }}
-    {{- else }}
-        {{- $list = (where .Site.Pages "Section" ($.Scratch.Get "pathName")) }}
-    {{- end }}
-
-    {{ $len := (len $list) -}}
-
-    {{ range $index, $element := $list -}}
-        index.add(
-            {
-                id: {{ $index }},
-                href: "{{ .RelPermalink }}",
-                title: {{ .Title }},
-                {{ with .Description -}}
-                    description: {{ . }},
-                {{ else -}}
-                description: {{ .Summary | htmlUnescape | plainify }},
-                {{ end -}}
-                content: {{ .Content | htmlUnescape | plainify }}
-            }
-        );
-    {{ end -}}
-
-    search.addEventListener('input', show_results, true);
+    indexReady.then(() => {
+        search.addEventListener('input', show_results, true);
+    });
 
     function show_results(){
         const maxResult = {{ .Site.Params.flexsearch.maxResult | default 5}};
