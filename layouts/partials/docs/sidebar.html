@@ -15,7 +15,7 @@
             {{ range (where .Site.Sections.ByWeight "Section" "in" $section) }}
                 {{ $child_pages := union .Sections .Pages }}
                 {{ range $child_pages.ByWeight }}
-                    {{ if or (.Sections) (.Pages) }}
+                    {{ if and (or (.Sections) (.Pages)) (ne .Params.sidebar_flat true) }}
                     {{ $active := in $currentPage.RelPermalink .RelPermalink }}
                         <li class="sidebar-dropdown {{ if eq .Site.Params.docs.sidebarIcons true -}}{{ else }}no-icon{{ end }} {{ if $active }}current active{{ end }}">
                             <button class="btn">
