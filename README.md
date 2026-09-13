@@ -81,60 +81,87 @@ python generate_index.py     # regenera só o INDEX.md a partir do state/ atual
 Se houver conteúdo novo (ou algum erro), o script gera `report.md` na raiz
 do projeto com o conteúdo que seria publicado na Issue.
 
-## Site (Hugo + Hextra)
+## Site (Hugo + Lotus Docs)
 
 O repositório também tem um site [Hugo](https://gohugo.io/) com o tema
-[Hextra](https://github.com/imfing/hextra), configurado em `hugo.toml`. O
-tema fica vendorizado em `themes/hextra/` (cópia direta dos arquivos, sem
-submodule/Hugo Modules), para poder ser editado diretamente aqui — veja
-`themes/hextra/VENDORED.md` para detalhes de como foi baixado e como
-atualizar para uma versão mais nova. (O site já passou brevemente pelo
-tema [OINK](https://github.com/pgsty/oink) — veja o histórico de posts do
-blog — mas voltou para o Hextra, mantendo o mesmo estilo de homepage
-criado nessa passagem.)
+[Lotus Docs](https://github.com/colinwilson/lotusdocs), configurado em
+`hugo.toml`. O tema é baseado em Bootstrap 5 e, no upstream, depende de
+outros três módulos Hugo (`hugo-mod-bootstrap-scss`, que por sua vez
+importa `github.com/twbs/bootstrap` e o popperjs) — como o padrão deste
+repositório é vendorizar temas (cópia direta dos arquivos, sem
+submodule/Hugo Modules) para poder editá-los diretamente aqui, todos
+esses módulos foram mesclados fisicamente em `themes/lotusdocs/assets/`,
+nos mesmos caminhos em que o Hugo Modules os montaria. Veja
+`themes/lotusdocs/VENDORED.md` para os detalhes de versão e de como
+atualizar. (O site já passou pelo Hextra e pelo OINK antes — veja o
+histórico de posts do blog — mantendo sempre o mesmo estilo de homepage.)
+
+Busca (FlexSearch), realce de código (Prism), diagramas (Mermaid) e
+fórmulas (KaTeX) já vêm vendorizados pelo próprio tema — nenhum desses
+recursos depende de CDN externo para funcionar.
 
 ```bash
 hugo server   # roda o site localmente em http://localhost:1313
 hugo          # gera o build estático em public/
 ```
 
-A homepage (`content/_index.md`) usa o layout `hextra-home`: hero (título,
-subtítulo e botão), uma faixa com 4 números em destaque (publicações,
-categorias, notícias e ciclo de verificação — HTML simples com as classes
-utilitárias do próprio tema, sem shortcode dedicado) e a grade
-"Categorias monitoradas" com o shortcode `cards`/`card`.
+A homepage (`content/_index.md`) usa o sistema de landing page do tema:
+o conteúdo em si mora em `data/landing.yaml` (blocos `hero`, `stats`,
+`featureGrid`, ordenados por `weight`). O bloco `stats` (a faixa com os
+4 números em destaque) não existe no Lotus Docs — foi adicionado em
+`layouts/partials/landing/stats.html`, na raiz do repositório (não
+dentro de `themes/lotusdocs/`), seguindo o mesmo padrão dos blocos
+nativos do tema. **Importante:** `themes/lotusdocs/data/landing.yaml`
+(o exemplo do próprio tema) foi removido — se ele existisse, seu
+conteúdo de demonstração apareceria mesclado com o nosso na homepage.
 
 O conteúdo de `content/docs/` é dividido em uma página por categoria
-(`content/docs/<slug>/_index.md`, um `<slug>` por fonte de `sources.yml`),
-para ser mais fácil de ajustar cada seção individualmente. `content/docs/_index.md`
-é só a página de entrada (lista de categorias); o conteúdo em si vive nas
-subpáginas. São cópias estáticas do estado de quando foram geradas — não
-sincronizadas automaticamente com `state/*.json`/`INDEX.md` a cada
-execução do monitor.
+(`content/docs/<slug>/index.md`, um `<slug>` por fonte de `sources.yml`).
+Cada categoria é um *leaf bundle* (`index.md`, sem underscore) e não uma
+seção (`_index.md`, que teria isso) — o layout `docs/list.html` do tema,
+usado para páginas de seção, só lista subpáginas e ignora o corpo
+markdown, então qualquer categoria sem subpáginas ficaria com o conteúdo
+invisível se fosse `_index.md`. Como *leaf bundle*, a página usa
+`docs/single.html`, que renderiza o conteúdo normalmente, e continua
+aparecendo do mesmo jeito na barra lateral e nos cartões automáticos de
+`content/docs/index.md` (a página de entrada, cujo corpo também não é
+renderizado pelo mesmo motivo — o resumo mostrado ali vem do front
+matter `description`, não do corpo). São cópias estáticas do estado de
+quando foram geradas — não sincronizadas automaticamente com
+`state/*.json`/`INDEX.md` a cada execução do monitor.
 
-`content/docs/noticias/_index.md` tem um formato à parte: em vez da
+`content/docs/noticias/index.md` tem um formato à parte: em vez da
 tabela markdown simples (Publicação/Data/Descrição), usa uma lista de
 cards em HTML com **palavras-chave** (tags de tema — LGPD, IA, ECA
 Digital, Sanção etc.) e **resumo** (uma frase para o leitor decidir se
 quer abrir a notícia), mais uma barra lateral de tags com filtro em
-JavaScript puro (sem dependência externa). Tags e resumos são autorados
-manualmente por item — ao adicionar uma notícia nova a essa página,
-inclua `data-tags` com os temas relevantes e um resumo curto seguindo o
-mesmo padrão.
+JavaScript puro (sem dependência externa) — a cor de destaque da tag
+ativa usa `var(--bs-primary)`, a variável real que o Bootstrap expõe em
+tempo de execução. Tags e resumos são autorados manualmente por item —
+ao adicionar uma notícia nova a essa página, inclua `data-tags` com os
+temas relevantes e um resumo curto seguindo o mesmo padrão.
 
 `content/blog/` é uma seção separada, para registrar atualizações e
 novidades do próprio site (não é conteúdo da ANPD) — cada post é um
-arquivo em `content/blog/<slug>.md`.
+arquivo em `content/blog/<slug>.md`. O Lotus Docs não tem um layout de
+blog nativo, então `layouts/blog/list.html` e `layouts/blog/single.html`
+(também na raiz, não em `themes/lotusdocs/`) foram criados para essa
+seção, com marcação Bootstrap simples.
+
+O modo escuro do tema é específico das páginas de `/docs/` (o CSS de
+`[data-dark-mode]` só existe em `themes/lotusdocs/assets/docs/scss/`) —
+a homepage e o `/blog/` não têm alternância de tema.
 
 ### Idiomas (i18n)
 
 O site é multilíngue: português do Brasil (`pt-br`) é o idioma padrão,
 servido na raiz (sem prefixo `/pt-br/`); inglês (`en`) e espanhol (`es`)
-já estão configurados em `hugo.toml` (`[languages]`), com o seletor de
-idioma na navbar, mas **sem conteúdo traduzido ainda** — hoje só existem
-`content/*.md` sem sufixo de idioma, então só o pt-br tem conteúdo de
-verdade em `/en/` e `/es/`. Para traduzir uma página, crie a versão com
-sufixo do idioma ao lado da original (ex.: `content/_index.en.md`,
+já estão configurados em `hugo.toml` (`[languages]`), com um seletor de
+idioma (ícone de globo, ao lado do modo escuro) nas páginas de `/docs/`,
+mas **sem conteúdo traduzido ainda** — hoje só existem `content/*.md`
+sem sufixo de idioma, então só o pt-br tem conteúdo de verdade em
+`/en/` e `/es/`. Para traduzir uma página, crie a versão com sufixo do
+idioma ao lado da original (ex.: `content/_index.en.md`,
 `content/_index.es.md`).
 
 ## Sobre o scraper

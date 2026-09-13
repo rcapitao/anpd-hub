@@ -1,0 +1,113 @@
+# Note: os blocos abaixo precisam do parâmetro 'weight' para ficarem na
+# ordem correta na homepage.
+
+hero:
+  enable: true
+  weight: 10
+  template: hero
+
+  badge:
+    text: "🎉 Novidade: o site foi ao ar"
+    color: primary
+    pill: true
+    soft: true
+
+  title: "ANPD Hub"
+  subtitle: >-
+    Acompanhamento automático das publicações oficiais da Autoridade Nacional
+    de Proteção de Dados — sem precisar ficar checando o site manualmente.
+
+  ctaButton:
+    icon: menu_book
+    btnText: "Ver índice"
+    url: "/docs/"
+  cta2Button:
+    icon: rss_feed
+    btnText: "Ler o blog"
+    url: "/blog/"
+
+  info: "**Código aberto**, sem IA no meio do caminho."
+
+stats:
+  enable: true
+  weight: 15
+  template: stats
+
+  items:
+    - value: "199"
+      label: Publicações monitoradas
+      icon: description
+    - value: "8"
+      label: Categorias acompanhadas
+      icon: apps
+    - value: "40"
+      label: Notícias da ANPD
+      icon: newspaper
+    - value: Diário
+      label: Ciclo de verificação
+      icon: autorenew
+
+featureGrid:
+  enable: true
+  weight: 20
+  template: feature grid
+
+  title: Categorias monitoradas
+  subtitle: Um clique de cada categoria já detectada pelo monitoramento.
+
+  items:
+    - title: Atos Normativos (visão geral)
+      icon: description
+      description: 1 publicação
+      ctaLink:
+        text: ver
+        url: /docs/atos-normativos/
+
+    - title: Regulamentações da ANPD
+      icon: balance
+      description: 17 publicações
+      ctaLink:
+        text: ver
+        url: /docs/regulamentacoes-anpd/
+
+    - title: Atos de Gestão Interna
+      icon: account_balance
+      description: 30 publicações
+      ctaLink:
+        text: ver
+        url: /docs/atos-gestao-interna/
+
+    - title: Decisões Sancionadoras
+      icon: gavel
+      description: 13 publicações
+      ctaLink:
+        text: ver
+        url: /docs/decisoes-processos-sancionadores/
+
+    - title: Documentos Técnicos e Orientativos
+      icon: article
+      description: 55 publicações
+      ctaLink:
+        text: ver
+        url: /docs/documentos-tecnicos-orientativos/
+
+    - title: Materiais Educativos
+      icon: school
+      description: 12 publicações
+      ctaLink:
+        text: ver
+        url: /docs/materiais-educativos-publicacoes/
+
+    - title: Outros Documentos
+      icon: inventory_2
+      description: 31 publicações
+      ctaLink:
+        text: ver
+        url: /docs/outros-documentos-publicacoes/
+
+    - title: Notícias da ANPD
+      icon: newspaper
+      description: 40 publicações, com tags e filtro por tema
+      ctaLink:
+        text: ver
+        url: /docs/noticias/

@@ -1,0 +1,28 @@
+{{ define "main" }}
+<div class="container mt-100 mt-60">
+    <h1 class="mb-2">{{ .Title }}</h1>
+    {{ with .Content }}<div class="text-muted mb-4">{{ . }}</div>{{ end }}
+
+    <div class="row g-4">
+        {{ range .Pages.ByDate.Reverse }}
+        <div class="col-12">
+            <div class="card p-4">
+                <h2 class="h4 mb-1">
+                    <a class="text-reset text-decoration-none" href="{{ .Permalink }}">{{ .Title }}</a>
+                </h2>
+                <p class="text-muted small mb-2">{{ .Date.Format "02/01/2006" }}</p>
+                {{ with .Params.tags }}
+                <p class="mb-2">
+                    {{ range . }}<span class="badge bg-light text-dark me-1">#{{ . }}</span>{{ end }}
+                </p>
+                {{ end }}
+                <p class="mb-2">{{ .Summary }}</p>
+                <a href="{{ .Permalink }}" class="text-primary text-decoration-none">
+                    Ler mais <span class="material-icons align-middle" style="font-size: 1.1rem;">chevron_right</span>
+                </a>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+</div>
+{{ end }}

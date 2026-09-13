@@ -1,0 +1,12 @@
+# NOTA (ANPD Hub): esta cópia do tema é vendorizada como tema clássico
+# (sem Hugo Modules) — veja themes/lotusdocs/VENDORED.md. O import de
+# "github.com/gohugoio/hugo-mod-bootstrap-scss/v5" que o tema original
+# declara aqui foi removido porque essa dependência (e, por baixo dela,
+# github.com/twbs/bootstrap e o popperjs) já foi mesclada fisicamente em
+# themes/lotusdocs/assets/ nos mesmos caminhos em que o Hugo Modules a
+# montaria — não há módulo a resolver em tempo de build.
+
+[module]
+  [module.hugoVersion]
+    extended = true
+    min = "0.140.0"
