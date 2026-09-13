@@ -36,3 +36,51 @@
 
 [enable_dark_mode]
     other = "Enable dark mode"
+
+[page_not_found_title]
+    other = "Page not found :("
+
+[page_not_found_body]
+    other = "The page you are looking for doesn't exist or has been moved."
+
+[toc_heading]
+    other = "On this page"
+
+[edit_this_page]
+    other = "Edit this page"
+
+[last_updated]
+    other = "Last updated"
+
+[draft_badge]
+    other = "DRAFT"
+
+[directory_tooltip]
+    other = "Directory"
+
+[aria_home]
+    other = "Home"
+
+[aria_toggle_menu]
+    other = "toggleMenu"
+
+[aria_toggle_theme]
+    other = "Toggle user interface mode"
+
+[aria_back_to_top]
+    other = "Back to Top Button"
+
+[aria_breadcrumb]
+    other = "breadcrumb"
+
+[aria_arrow_down]
+    other = "Arrow down"
+
+[aria_arrow_up]
+    other = "Arrow up"
+
+[aria_enter_key]
+    other = "Enter key"
+
+[aria_escape_key]
+    other = "Escape key"
