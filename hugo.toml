@@ -1,6 +1,5 @@
 baseURL = "https://rcapitao.github.io/anpd-hub/"
 title = "ANPD Hub"
-theme = "lotusdocs"
 
 enableRobotsTXT = true
 enableGitInfo = true

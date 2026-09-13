@@ -5,12 +5,13 @@ on:
     branches: ["main"]
     paths:
       - "content/**"
-      - "themes/**"
       - "layouts/**"
       - "hugo.toml"
       - "assets/**"
       - "static/**"
       - "data/**"
+      - "i18n/**"
+      - "archetypes/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch: {}
 

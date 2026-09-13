@@ -94,17 +94,21 @@ Issue.
 
 ## Site (Hugo + Lotus Docs)
 
-O repositório também tem um site [Hugo](https://gohugo.io/) com o tema
-[Lotus Docs](https://github.com/colinwilson/lotusdocs), configurado em
-`hugo.toml`. O tema é baseado em Bootstrap 5 e, no upstream, depende de
-outros três módulos Hugo (`hugo-mod-bootstrap-scss`, que por sua vez
-importa `github.com/twbs/bootstrap` e o popperjs) — como o padrão deste
-repositório é vendorizar temas (cópia direta dos arquivos, sem
-submodule/Hugo Modules) para poder editá-los diretamente aqui, todos
-esses módulos foram mesclados fisicamente em `themes/lotusdocs/assets/`,
-nos mesmos caminhos em que o Hugo Modules os montaria. Veja
-`themes/lotusdocs/VENDORED.md` para os detalhes de versão e de como
-atualizar. (O site já passou pelo Hextra e pelo OINK antes — veja o
+O repositório também tem um site [Hugo](https://gohugo.io/) baseado no
+tema [Lotus Docs](https://github.com/colinwilson/lotusdocs), configurado
+em `hugo.toml`. Diferente das trocas de tema anteriores, o Lotus Docs
+não fica num diretório `themes/<nome>/` à parte — seus arquivos
+(`assets/`, `layouts/`, `static/`, `i18n/`, `archetypes/`) foram
+incorporados diretamente na raiz do repositório, lado a lado com o
+conteúdo próprio do ANPD Hub, sem nenhum `theme = "..."` em `hugo.toml`.
+O tema é baseado em Bootstrap 5 e, no upstream, depende de outros três
+módulos Hugo (`hugo-mod-bootstrap-scss`, que por sua vez importa
+`github.com/twbs/bootstrap` e o popperjs) — como este repositório não
+usa Hugo Modules, todos esses módulos foram mesclados fisicamente em
+`assets/`, nos mesmos caminhos em que o Hugo Modules os montaria. Veja
+`VENDORED.md` para os detalhes de origem, versão e de como atualizar; o
+`LICENSE` na raiz é o do Lotus Docs (MIT), preservado por cobrir esse
+código. (O site já passou pelo Hextra e pelo OINK antes — veja o
 histórico de posts do blog — mantendo sempre o mesmo estilo de homepage.)
 
 Busca (FlexSearch), realce de código (Prism), diagramas (Mermaid) e
@@ -120,11 +124,8 @@ A homepage (`content/_index.md`) usa o sistema de landing page do tema:
 o conteúdo em si mora em `data/landing.yaml` (blocos `hero`, `stats`,
 `featureGrid`, ordenados por `weight`). O bloco `stats` (a faixa com os
 4 números em destaque) não existe no Lotus Docs — foi adicionado em
-`layouts/partials/landing/stats.html`, na raiz do repositório (não
-dentro de `themes/lotusdocs/`), seguindo o mesmo padrão dos blocos
-nativos do tema. **Importante:** `themes/lotusdocs/data/landing.yaml`
-(o exemplo do próprio tema) foi removido — se ele existisse, seu
-conteúdo de demonstração apareceria mesclado com o nosso na homepage.
+`layouts/partials/landing/stats.html`, seguindo o mesmo padrão dos
+blocos nativos do tema.
 
 O conteúdo de `content/docs/` é dividido em uma página por categoria
 (`content/docs/<slug>/index.md`, um `<slug>` por fonte de
@@ -159,12 +160,11 @@ temas relevantes e um resumo curto seguindo o mesmo padrão.
 novidades do próprio site (não é conteúdo da ANPD) — cada post é um
 arquivo em `content/blog/<slug>.md`. O Lotus Docs não tem um layout de
 blog nativo, então `layouts/blog/list.html` e `layouts/blog/single.html`
-(também na raiz, não em `themes/lotusdocs/`) foram criados para essa
-seção, com marcação Bootstrap simples.
+foram criados para essa seção, com marcação Bootstrap simples.
 
 O modo escuro do tema é específico das páginas de `/docs/` (o CSS de
-`[data-dark-mode]` só existe em `themes/lotusdocs/assets/docs/scss/`) —
-a homepage e o `/blog/` não têm alternância de tema.
+`[data-dark-mode]` só existe em `assets/docs/scss/`) — a homepage e o
+`/blog/` não têm alternância de tema.
 
 ### Idiomas (i18n)
 
