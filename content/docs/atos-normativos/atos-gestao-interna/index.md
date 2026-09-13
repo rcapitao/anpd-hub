@@ -5,6 +5,8 @@ weight: 2
 icon: "account_balance"
 ---
 
+Nesta seção estão dispostos os atos normativos relativos à gestão interna da Agência.
+
 Fonte: <https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/atos_gestao_interna>
 
 | Publicação | Data | Descrição |
