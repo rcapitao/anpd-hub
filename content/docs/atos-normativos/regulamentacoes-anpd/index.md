@@ -5,6 +5,8 @@ weight: 1
 icon: "balance"
 ---
 
+Nesta seção estão dispostas as regulamentações emitidas pela Agência Nacional de Proteção de Dados.
+
 Fonte: <https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd>
 
 | Publicação | Data | Descrição |

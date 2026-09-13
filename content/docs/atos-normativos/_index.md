@@ -5,6 +5,8 @@ weight: 1
 icon: "description"
 ---
 
+Nesta seção são disponibilizados os Atos Normativos inferiores a Decreto editados pela ANPD, organizados por áreas temáticas.
+
 Fonte: <https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos>
 
 | Publicação | Data | Descrição |
