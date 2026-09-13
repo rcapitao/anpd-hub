@@ -7,7 +7,8 @@ hero:
   template: hero
 
   badge:
-    text: "🎉 Novidade: o site foi ao ar"
+    latestPost: true # mostra sempre o título da última postagem do blog, com link para ela
+    prefix: "🎉 Novidade:"
     color: primary
     pill: true
     soft: true
@@ -15,10 +16,10 @@ hero:
   title: "ANPD Hub"
   subtitle: >-
     Acompanhamento automático de todas as publicações oficiais da Agência
-    Nacional de Proteção de Dados (ANPD): normas, resoluções, documentos
-    técnicos, estudos e comunicados, tudo centralizado em um único lugar,
-    com busca facilitada. Chega de checar o site da Agência manualmente e
-    você ainda recebe as atualizações assim que elas são publicadas.
+    Nacional de Proteção de Dados (ANPD) — normas, resoluções, documentos
+    técnicos, estudos e comunicados — centralizados em um único lugar, com
+    busca facilitada. Você recebe as atualizações assim que são publicadas,
+    sem precisar checar o site da Agência manualmente.
 
   ctaButton:
     icon: menu_book
