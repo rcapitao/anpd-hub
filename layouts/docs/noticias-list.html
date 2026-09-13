@@ -1,0 +1,169 @@
+{{ define "main" }}
+{{ $pages := .Pages.ByDate.Reverse }}
+
+{{/* build the list of distinct tags with counts, most frequent first */}}
+{{ $allTags := slice }}
+{{ range $pages }}
+    {{ range .Params.tags }}
+        {{ if not (in $allTags .) }}
+            {{ $allTags = $allTags | append . }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+{{ $tagCounts := slice }}
+{{ range $allTags }}
+    {{ $count := len (where $pages "Params.tags" "intersect" (slice .)) }}
+    {{ $tagCounts = $tagCounts | append (dict "name" . "count" $count) }}
+{{ end }}
+{{ $tagCounts = sort $tagCounts "count" "desc" }}
+
+<div class="anpd-noticias-layout">
+<div class="anpd-noticias-list" id="noticias-lista">
+    {{ range $pages }}
+    <div class="anpd-card" data-tags="{{ delimit .Params.tags "|" }}">
+        <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+        <div class="anpd-card-meta">
+            <span>{{ .Date.Format "02/01/2006" }}</span>
+            {{ range .Params.tags }}<span class="anpd-tag-badge">{{ . }}</span>{{ end }}
+        </div>
+        <p class="anpd-card-resumo">{{ .Description }}</p>
+    </div>
+    {{ end }}
+</div>
+<aside class="anpd-noticias-tags">
+<div class="anpd-tags-sticky">
+<p class="anpd-tags-titulo">Filtrar por tema</p>
+<p class="anpd-tags-contagem" id="noticias-contagem"></p>
+<ul class="anpd-tags-lista" id="noticias-filtro-tags">
+    {{ range $tagCounts }}
+    <li><button type="button" data-tag="{{ .name }}"><span>{{ .name }}</span><span class="anpd-tags-count">{{ .count }}</span></button></li>
+    {{ end }}
+</ul>
+<button type="button" id="noticias-limpar" class="anpd-tags-limpar" hidden>Limpar filtro</button>
+</div>
+</aside>
+</div>
+
+<style>
+.anpd-noticias-layout { display: flex; gap: 2rem; align-items: flex-start; margin-top: 1rem; }
+.anpd-noticias-list { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 1.25rem; }
+.anpd-card { border: 1px solid rgba(120, 120, 120, 0.25); border-radius: 0.75rem; padding: 1rem 1.25rem; }
+.anpd-card[hidden] { display: none; }
+.anpd-card h3 { margin: 0 0 0.35rem; font-size: 1.05rem; }
+.anpd-card h3 a { text-decoration: none; }
+.anpd-card-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; margin-bottom: 0.6rem; font-size: 0.8rem; opacity: 0.75; }
+.anpd-tag-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  padding: 0.12rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(120, 120, 120, 0.15);
+  white-space: nowrap;
+}
+.anpd-card-resumo { margin: 0; line-height: 1.5; opacity: 0.9; }
+
+.anpd-noticias-tags { flex: 0 0 14rem; width: 14rem; }
+.anpd-tags-sticky { position: sticky; top: calc(90px + 1.5rem); }
+.anpd-tags-titulo { font-weight: 600; font-size: 0.85rem; margin: 0 0 0.25rem; }
+.anpd-tags-contagem { font-size: 0.78rem; opacity: 0.65; margin: 0 0 0.75rem; }
+.anpd-tags-lista { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.3rem; }
+.anpd-tags-lista button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+}
+.anpd-tags-lista button:hover { background: rgba(120, 120, 120, 0.12); }
+.anpd-tags-lista button.is-active {
+  background: var(--bs-primary);
+  color: #fff;
+}
+.anpd-tags-count { font-size: 0.72rem; opacity: 0.7; }
+.anpd-tags-lista button.is-active .anpd-tags-count { opacity: 0.9; }
+.anpd-tags-limpar {
+  margin-top: 0.75rem;
+  font-size: 0.78rem;
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--bs-primary);
+  cursor: pointer;
+  text-decoration: underline;
+  font-family: inherit;
+}
+
+@media (max-width: 768px) {
+  .anpd-noticias-layout { flex-direction: column-reverse; }
+  .anpd-noticias-tags { width: 100%; flex: 1 1 auto; }
+  .anpd-tags-sticky { position: static; }
+  .anpd-tags-lista { flex-direction: row; flex-wrap: wrap; }
+  .anpd-tags-lista button { width: auto; border-radius: 999px; }
+}
+</style>
+<script>
+(function () {
+  var list = document.getElementById("noticias-lista");
+  var tagsList = document.getElementById("noticias-filtro-tags");
+  var countEl = document.getElementById("noticias-contagem");
+  var clearBtn = document.getElementById("noticias-limpar");
+  if (!list || !tagsList) return;
+
+  var cards = list.querySelectorAll(".anpd-card");
+  var chips = tagsList.querySelectorAll("[data-tag]");
+  var active = new Set();
+
+  function render() {
+    var visible = 0;
+    cards.forEach(function (card) {
+      var tags = (card.getAttribute("data-tags") || "").split("|");
+      var show = active.size === 0 || tags.some(function (t) { return active.has(t); });
+      card.hidden = !show;
+      if (show) visible += 1;
+    });
+    chips.forEach(function (chip) {
+      var tag = chip.getAttribute("data-tag");
+      var isActive = active.has(tag);
+      chip.classList.toggle("is-active", isActive);
+      chip.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
+    if (countEl) {
+      countEl.textContent = visible + " de " + cards.length + " notícias";
+    }
+    if (clearBtn) {
+      clearBtn.hidden = active.size === 0;
+    }
+  }
+
+  chips.forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      var tag = chip.getAttribute("data-tag");
+      if (active.has(tag)) {
+        active.delete(tag);
+      } else {
+        active.add(tag);
+      }
+      render();
+    });
+  });
+
+  if (clearBtn) {
+    clearBtn.addEventListener("click", function () {
+      active.clear();
+      render();
+    });
+  }
+
+  render();
+})();
+</script>
+{{ end }}

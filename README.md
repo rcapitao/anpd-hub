@@ -145,16 +145,37 @@ não sincronizadas automaticamente com
 `monitoramento-ANPD/state/*.json`/`monitoramento-ANPD/INDEX.md` a cada
 execução do monitor.
 
-`content/docs/noticias/index.md` tem um formato à parte: em vez da
-tabela markdown simples (Publicação/Data/Descrição), usa uma lista de
-cards em HTML com **palavras-chave** (tags de tema — LGPD, IA, ECA
-Digital, Sanção etc.) e **resumo** (uma frase para o leitor decidir se
-quer abrir a notícia), mais uma barra lateral de tags com filtro em
+`content/docs/noticias/` é uma exceção às outras categorias: em vez de
+uma única página por categoria, cada notícia é uma página própria
+(`content/docs/noticias/<slug>.md`) — **não republica o conteúdo da
+notícia**, só o **resumo** (front matter `description`) e o **link**
+para a página oficial (front matter `source_url`, também linkado no
+corpo como "Fonte:"). Isso existe para que cada notícia tenha uma URL
+estável e apareça como um item próprio no feed RSS da seção
+(`/docs/noticias/index.xml`) — pensando numa futura configuração de
+alertas por e-mail ou RSS por notícia nova, e não só por categoria.
+
+`content/docs/noticias/_index.md` é a página de listagem (front matter
+`layout: "noticias-list"`, que aponta para
+`layouts/docs/noticias-list.html`) — igual às outras categorias, ela só
+lista as subpáginas, mas com um layout próprio: cards ordenados por
+data (mais recente primeiro), com **palavras-chave** (front matter
+`tags`) e resumo, mais uma barra lateral de tags com filtro em
 JavaScript puro (sem dependência externa) — a cor de destaque da tag
 ativa usa `var(--bs-primary)`, a variável real que o Bootstrap expõe em
-tempo de execução. Tags e resumos são autorados manualmente por item —
-ao adicionar uma notícia nova a essa página, inclua `data-tags` com os
-temas relevantes e um resumo curto seguindo o mesmo padrão.
+tempo de execução. `layouts/docs/noticias-list.rss.xml` customiza o
+RSS dessa seção para usar o resumo de cada notícia na descrição do
+item, em vez do conteúdo renderizado da página (que é só "Fonte:
+<link>"). Como notícias têm subpáginas de verdade (ao contrário das
+outras categorias), `sidebar_flat: true` no front matter da seção evita
+que a barra lateral tente listar as 40 notícias como um dropdown
+aninhado — veja o guard correspondente em
+`layouts/partials/docs/sidebar.html`.
+
+Para adicionar uma notícia nova, crie um arquivo
+`content/docs/noticias/<slug>.md` com `title`, `date`, `tags` (lista),
+`description` (o resumo) e `source_url` (link da página oficial) no
+front matter, seguindo o padrão dos arquivos existentes.
 
 `content/blog/` é uma seção separada, para registrar atualizações e
 novidades do próprio site (não é conteúdo da ANPD) — cada post é um
