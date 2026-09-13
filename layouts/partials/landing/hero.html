@@ -31,7 +31,27 @@
             <div class="col-lg-6 col-md-6">
                 <div class="title-heading">
                     {{ with .badge }}
-                    <span class="badge {{ if eq .pill true }}rounded-pill{{ end }} bg-{{ if eq .soft true }}soft-{{ else }}hard-{{ end }}{{ .color }} mb-1">{{ .text }}</span>
+                        {{ $text := .text }}
+                        {{ $link := "" }}
+                        {{ $prefix := .prefix | default "🎉 Novidade:" }}
+                        {{ if .latestPost }}
+                            {{ with site.GetPage "blog" }}
+                                {{ with .RegularPages.ByDate.Reverse | first 1 }}
+                                    {{ with index . 0 }}
+                                        {{ $text = printf "%s %s" $prefix .Title }}
+                                        {{ $link = .RelPermalink }}
+                                    {{ end }}
+                                {{ end }}
+                            {{ end }}
+                        {{ end }}
+                        {{ if $text }}
+                            {{ $classes := printf "badge %s bg-%s%s mb-1" (cond (eq .pill true) "rounded-pill" "") (cond (eq .soft true) "soft-" "hard-") .color }}
+                            {{ if $link }}
+                            <a href="{{ $link }}" class="{{ $classes }}">{{ $text }}</a>
+                            {{ else }}
+                            <span class="{{ $classes }}">{{ $text }}</span>
+                            {{ end }}
+                        {{ end }}
                     {{ end }}
                     <h4 class="heading mt-0 mb-3">
                         {{ with .titleLogo }}
