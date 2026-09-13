@@ -6,9 +6,9 @@ icon: "article"
 hide_lead_description: true
 ---
 
-{{< alert context="info" text="55 publicações" />}}
-
 Fonte: <https://www.gov.br/anpd/pt-br/centrais-de-conteudo/documentos-tecnicos-orientativos>
+
+{{< alert context="info" text="55 publicações" />}}
 
 | Publicação | Data | Descrição |
 |---|---|---|
