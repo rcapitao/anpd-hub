@@ -2,7 +2,7 @@
 <header id="topnav">
     <div class="container d-flex justify-content-between align-items-center">
         <!-- Logo container-->
-        <a class="logo d-flex align-items-center" aria-label="Home" href='{{ relLangURL "" }}'>
+        <a class="logo d-flex align-items-center" aria-label="{{ i18n "aria_home" | default "Home" }}" href='{{ relLangURL "" }}'>
             <div class="small">
                 {{ with resources.Get "images/logos/mark.svg" }}
                         {{ .Content | safeHTML }}
@@ -50,7 +50,7 @@
             <div class="menu-extras ms-3 me-2">
                 <div class="menu-item">
                     <!-- Mobile menu toggle-->
-                    <button class="navbar-toggle btn btn-icon btn-soft-light" id="isToggle" aria-label="toggleMenu" onclick="toggleMenu()">
+                    <button class="navbar-toggle btn btn-icon btn-soft-light" id="isToggle" aria-label="{{ i18n "aria_toggle_menu" | default "toggleMenu" }}" onclick="toggleMenu()">
                         <div class="lines">
                             <span></span>
                             <span></span>

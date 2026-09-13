@@ -1,0 +1,86 @@
+[lang_select_title]
+    other = "Escolha o idioma"
+
+[search_title]
+    other = "Pesquisar"
+
+[search_navigate]
+    other = "para navegar"
+
+[search_select]
+    other = "para selecionar"
+
+[search_close]
+    other = "para fechar"
+
+[search_cancel]
+    other = "cancelar"
+
+[search_no_results]
+    other = "Nenhum resultado para"
+
+[feedback_yes]
+    other = "Sim"
+
+[feedback_no]
+    other = "Não"
+
+[feedback_helpful]
+    other = "Esta página foi útil?"
+
+[feedback_submit]
+    other = "Enviar"
+
+[enable_light_mode]
+    other = "Ativar modo claro"
+
+[enable_dark_mode]
+    other = "Ativar modo escuro"
+
+[page_not_found_title]
+    other = "Página não encontrada :("
+
+[page_not_found_body]
+    other = "A página que você está procurando não existe ou foi movida."
+
+[toc_heading]
+    other = "Nesta página"
+
+[edit_this_page]
+    other = "Editar esta página"
+
+[last_updated]
+    other = "Última atualização em"
+
+[draft_badge]
+    other = "RASCUNHO"
+
+[directory_tooltip]
+    other = "Diretório"
+
+[aria_home]
+    other = "Início"
+
+[aria_toggle_menu]
+    other = "Alternar menu"
+
+[aria_toggle_theme]
+    other = "Alternar modo claro/escuro"
+
+[aria_back_to_top]
+    other = "Voltar ao topo"
+
+[aria_breadcrumb]
+    other = "trilha de navegação"
+
+[aria_arrow_down]
+    other = "Seta para baixo"
+
+[aria_arrow_up]
+    other = "Seta para cima"
+
+[aria_enter_key]
+    other = "Tecla Enter"
+
+[aria_escape_key]
+    other = "Tecla Esc"

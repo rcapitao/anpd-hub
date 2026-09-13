@@ -223,6 +223,25 @@ sem sufixo de idioma, então só o pt-br tem conteúdo de verdade em
 idioma ao lado da original (ex.: `content/_index.en.md`,
 `content/_index.es.md`).
 
+Além do conteúdo, o tema também traduz sua própria interface (busca,
+"Editar esta página", rodapé, página 404 etc.) via arquivos em
+`i18n/<código-do-idioma>.toml` — o Hugo casa esse arquivo pelo código
+exato do idioma declarado em `[languages]`. O tema (Lotus Docs) veio
+só com `i18n/en.toml`, `pt.toml`, `de.toml` e `fr.toml`; como o site
+declara o idioma como `pt-br` (não `pt`), o Hugo não casava esse
+arquivo, e toda a interface caía no fallback em inglês mesmo com
+pt-br como idioma padrão. Criado `i18n/pt-br.toml` com todas as
+chaves traduzidas para português do Brasil (algumas reescritas a
+partir do `pt.toml`, que estava em português de Portugal — ex.:
+"Ativar o modo de luz" → "Ativar modo claro", "Submeter" → "Enviar").
+Também havia strings de interface sem chave de i18n nenhuma,
+direto em inglês nos templates (página 404, "Table of Contents",
+"Edit this page", "Last updated", o badge "DRAFT", o tooltip
+"Directory" e vários `aria-label`) — foram convertidas para usar
+`i18n`, com chaves novas adicionadas tanto em `pt-br.toml` quanto em
+`en.toml` (mantendo o texto em inglês como estava, para não regredir
+se `/en/` ganhar conteúdo de verdade no futuro).
+
 ## Sobre o scraper
 
 As páginas da ANPD são construídas em Plone/Volto, cujo HTML de listagem

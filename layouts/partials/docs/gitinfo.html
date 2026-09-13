@@ -27,13 +27,13 @@
                     {{ .Content | safeHTML }}
                 {{ end }}
             </span>
-            Edit this page
+            {{ i18n "edit_this_page" | default "Edit this page" }}
         </a>
     </div>
     {{ end }}
     {{ if .Site.Params.docs.lastMod | default false -}}
     <div id="last-modified" class="mt-1">
-        <p class="mb-0 fw-semibold">Last updated 
+        <p class="mb-0 fw-semibold">{{ i18n "last_updated" | default "Last updated" }}
             <span 
                 {{- if .Site.Params.docs.lastModRelative | default true }} id="relativetime"{{ end }}
                 {{- if .Params.lastmod }}

@@ -1,7 +1,7 @@
 <!-- sidebar-wrapper -->
 <nav id="sidebar" class="sidebar-wrapper">
     <div class="sidebar-brand">
-        <a href='{{ with .Site.Params.docs.logoLinkURL }}{{ . }}{{ else }}{{ relLangURL "" }}{{ end }}' aria-label="HomePage" alt="HomePage" class="d-flex align-items-center">
+        <a href='{{ with .Site.Params.docs.logoLinkURL }}{{ . }}{{ else }}{{ relLangURL "" }}{{ end }}' aria-label="{{ i18n "aria_home" | default "Home" }}" alt="{{ i18n "aria_home" | default "Home" }}" class="d-flex align-items-center">
             {{ with resources.Get "images/logos/logo.svg" }}
                 {{ .Content | safeHTML }}
             {{ end }}

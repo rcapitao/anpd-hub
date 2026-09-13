@@ -9,8 +9,8 @@
                 <div class="card h-100 features feature-full-bg rounded p-4 position-relative overflow-hidden border-1">
                     <span class="icon-color d-flex my-3">
                         <i class="material-icons align-middle">{{- .Params.icon | default "article" }}</i>
-                        {{ if .Draft }}<span class="badge bg-default ms-2 fs-6 align-middle">DRAFT</span>{{ end }}
-                        {{ if .IsSection }}<i class="material-icons icon-faint align-middle ms-auto" title="Directory">folder</i>{{ end }}
+                        {{ if .Draft }}<span class="badge bg-default ms-2 fs-6 align-middle">{{ i18n "draft_badge" | default "DRAFT" }}</span>{{ end }}
+                        {{ if .IsSection }}<i class="material-icons icon-faint align-middle ms-auto" title="{{ i18n "directory_tooltip" | default "Directory" }}">folder</i>{{ end }}
                     </span>
                     <div class="card-body p-0 content">
                         <p class="fs-5 fw-semibold card-title mb-1">{{ .Title }}</p>

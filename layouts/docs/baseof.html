@@ -38,7 +38,7 @@
                                         {{ if site.Params.docs.tocMobile | default true }}
                                         <div class="docs-toc-mobile {{ if .IsNode }}visually-hidden{{ else }}{{end}} {{ if and (ne .Params.toc false) (ne .TableOfContents "<nav id=\"TableOfContents\"></nav>") }}{{ else }}visually-hidden{{ end }} {{ if site.Params.docs.tocMobile | default true }}{{ else }}visually-hidden{{ end }} d-print-none d-xl-none">
                                             <button id="toc-dropdown-btn" class="btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-offset="0,0" aria-expanded="false">
-                                                Table of Contents
+                                                {{ i18n "toc_heading" | default "On this page" }}
                                             </button>
                                             {{- partial (printf "%s/%s" ($.Scratch.Get "pathName") "toc-mobile.html") . -}}
                                         </div>
@@ -51,7 +51,7 @@
                                                 <h1 class="content-title mb-0">
                                                     {{ $currentPage.Title }}
                                                     {{ if .Draft }}
-                                                        <span class="badge bg-default fs-6 mb-1 align-middle">DRAFT</span>
+                                                        <span class="badge bg-default fs-6 mb-1 align-middle">{{ i18n "draft_badge" | default "DRAFT" }}</span>
                                                     {{ end }}
                                                 </h1>
                                             </div>
@@ -76,7 +76,7 @@
 
         {{ if site.Params.docs.backToTop | default true }}
         <!-- Back to top -->
-        <button onclick="topFunction()" id="back-to-top" aria-label="Back to Top Button" class="back-to-top fs-5"><svg width="24" height="24"><path d="M12,10.224l-6.3,6.3L4.32,15.152,12,7.472l7.68,7.68L18.3,16.528Z" style="fill:#fff"/></svg></button>
+        <button onclick="topFunction()" id="back-to-top" aria-label="{{ i18n "aria_back_to_top" | default "Back to Top Button" }}" class="back-to-top fs-5"><svg width="24" height="24"><path d="M12,10.224l-6.3,6.3L4.32,15.152,12,7.472l7.68,7.68L18.3,16.528Z" style="fill:#fff"/></svg></button>
         <!-- Back to top -->
         {{ end }}
 
