@@ -1,0 +1,30 @@
+{{/*
+Bloco "stats" da homepage: uma faixa com números em destaque.
+Não existe no tema Lotus Docs — adicionado aqui (site-level) seguindo o
+mesmo padrão de dados/weight/template dos demais blocos da landing page
+(ver layouts/index.html, no tema).
+*/}}
+{{ $sectionTitle := .Scratch.Get "sectionTitle" }}
+{{ with (index .Site.Data.landing $sectionTitle) }}
+{{ if eq .enable true }}
+<!-- Stats Start -->
+<section id="{{ $sectionTitle }}">
+    <div class="container mt-100 mt-60">
+        <div class="row g-4">
+            {{ range .items }}
+            <div class="col-6 col-lg-3">
+                <div class="text-center h-100 p-4 border rounded-3">
+                    {{ with .icon }}
+                    <span class="material-icons text-primary d-block mb-2" style="font-size: 2rem;">{{ . }}</span>
+                    {{ end }}
+                    <div class="display-6 fw-bold">{{ .value }}</div>
+                    <p class="text-muted mb-0">{{ .label }}</p>
+                </div>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+</section>
+<!-- Stats End -->
+{{ end }}
+{{ end }}

@@ -1,12 +1,9 @@
 baseURL = "https://rcapitao.github.io/anpd-hub/"
 title = "ANPD Hub"
-theme = "hextra"
+theme = "lotusdocs"
 
 enableRobotsTXT = true
 enableGitInfo = true
-
-outputs.home = ["html", "rss"]
-outputs.section = ["html", "rss"]
 
 # i18n: português do Brasil é o idioma padrão (todo o conteúdo hoje é só em
 # pt-br, então fica servido na raiz, sem prefixo /pt-br/). Inglês e espanhol
@@ -18,82 +15,79 @@ defaultContentLanguageInSubdir = false
 [languages]
   [languages.pt-br]
     label = "Português (Brasil)"
-    locale = "pt-BR"
     weight = 1
   [languages.en]
     label = "English"
-    locale = "en"
     weight = 2
   [languages.es]
     label = "Español"
-    locale = "es"
     weight = 3
 
 [markup]
-  [markup.highlight]
-    noClasses = false
+  defaultMarkdownHandler = "goldmark"
+  [markup.tableOfContents]
+    endLevel = 3
+    startLevel = 1
   [markup.goldmark.renderer]
     unsafe = true
 
-[[menu.main]]
-  identifier = "docs"
+[[menu.primary]]
   name = "Índice"
-  pageRef = "/docs"
-  weight = 1
+  url = "docs/"
+  identifier = "docs"
+  weight = 10
 
-[[menu.main]]
-  identifier = "blog"
+[[menu.primary]]
   name = "Blog"
-  pageRef = "/blog"
-  weight = 2
+  url = "blog/"
+  identifier = "blog"
+  weight = 20
 
-[[menu.main]]
-  name = "Search"
-  weight = 3
-  [menu.main.params]
-    type = "search"
-
-[[menu.main]]
-  name = "Language"
-  weight = 4
-  [menu.main.params]
-    type = "language-switch"
-
-[[menu.main]]
+[[menu.primary]]
   name = "GitHub"
-  weight = 5
   url = "https://github.com/rcapitao/anpd-hub"
-  [menu.main.params]
-    icon = "github"
+  identifier = "github"
+  weight = 30
 
 [params]
   description = "Monitoramento automático de novas publicações da ANPD (Autoridade Nacional de Proteção de Dados)."
 
-  [params.navbar]
-    displayTitle = true
-    displayLogo = false
-
-  [params.theme]
-    default = "system"
-    displayToggle = true
-
   [params.footer]
-    enable = true
-    displayCopyright = false
-    displayPoweredBy = true
+    copyright = "© :YEAR: ANPD Hub"
 
-  displayUpdatedDate = true
-  dateFormat = "02/01/2006"
+  [params.social]
+    github = "rcapitao/anpd-hub"
 
-  [params.search]
-    enable = true
-    type = "flexsearch"
+  [params.docs] # Parâmetros da seção /docs
+    title = "ANPD Hub"
 
-  [params.blog]
-    [params.blog.list]
-      sortBy = "date"
-      sortOrder = "desc"
-      displayTags = true
-      pagerSize = 10
-    [params.blog.article]
-      displayPagination = false
+    darkMode = true
+
+    prism = true
+
+    repoURL = "https://github.com/rcapitao/anpd-hub"
+    repoBranch = "main"
+    editPage = true
+    lastMod = true
+    lastModRelative = true
+
+    sidebarIcons = true
+    breadcrumbs = true
+    backToTop = true
+
+    toc = true
+    tocMobile = true
+    scrollSpy = true
+
+    descriptions = true
+    titleIcon = true
+
+    navDesc = true
+    navDescTrunc = 30
+
+    listDescTrunc = 100
+
+    intLinkTooltip = true
+
+  [params.flexsearch]
+    enabled = true
