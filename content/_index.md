@@ -1,4 +1,4 @@
 ---
 title: ANPD Hub
-description: Monitoramento automático de novas publicações da ANPD (Autoridade Nacional de Proteção de Dados).
+description: Monitoramento automático de novas publicações da ANPD (Agência Nacional de Proteção de Dados).
 ---
