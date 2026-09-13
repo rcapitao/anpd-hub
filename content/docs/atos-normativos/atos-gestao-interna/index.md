@@ -3,7 +3,10 @@ title: "Atos de Gestão Interna"
 description: "30 publicações"
 weight: 2
 icon: "account_balance"
+hide_lead_description: true
 ---
+
+{{< alert context="info" text="30 publicações" />}}
 
 Nesta seção estão dispostos os atos normativos relativos à gestão interna da Agência.
 

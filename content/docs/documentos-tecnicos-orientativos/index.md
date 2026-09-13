@@ -3,7 +3,10 @@ title: "Documentos Técnicos e Orientativos"
 description: "55 publicações"
 weight: 3
 icon: "article"
+hide_lead_description: true
 ---
+
+{{< alert context="info" text="55 publicações" />}}
 
 Fonte: <https://www.gov.br/anpd/pt-br/centrais-de-conteudo/documentos-tecnicos-orientativos>
 

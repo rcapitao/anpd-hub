@@ -3,7 +3,10 @@ title: "Materiais Educativos e Publicações"
 description: "12 publicações"
 weight: 4
 icon: "school"
+hide_lead_description: true
 ---
+
+{{< alert context="info" text="12 publicações" />}}
 
 Fonte: <https://www.gov.br/anpd/pt-br/centrais-de-conteudo/materiais-educativos-e-publicacoes>
 

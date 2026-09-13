@@ -55,7 +55,7 @@
                                                     {{ end }}
                                                 </h1>
                                             </div>
-                                            {{ if site.Params.docs.descriptions | default false }}
+                                            {{ if and (site.Params.docs.descriptions | default false) (ne $currentPage.Params.hide_lead_description true) }}
                                                 <p class="lead mb-3">{{ $currentPage.Description | markdownify }}</p>
                                             {{ end }}
                                             <div id="content" class="main-content" {{ if eq .Site.Params.docs.toc true -}}data-bs-spy="scroll" data-bs-root-margin="0px 0px -65%" data-bs-target="#toc-mobile"{{ end }}>
