@@ -1,0 +1,25 @@
+{{ $page := .Page }}
+{{ with .InnerDeindent }}{{ end }}
+{{ if $page.Site.Params.docs.lastMod | default false }}
+<div id="last-modified" class="mt-3 mb-3 opacity-85">
+    <p class="mb-0 fw-semibold">{{ i18n "last_updated" | default "Last updated" }}
+        <span
+            {{- if $page.Site.Params.docs.lastModRelative | default true }} id="relativetime"{{ end }}
+            {{- if $page.Params.lastmod }}
+                data-authdate="{{ dateFormat "2006-01-02T15:04:05Z0700" $page.Params.lastmod }}"
+            {{- else if and ($page.Site.Params.docs.useLastmodTime | default false) ($page.Lastmod) }}
+                data-authdate="{{ dateFormat "2006-01-02T15:04:05Z0700" $page.Lastmod }}"
+            {{- else }}
+                data-authdate="{{ dateFormat "2006-01-02T15:04:05Z0700" $page.GitInfo.AuthorDate }}"
+            {{- end }}>
+            {{- if $page.Params.lastmod -}}
+                {{ dateFormat "02 Jan 2006, 15:04 MST" $page.Params.lastmod }}
+            {{- else if and ($page.Site.Params.docs.useLastmodTime | default false) ($page.Lastmod) -}}
+                {{ dateFormat "02 Jan 2006, 15:04 MST" $page.Lastmod }}
+            {{- else -}}
+                {{ dateFormat "02 Jan 2006, 15:04 MST" $page.GitInfo.AuthorDate }}
+            {{- end -}}
+        </span>. <span class="material-icons size-20 align-text-bottom opacity-75">history</span>
+    </p>
+</div>
+{{ end }}

@@ -176,6 +176,35 @@ nível de dropdown aninhado sem precisar de nenhum ajuste em
 `layouts/partials/docs/sidebar.html` — o partial já era recursivo o
 suficiente.
 
+**Decisões em Processos Sancionadores** segue o mesmo padrão de
+subpáginas por baixo de uma seção só que um nível mais raso: em vez de
+uma única página com abas (`tabs`/`tab`) dividindo os anos, agora é uma
+seção (`content/docs/decisoes-processos-sancionadores/_index.md`, só
+introdução + Fonte, sem tabela) com uma subpágina *leaf bundle* por ano
+(`2026/`, `2024/`, `2023/`), cada uma com sua própria tabela `Publicação
+| Descrição | Processo nº | Status`. Essa divisão por ano é uma
+organização nossa (a página oficial da ANPD não separa por ano da mesma
+forma) — o total de 11 publicações não muda, só a apresentação. Depois
+dessa conversão, nenhuma página do site usa mais os shortcodes
+`tabs`/`tab` (`layouts/shortcodes/tabs.html`/`tab.html` continuam no
+tema, sem uso atual).
+
+O indicador "Última atualização" (antes um bloco fixo dentro de
+`layouts/partials/docs/gitinfo.html`, sempre no rodapé da página) virou
+o shortcode `{{< lastupdated />}}` (`layouts/shortcodes/lastupdated.html`),
+inserido no corpo markdown logo depois da caixa `{{< alert
+context="info" text="N publicações" />}}` — assim ele aparece antes da
+tabela em vez de depois dela, mesmo em tabelas longas.
+`layouts/partials/docs/gitinfo.html` manteve só o link "Editar esta
+página". Um detalhe do Hugo: um shortcode que nunca usa `.Inner`
+(o caso de `lastupdated`, sempre autofechado com `/>}}`) precisa, ainda
+assim, referenciar `.InnerDeindent` em algum lugar do template (mesmo
+que dentro de um `{{ with }}` nunca satisfeito, como em
+`layouts/shortcodes/alert.html`) — sem isso o Hugo falha o build com
+"does not evaluate .Inner or .InnerDeindent, yet a closing tag was
+provided" na primeira página que usa o shortcode, mesmo sem nenhuma tag
+de fechamento explícita no conteúdo.
+
 `content/docs/noticias/` é uma exceção às outras categorias: em vez de
 uma única página por categoria, cada notícia é uma página própria
 (`content/docs/noticias/<slug>.md`) — **não republica o conteúdo da

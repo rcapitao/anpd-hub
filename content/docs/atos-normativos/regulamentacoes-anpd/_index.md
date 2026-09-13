@@ -11,3 +11,6 @@ Nesta seção estão dispostas as regulamentações emitidas pela Agência Nacio
 Fonte: <https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd>
 
 {{< alert context="info" text="17 publicações" />}}
+
+{{< lastupdated />}}
+

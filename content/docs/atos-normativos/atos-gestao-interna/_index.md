@@ -11,3 +11,6 @@ Nesta seção estão dispostos os atos normativos relativos à gestão interna d
 Fonte: <https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/atos_gestao_interna>
 
 {{< alert context="info" text="30 publicações" />}}
+
+{{< lastupdated />}}
+

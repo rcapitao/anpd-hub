@@ -10,6 +10,9 @@ Fonte: <https://www.gov.br/anpd/pt-br/centrais-de-conteudo/documentos-tecnicos-o
 
 {{< alert context="info" text="55 publicações" />}}
 
+{{< lastupdated />}}
+
+
 | Publicação | Data | Descrição |
 |---|---|---|
 | [Despacho Decisório no 3/2026/SFI](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/documentos-tecnicos-orientativos/despacho_decisorio_3_discord-inc.pdf/@@display-file/file) | 17/09/2025 | Nota Técnica no 1/2026/CGF/SFI/ANPD - Aplicação de medida preventiva diante de possíveis violações à Lei no 15.211, de 17 de setembro de 2025, que instituiu o Estatuto Digital da Criança e do Adolescente – ECA Digital, e ao Decreto no 12.880, de 18 de março de 2026, espe |
