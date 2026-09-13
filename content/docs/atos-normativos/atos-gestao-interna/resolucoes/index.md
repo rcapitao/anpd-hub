@@ -8,6 +8,9 @@ hide_lead_description: true
 
 {{< alert context="info" text="20 publicações" />}}
 
+{{< lastupdated />}}
+
+
 Fonte: <https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/atos_gestao_interna>
 
 | Publicação | Data | Descrição | Status Atual |

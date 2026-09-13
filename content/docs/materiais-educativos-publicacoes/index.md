@@ -10,6 +10,8 @@ Fonte: <https://www.gov.br/anpd/pt-br/centrais-de-conteudo/materiais-educativos-
 
 {{< alert context="info" text="12 publicações" />}}
 
+{{< lastupdated />}}
+
 | Publicação | Data | Descrição |
 |---|---|---|
 | [Fascículo Vazamento de Dados](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/materiais-educativos-e-publicacoes/fasciculo_vazamento_de_dados) | — | — |

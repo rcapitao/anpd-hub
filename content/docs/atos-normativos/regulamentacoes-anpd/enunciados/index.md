@@ -8,6 +8,9 @@ hide_lead_description: true
 
 {{< alert context="info" text="1 publicação" />}}
 
+{{< lastupdated />}}
+
+
 Fonte: <https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd>
 
 | Publicação | Data | Descrição | Status Atual |

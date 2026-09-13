@@ -10,6 +10,9 @@ Fonte: <https://www.gov.br/anpd/pt-br/centrais-de-conteudo/outros-documentos-e-p
 
 {{< alert context="info" text="31 publicações" />}}
 
+{{< lastupdated />}}
+
+
 | Publicação | Data | Descrição |
 |---|---|---|
 | [Agenda Regulatória 2023-2024 em língua espanhola](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/outros-documentos-e-publicacoes-institucionais/agenda-regulatoria-2023-2024-em-espanhol.pdf) | — | — |
