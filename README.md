@@ -154,6 +154,21 @@ sincronizadas automaticamente com
 `monitoramento-ANPD/state/*.json`/`monitoramento-ANPD/INDEX.md` a cada
 execução do monitor.
 
+Nas duas subcategorias de Atos Normativos, a tabela de publicações é
+dividida em abas por tipo de ato — Regulamentações da ANPD em
+Resoluções/Portarias/Enunciados, Atos de Gestão Interna em
+Resoluções/Portarias —, usando os shortcodes `tabs`/`tab` já
+embutidos no tema Lotus Docs (`layouts/shortcodes/tabs.html` e
+`tab.html`), com uma tabela `Publicação | Data | Descrição | Status
+Atual` própria dentro de cada aba. Isso espelha a divisão e a coluna
+"Status Atual" que já existem nas páginas oficiais da ANPD; o campo
+`description` do `monitor.py` concatena ementa e status numa string só
+("... (Status: Vigente)"), então o status foi extraído manualmente
+para essas 6 tabelas na reorganização em tabs — uma nova execução do
+monitor não vai repopular esse split automaticamente (o texto de
+`description` nos arquivos de estado continua com ementa+status juntos
+como antes).
+
 `content/docs/noticias/` é uma exceção às outras categorias: em vez de
 uma única página por categoria, cada notícia é uma página própria
 (`content/docs/noticias/<slug>.md`) — **não republica o conteúdo da
