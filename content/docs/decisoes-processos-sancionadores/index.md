@@ -1,7 +1,7 @@
 ---
 title: "Decisões em Processos Sancionadores"
 description: "13 publicações"
-weight: 4
+weight: 2
 icon: "gavel"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Materiais Educativos e Publicações"
 description: "12 publicações"
-weight: 6
+weight: 4
 icon: "school"
 ---
 

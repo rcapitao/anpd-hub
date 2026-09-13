@@ -1,7 +1,7 @@
 ---
 title: "Regulamentações da ANPD"
 description: "17 publicações"
-weight: 2
+weight: 1
 icon: "balance"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Outros Documentos e Publicações Institucionais"
 description: "31 publicações"
-weight: 7
+weight: 5
 icon: "inventory_2"
 ---
 
