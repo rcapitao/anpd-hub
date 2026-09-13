@@ -36,7 +36,7 @@ stats:
   template: stats
 
   items:
-    - value: "199"
+    - value: "197"
       label: Publicações monitoradas
       icon: description
     - value: "8"
@@ -67,7 +67,7 @@ featureGrid:
 
     - title: Decisões Sancionadoras
       icon: gavel
-      description: 13 publicações
+      description: 11 publicações
       ctaLink:
         text: ver
         url: docs/decisoes-processos-sancionadores/
