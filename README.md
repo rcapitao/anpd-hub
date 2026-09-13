@@ -4,22 +4,30 @@ Monitoramento automático da [Central de Conteúdos da ANPD](https://www.gov.br/
 Todo dia, um workflow do GitHub Actions verifica as páginas configuradas,
 compara com o conteúdo já visto anteriormente e **abre uma Issue neste
 repositório** listando o que é novo — título e link de cada item. Todo o
-conteúdo já visto fica organizado em **[INDEX.md](INDEX.md)**, por categoria,
-com nome, link, data de publicação e uma breve descrição.
+conteúdo já visto fica organizado em
+**[Monitoramento ANPD/INDEX.md](Monitoramento%20ANPD/INDEX.md)**, por
+categoria, com nome, link, data de publicação e uma breve descrição.
+
+Todos os arquivos do script de monitoramento (o que existia neste
+repositório antes de ele ganhar o site Hugo) ficam em
+[`Monitoramento ANPD/`](Monitoramento%20ANPD/) — o site (tema, conteúdo,
+configuração do Hugo) ocupa a raiz do repositório.
 
 ## Como funciona
 
-1. `monitor.py` baixa cada página listada em [`sources.yml`](sources.yml) e
+1. `Monitoramento ANPD/monitor.py` baixa cada página listada em
+   [`Monitoramento ANPD/sources.yml`](Monitoramento%20ANPD/sources.yml) e
    extrai os itens de conteúdo (título, link, data e descrição, quando
    disponíveis na página).
-2. O resultado é comparado com o estado salvo em `state/<slug>.json`
-   (um arquivo por fonte, versionado no repositório).
+2. O resultado é comparado com o estado salvo em
+   `Monitoramento ANPD/state/<slug>.json` (um arquivo por fonte,
+   versionado no repositório).
 3. Itens que não estavam no estado anterior são "novos". Nesse caso:
    - o arquivo de estado é atualizado e commitado de volta no repositório;
    - uma Issue é aberta com o título e o link de cada item novo, agrupados
      por fonte;
-   - [`INDEX.md`](INDEX.md) é regenerado a partir do estado atualizado, para
-     refletir o novo conteúdo.
+   - [`INDEX.md`](Monitoramento%20ANPD/INDEX.md) é regenerado a partir do
+     estado atualizado, para refletir o novo conteúdo.
    - Antes de considerar um item "novo", o monitor verifica se ele não é na
      verdade um documento já conhecido que só mudou de URL (ex.: de
      `in.gov.br` para uma página própria do `gov.br`) — nesse caso, só
@@ -36,7 +44,7 @@ com nome, link, data de publicação e uma breve descrição.
    scraper não reconhece mais a listagem), isso também vira um alerta em
    forma de Issue, em vez de falhar silenciosamente.
 
-O `INDEX.md` é regenerado a cada execução do workflow (não só quando há
+O `Monitoramento ANPD/INDEX.md` é regenerado a cada execução do workflow (não só quando há
 conteúdo novo), então ele nunca fica desatualizado em relação ao estado.
 
 O workflow roda em `.github/workflows/monitor.yml`, agendado para
@@ -57,7 +65,8 @@ manualmente pela aba *Actions* do GitHub (`workflow_dispatch`).
 ## Adicionar novas páginas para monitorar
 
 Para monitorar uma nova página da central de conteúdos, edite
-[`sources.yml`](sources.yml) e adicione um item:
+[`Monitoramento ANPD/sources.yml`](Monitoramento%20ANPD/sources.yml) e
+adicione um item:
 
 ```yaml
 sources:
@@ -72,14 +81,16 @@ descrita acima.
 ## Rodando localmente
 
 ```bash
+cd "Monitoramento ANPD"
 pip install -r requirements.txt
 python monitor.py            # roda, atualiza state/*.json e regenera INDEX.md
 python monitor.py --dry-run  # roda sem gravar estado nem regenerar o índice
 python generate_index.py     # regenera só o INDEX.md a partir do state/ atual
 ```
 
-Se houver conteúdo novo (ou algum erro), o script gera `report.md` na raiz
-do projeto com o conteúdo que seria publicado na Issue.
+Se houver conteúdo novo (ou algum erro), o script gera
+`Monitoramento ANPD/report.md` com o conteúdo que seria publicado na
+Issue.
 
 ## Site (Hugo + Lotus Docs)
 
@@ -116,19 +127,22 @@ nativos do tema. **Importante:** `themes/lotusdocs/data/landing.yaml`
 conteúdo de demonstração apareceria mesclado com o nosso na homepage.
 
 O conteúdo de `content/docs/` é dividido em uma página por categoria
-(`content/docs/<slug>/index.md`, um `<slug>` por fonte de `sources.yml`).
-Cada categoria é um *leaf bundle* (`index.md`, sem underscore) e não uma
-seção (`_index.md`, que teria isso) — o layout `docs/list.html` do tema,
-usado para páginas de seção, só lista subpáginas e ignora o corpo
-markdown, então qualquer categoria sem subpáginas ficaria com o conteúdo
-invisível se fosse `_index.md`. Como *leaf bundle*, a página usa
-`docs/single.html`, que renderiza o conteúdo normalmente, e continua
-aparecendo do mesmo jeito na barra lateral e nos cartões automáticos de
-`content/docs/index.md` (a página de entrada, cujo corpo também não é
-renderizado pelo mesmo motivo — o resumo mostrado ali vem do front
-matter `description`, não do corpo). São cópias estáticas do estado de
-quando foram geradas — não sincronizadas automaticamente com
-`state/*.json`/`INDEX.md` a cada execução do monitor.
+(`content/docs/<slug>/index.md`, um `<slug>` por fonte de
+`Monitoramento ANPD/sources.yml`). Cada categoria é um *leaf bundle*
+(`index.md`, sem underscore) e não uma seção (`_index.md`, que teria
+isso) — o layout `docs/list.html` do tema, usado para páginas de seção,
+só lista subpáginas e ignora o corpo markdown, então qualquer categoria
+sem subpáginas ficaria com o conteúdo invisível se fosse `_index.md`.
+Como *leaf bundle*, a página usa `docs/single.html`, que renderiza o
+conteúdo normalmente, e continua aparecendo do mesmo jeito na barra
+lateral e nos cartões automáticos de `content/docs/_index.md` (a
+página de entrada — essa sim uma seção de verdade, já que tem as 8
+categorias como subpáginas —, cujo corpo também não é renderizado pelo
+mesmo motivo: o resumo mostrado ali vem do front matter `description`,
+não do corpo). São cópias estáticas do estado de quando foram geradas —
+não sincronizadas automaticamente com
+`Monitoramento ANPD/state/*.json`/`Monitoramento ANPD/INDEX.md` a cada
+execução do monitor.
 
 `content/docs/noticias/index.md` tem um formato à parte: em vez da
 tabela markdown simples (Publicação/Data/Descrição), usa uma lista de
@@ -167,7 +181,7 @@ idioma ao lado da original (ex.: `content/_index.en.md`,
 ## Sobre o scraper
 
 As páginas da ANPD são construídas em Plone/Volto, cujo HTML de listagem
-pode variar entre seções. `monitor.py` tenta, em ordem:
+pode variar entre seções. `Monitoramento ANPD/monitor.py` tenta, em ordem:
 
 1. Seletores conhecidos de listagem do Plone (`tileItem`, `listing-item`
    etc.);
