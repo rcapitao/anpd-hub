@@ -1,0 +1,30 @@
+{{- $list := slice -}}
+{{- if and (isset .Site.Params.flexsearch "searchsectionsindex") (not (eq (len .Site.Params.flexsearch.searchSectionsIndex) 0)) -}}
+    {{- if eq .Site.Params.flexsearch.searchSectionsIndex "ALL" -}}
+        {{- $list = .Site.Pages -}}
+    {{- else -}}
+        {{- $list = (where .Site.Pages "Type" "in" .Site.Params.flexsearch.searchSectionsIndex) -}}
+        {{- if (in .Site.Params.flexsearch.searchSectionsIndex "HomePage") -}}
+            {{- $list = $list | append .Site.Home -}}
+        {{- end -}}
+    {{- end -}}
+{{- else -}}
+    {{- $list = (where .Site.Pages "Section" "docs") -}}
+{{- end -}}
+[
+{{- range $index, $element := $list -}}
+    {{- if $index }},{{ end -}}
+    {{- $description := $element.Description -}}
+    {{- if not $description -}}
+        {{- $description = $element.Summary | htmlUnescape | plainify -}}
+    {{- end -}}
+    {{- $doc := dict
+        "id" $index
+        "href" $element.RelPermalink
+        "title" $element.Title
+        "description" $description
+        "content" ($element.Content | htmlUnescape | plainify)
+    -}}
+    {{ $doc | jsonify }}
+{{- end -}}
+]

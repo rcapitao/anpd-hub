@@ -4,6 +4,7 @@ description: "55 publicações"
 weight: 3
 icon: "article"
 hide_lead_description: true
+cardtable: true
 ---
 
 Fonte: <https://www.gov.br/anpd/pt-br/centrais-de-conteudo/documentos-tecnicos-orientativos>
@@ -17,7 +18,7 @@ Fonte: <https://www.gov.br/anpd/pt-br/centrais-de-conteudo/documentos-tecnicos-o
 |---|---|---|
 | [Despacho Decisório no 3/2026/SFI](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/documentos-tecnicos-orientativos/despacho_decisorio_3_discord-inc.pdf/@@display-file/file) | 17/09/2025 | Nota Técnica no 1/2026/CGF/SFI/ANPD - Aplicação de medida preventiva diante de possíveis violações à Lei no 15.211, de 17 de setembro de 2025, que instituiu o Estatuto Digital da Criança e do Adolescente – ECA Digital, e ao Decreto no 12.880, de 18 de março de 2026, espe |
 | [Nota Técnica no 1/2026/CGF/SFI/ANPD](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/documentos-tecnicos-orientativos/nota_tecnica_1_versao_publica_discord-inc.pdf/@@display-file/file) | 17/09/2025 | Aplicação de medida preventiva diante de possíveis violações à Lei no 15.211, de 17 de setembro de 2025, que instituiu o Estatuto Digital da Criança e do Adolescente – ECA Digital, e ao Decreto no 12.880, de 18 de março de 2026, especialmente no que se refere a eventuais  |
-| [Regulation on International Transfer of Personal Data](https://www./pt-br/documentos-e-publicacoes/documentos-de-publicacoes/regulation-on-international-transfer-of-personal-data.pdf/) | 23/08/2024 | versão em língua inglesa do Anexo I do Regulamento de Transferência Internacional de Dados e cláusulas-padrão contratuais, aprovado pela Resolução CD/ANPD nº 19, de 23 de agosto de 2024 |
+| [Regulation on International Transfer of Personal Data](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/outros-documentos-e-publicacoes-institucionais/regulation-on-international-transfer-of-personal-data.pdf) | 23/08/2024 | versão em língua inglesa do Anexo I do Regulamento de Transferência Internacional de Dados e cláusulas-padrão contratuais, aprovado pela Resolução CD/ANPD nº 19, de 23 de agosto de 2024 |
 | [Resolução CD/ANPD nº 19, de 23 de agosto de 2024](https://www.in.gov.br/en/web/dou/-/resolucao-cd/anpd-n-19-de-23-de-agosto-de-2024-580095396) | 23/08/2024 | Regulation on International Transfer of Personal Data - versão em língua inglesa do Anexo I do Regulamento de Transferência Internacional de Dados e cláusulas-padrão contratuais, aprovado pela |
 | [Nota Técnica nº 1/2026/FIS/CGF/ANPD](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/documentos-tecnicos-orientativos/nota-tecnica-no-1-2026-fis-cgf-anpd.pdf/@@display-file/file) | 14/08/2018 | Sistema de inteligência artificial Grok. Possíveis violações à Lei nº 13.709, de 14 de agosto de 2018 (Lei Geral de Proteção de Dados Pessoais – LGPD) |
 | [Nota Técnica nº 12/2023/CGF/ANPD](https://www.gov.br/anpd/pt-br/centrais-de-conteudo/documentos-tecnicos-orientativos/nota-tecnica-no-12-2023-cgf-anpd-inep.pdf/@@display-file/file) | 14/08/2018 | Avaliação dos Relatórios de Impacto à Proteção de Dados elaborados pelo INEP para fins adequação da divulgação dos microdados do censo escolar e do Enem à Lei nº 13.709, de 14 de agosto de 2018 — Lei Geral de Proteção de Dados Pessoais (LGPD) |

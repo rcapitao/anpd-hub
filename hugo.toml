@@ -4,10 +4,11 @@ title = "ANPD Hub"
 enableRobotsTXT = true
 enableGitInfo = true
 
-# i18n: português do Brasil é o idioma padrão (todo o conteúdo hoje é só em
-# pt-br, então fica servido na raiz, sem prefixo /pt-br/). Inglês e espanhol
-# ficam configurados e com o seletor de idioma disponível na navbar, prontos
-# para receber conteúdo traduzido (em /en/ e /es/) quando existir.
+# i18n: português do Brasil é o único idioma do site (todo o conteúdo é
+# pt-br, servido na raiz, sem prefixo /pt-br/). Inglês e espanhol foram
+# removidos por enquanto: sem conteúdo traduzido, gerar essas páginas
+# só criava um seletor de idioma que levava a uma home vazia com links
+# quebrados. Reative quando houver conteúdo real em /en/ ou /es/.
 defaultContentLanguage = "pt-br"
 defaultContentLanguageInSubdir = false
 
@@ -15,12 +16,6 @@ defaultContentLanguageInSubdir = false
   [languages.pt-br]
     label = "Português (Brasil)"
     weight = 1
-  [languages.en]
-    label = "English"
-    weight = 2
-  [languages.es]
-    label = "Español"
-    weight = 3
 
 [markup]
   defaultMarkdownHandler = "goldmark"
@@ -62,7 +57,7 @@ defaultContentLanguageInSubdir = false
 
     darkMode = true
 
-    prism = true
+    prism = false
 
     repoURL = "https://github.com/rcapitao/anpd-hub"
     repoBranch = "main"
@@ -90,3 +85,16 @@ defaultContentLanguageInSubdir = false
 
   [params.flexsearch]
     enabled = true
+
+# Índice de busca (FlexSearch) publicado como um único JSON estático,
+# buscado uma vez via fetch() e cacheado pelo navegador — em vez de
+# reembutido inline em cada página. Ver layouts/index.searchindex.json
+# e layouts/partials/docs/footer/flexsearch.html.
+[outputFormats.searchindex]
+  mediaType = "application/json"
+  baseName = "search-index"
+  isPlainText = true
+  notAlternative = true
+
+[outputs]
+  home = ["HTML", "RSS", "searchindex"]
