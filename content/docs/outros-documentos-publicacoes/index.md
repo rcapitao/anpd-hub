@@ -3,7 +3,10 @@ title: "Outros Documentos e Publicações Institucionais"
 description: "31 publicações"
 weight: 5
 icon: "inventory_2"
+hide_lead_description: true
 ---
+
+{{< alert context="info" text="31 publicações" />}}
 
 Fonte: <https://www.gov.br/anpd/pt-br/centrais-de-conteudo/outros-documentos-e-publicacoes-institucionais>
 

@@ -3,7 +3,10 @@ title: "Decisões em Processos Sancionadores"
 description: "13 publicações"
 weight: 2
 icon: "gavel"
+hide_lead_description: true
 ---
+
+{{< alert context="info" text="13 publicações" />}}
 
 Fonte: <https://www.gov.br/anpd/pt-br/centrais-de-conteudo/decisoes-em-processos-sancionadores/>
 

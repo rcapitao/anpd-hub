@@ -3,7 +3,10 @@ title: "Regulamentações da ANPD"
 description: "17 publicações"
 weight: 1
 icon: "balance"
+hide_lead_description: true
 ---
+
+{{< alert context="info" text="17 publicações" />}}
 
 Nesta seção estão dispostas as regulamentações emitidas pela Agência Nacional de Proteção de Dados.
 
