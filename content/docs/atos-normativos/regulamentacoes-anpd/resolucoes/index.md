@@ -1,19 +1,14 @@
 ---
-title: "Regulamentações da ANPD"
-description: "17 publicações"
+title: "Resoluções"
+description: "13 publicações"
 weight: 1
-icon: "balance"
+icon: "gavel"
 hide_lead_description: true
 ---
 
-Nesta seção estão dispostas as regulamentações emitidas pela Agência Nacional de Proteção de Dados.
+{{< alert context="info" text="13 publicações" />}}
 
 Fonte: <https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd>
-
-{{< alert context="info" text="17 publicações" />}}
-
-{{< tabs tabTotal="3">}}
-{{% tab tabName="Resoluções" %}}
 
 | Publicação | Data | Descrição | Status Atual |
 |---|---|---|---|
@@ -30,22 +25,3 @@ Fonte: <https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-nor
 | [Resolução CD/ANPD nº 4, de 24 de fevereiro de 2023](https://www.in.gov.br/en/web/dou/-/resolucao-cd/anpd-n-4-de-24-de-fevereiro-de-2023-466146077) | 24/02/2023 | Aprova o Regulamento de Dosimetria e Aplicação de Sanções Administrativas. Acesse aqui o processo completo parte 1, parte 2 | Vigente |
 | [Resolução CD/ANPD nº 2, de 27 de janeiro de 2022](https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd/resolucao-cd-anpd-no-2-de-27-de-janeiro-de-2022) | 27/01/2022 | Aprova o Regulamento de aplicação da Lei nº 13.709, de 14 de agosto de 2018, Lei Geral de Proteção de Dados Pessoais (LGPD), para agentes de tratamento de pequeno porte. Acesse aqui o processo completo parte 1, parte 2, parte 3, parte 4, parte 5, parte 6 e parte 7 | Vigente com alterações pela [Resolução CD/ANPD nº 15, de 24 de abril de 2024](https://www.in.gov.br/en/web/dou/-/resolucao-cd/anpd-n-15-de-24-de-abril-de-2024-556243024) |
 | [Resolução CD/ANPD nº 1, de 28 de outubro de 2021](https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd/resolucao-cd-anpd-no1-2021) | 28/10/2021 | Aprova o Regulamento do Processo de Fiscalização e do Processo Administrativo Sancionador no âmbito da Autoridade Nacional de Proteção de Dados. Acesse aqui o processo completo | Vigente com retificações pela [Resolução CD/ANPD nº 4, de 24 de fevereiro de 2023](https://www.in.gov.br/en/web/dou/-/resolucao-cd/anpd-n-4-de-24-de-fevereiro-de-2023-466146077) |
-
-{{% /tab %}}
-{{% tab tabName="Portarias" %}}
-
-| Publicação | Data | Descrição | Status Atual |
-|---|---|---|---|
-| [Portaria ANPD nº 35, de 4 de novembro de 2022](https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd/portaria-anpd-no-35-de-4-de-novembro-de-2022) | 04/11/2022 | Torna pública a Agenda Regulatória para o biênio 2023-2024. Acesse aqui o processo completo | Vigente, com alterações da [Resolução CD/ANPD nº 11/2023](https://www.in.gov.br/en/web/dou/-/resolucao-cd/anpd-n-11-de-27-de-dezembro-de-2023-534947737) |
-| [Portaria nº 16, de 8 de julho de 2021](https://www.in.gov.br/en/web/dou/-/portaria-n-16-de-8-de-julho-de-2021-330970241) | 08/07/2021 | Aprova o processo de regulamentação no âmbito da Autoridade Nacional de Proteção de Dados | Vigente |
-| [Portaria nº 11, de 27 de janeiro de 2021](https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd/portaria-no-11-de-27-de-janeiro-de-2021) | 27/01/2021 | Torna pública a agenda regulatória para o biênio 2021-2022. Acesse aqui o processo completo | Vigente, considerando-se a [RETIFICAÇÃO de 01/07/2022](https://www.in.gov.br/en/web/dou/-/retificacao-411830272) |
-
-{{% /tab %}}
-{{% tab tabName="Enunciados" %}}
-
-| Publicação | Data | Descrição | Status Atual |
-|---|---|---|---|
-| [Enunciado CD/ANPD nº 1, de 22 de maio de 2023](https://www.in.gov.br/en/web/dou/-/enunciado-cd/anpd-n-1-de-22-de-maio-de-2023-485306934) | 22/05/2023 | — | Vigente |
-
-{{% /tab %}}
-{{< /tabs >}}

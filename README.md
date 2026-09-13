@@ -154,20 +154,27 @@ sincronizadas automaticamente com
 `monitoramento-ANPD/state/*.json`/`monitoramento-ANPD/INDEX.md` a cada
 execução do monitor.
 
-Nas duas subcategorias de Atos Normativos, a tabela de publicações é
-dividida em abas por tipo de ato — Regulamentações da ANPD em
-Resoluções/Portarias/Enunciados, Atos de Gestão Interna em
-Resoluções/Portarias —, usando os shortcodes `tabs`/`tab` já
-embutidos no tema Lotus Docs (`layouts/shortcodes/tabs.html` e
-`tab.html`), com uma tabela `Publicação | Data | Descrição | Status
-Atual` própria dentro de cada aba. Isso espelha a divisão e a coluna
-"Status Atual" que já existem nas páginas oficiais da ANPD; o campo
-`description` do `monitor.py` concatena ementa e status numa string só
-("... (Status: Vigente)"), então o status foi extraído manualmente
-para essas 6 tabelas na reorganização em tabs — uma nova execução do
-monitor não vai repopular esse split automaticamente (o texto de
+As duas subcategorias de Atos Normativos (Regulamentações da ANPD e
+Atos de Gestão Interna) são, por sua vez, seções com subpáginas
+próprias — um terceiro nível de aninhamento, dividido por tipo de ato:
+`atos-normativos/regulamentacoes-anpd/{resolucoes,portarias,enunciados}/`
+e `atos-normativos/atos-gestao-interna/{resolucoes,portarias}/`. Cada
+subpágina é um *leaf bundle* com sua própria tabela `Publicação | Data
+| Descrição | Status Atual`; a página mãe de cada uma
+(`regulamentacoes-anpd/_index.md`, `atos-gestao-interna/_index.md`) é
+só a introdução + Fonte, sem tabela — os cartões das subpáginas vêm do
+`docs/list.html` de sempre. Essa divisão por tipo de ato (e a coluna
+"Status Atual" separada da Descrição) espelha a estrutura das páginas
+oficiais da ANPD; o campo `description` do `monitor.py` concatena
+ementa e status numa string só ("... (Status: Vigente)"), então o
+status foi extraído manualmente para essas tabelas — uma nova execução
+do monitor não vai repopular esse split automaticamente (o texto de
 `description` nos arquivos de estado continua com ementa+status juntos
-como antes).
+como antes). Como essas subpáginas são uma seção dentro de outra seção
+dentro de Atos Normativos, a barra lateral já lida com esse terceiro
+nível de dropdown aninhado sem precisar de nenhum ajuste em
+`layouts/partials/docs/sidebar.html` — o partial já era recursivo o
+suficiente.
 
 `content/docs/noticias/` é uma exceção às outras categorias: em vez de
 uma única página por categoria, cada notícia é uma página própria
