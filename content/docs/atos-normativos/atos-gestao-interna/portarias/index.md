@@ -3,6 +3,7 @@ title: "Portarias"
 description: "10 publicações"
 weight: 2
 icon: "description"
+cardtable: "timeline"
 hide_lead_description: true
 ---
 

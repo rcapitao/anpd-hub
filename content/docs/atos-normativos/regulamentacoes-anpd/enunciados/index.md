@@ -3,6 +3,7 @@ title: "Enunciados"
 description: "1 publicação"
 weight: 3
 icon: "campaign"
+cardtable: "timeline"
 hide_lead_description: true
 ---
 

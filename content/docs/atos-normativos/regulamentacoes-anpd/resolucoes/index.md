@@ -3,6 +3,7 @@ title: "Resoluções"
 description: "13 publicações"
 weight: 1
 icon: "gavel"
+cardtable: "timeline"
 hide_lead_description: true
 ---
 

@@ -3,6 +3,7 @@ title: "Atos Normativos"
 description: "Atos normativos da ANPD, incluindo as subcategorias Atos de Gestão Interna e Regulamentações da ANPD."
 weight: 1
 icon: "description"
+cardtable: "timeline"
 ---
 
 Nesta seção são disponibilizados os Atos Normativos inferiores a Decreto editados pela ANPD, organizados por áreas temáticas.

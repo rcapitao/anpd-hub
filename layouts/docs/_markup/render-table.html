@@ -1,22 +1,33 @@
-{{- if .Page.Params.cardtable -}}
-<div class="pub-cards">
+{{- $mode := .Page.Params.cardtable -}}
+
+{{- if eq $mode "timeline" -}}
+{{- $lastGroup := "" -}}
+<div class="pub-timeline">
     {{- range $rowIndex, $row := .TBody }}
-    <details class="pub-card">
-        <summary class="pub-card-header">
-            <span class="pub-card-title">{{ (index $row 0).Text | safeHTML }}</span>
-            {{- with (index $row 1).Text }}
-            <span class="pub-card-date">{{ . | safeHTML }}</span>
-            {{- end }}
-        </summary>
-        {{- with (index $row 2).Text }}
-        <div class="pub-card-desc">{{ . | safeHTML }}</div>
-        {{- end }}
-        {{- with (index $row 3).Text }}
-        <div class="pub-card-status">{{ . | safeHTML }}</div>
-        {{- end }}
-    </details>
+    {{- $date := (index $row 1).Text | safeHTML | printf "%s" -}}
+    {{- $group := "Sem data" -}}
+    {{- if in $date "/" -}}
+        {{- $parts := split $date "/" -}}
+        {{- if eq (len $parts) 3 -}}{{ $group = index $parts 2 }}{{- end -}}
+    {{- end -}}
+    {{- if ne $group $lastGroup }}
+    <div class="pub-timeline-year">{{ $group }}</div>
+    {{- $lastGroup = $group }}
+    {{- end }}
+    <div class="pub-timeline-item">
+        <div class="pub-timeline-dot"></div>
+        <div class="pub-timeline-content">
+            <div class="pub-timeline-header">
+                <span class="pub-timeline-title">{{ (index $row 0).Text | safeHTML }}</span>
+                {{- with (index $row 1).Text }}<span class="pub-timeline-date">{{ . | safeHTML }}</span>{{- end }}
+            </div>
+            {{- with (index $row 2).Text }}<div class="pub-timeline-desc">{{ . | safeHTML }}</div>{{- end }}
+            {{- with (index $row 3).Text }}<div class="pub-timeline-status">{{ . | safeHTML }}</div>{{- end }}
+        </div>
+    </div>
     {{- end }}
 </div>
+
 {{- else -}}
 <table>
     <thead>
